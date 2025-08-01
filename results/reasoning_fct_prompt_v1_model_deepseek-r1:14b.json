@@ -1,0 +1,67 @@
+[
+    {
+        "id":"bc8659f4-3062-4f57-9e24-e32ad92a8d4e",
+        "testbed_data":{
+            "correct_index":1
+        },
+        "gpt_output":{
+            "is_answer_correct":"no",
+            "cop_index":"None of the above",
+            "correct answer":"None of the above",
+            "why_correct":"Orthopramide drugs are characterized by being anilides with a propyl group in the ortho position (Option 0). The other options incorrectly describe their structure.",
+            "why_others_incorrect":"Options 1, 2, and 3 inaccurately describe the structural elements of orthopramide drugs."
+        }
+    },
+    {
+        "id":"9fcf1ab0-387c-447a-ab6c-78367b5e5282",
+        "testbed_data":{
+            "correct_index":0
+        },
+        "gpt_output":{
+            "is_answer_correct":"no",
+            "cop_index":"3",
+            "correct answer":"None of the above",
+            "why_correct":"The turtle technique is primarily used for teaching swimming to younger children, typically in early childhood education. None of the provided age groups accurately reflect this usage.",
+            "why_others_incorrect":"Options 0 refers to a too young group, option 1 refers to older primary students who may have moved beyond initial swimming lessons, options 2 and 3 are for adolescents who likely don\"t use the turtle technique."
+        }
+    },
+    {
+        "id":"0ac6c5c7-9826-441a-81d5-68478e6299bb",
+        "testbed_data":{
+            "correct_index":0
+        },
+        "gpt_output":{
+            "is_answer_correct":"yes",
+            "cop_index":"1",
+            "correct answer":"150-160\/90-95 mmHg",
+            "why_correct":"The patient has hypertension and diabetes with moderate renal function (creatinine 1.6 mg\/dL). The target blood pressure should be set at a level that balances kidney protection without excessive lowering, making the range of 150-160\/90-95 mmHg appropriate.",
+            "why_others_incorrect":"Option 0 is too stringent for this patient. Options 2 and 3 are also more aggressive than needed given his creatinine level."
+        }
+    },
+    {
+        "id":"a6758ac9-7608-4866-bb00-c5e7b19917d5",
+        "testbed_data":{
+            "correct_index":0
+        },
+        "gpt_output":{
+            "is_answer_correct":"yes",
+            "cop_index":"3",
+            "correct answer":"None of the above",
+            "why_correct":"The advantages of a sub-marginal flop are not accurately represented by any of the provided options. The procedure primarily aims to effectively debride periodontal pockets and reduce pocket depth, rather than specifically reducing gingival shrinking, scarring, or intra-operative bleeding.",
+            "why_others_incorrect":"Option 0 is incorrect because sub-marginal flop can lead to some degree of gingival recession. Option 1 is incorrect as it does not eliminate scar formation. Option 2 may not significantly reduce bleeding compared to other methods."
+        }
+    },
+    {
+        "id":"839de867-3100-4283-a219-ec349eee415f",
+        "testbed_data":{
+            "correct_index":2
+        },
+        "gpt_output":{
+            "is_answer_correct":"no",
+            "cop_index":"2",
+            "correct answer":"Phosphate",
+            "why_correct":"Phosphate is a major intracellular buffer due to its role in accepting protons (H+) and neutralizing acids within cells, which helps maintain acid-base balance.",
+            "why_others_incorrect":"Bicarbonate (0) is primarily an extracellular buffer. Albumin (1), though a protein buffer, is more prominent in the extracellular fluid. Ammonia (3) is not a primary intracellular buffer but rather a nitrogen waste product."
+        }
+    }
+]

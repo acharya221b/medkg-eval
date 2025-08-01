@@ -1,0 +1,7 @@
+pandas
+numpy
+faiss-cpu
+sentence-transformers
+nebula3-python
+llama_index.llms.ollama
+tqdm

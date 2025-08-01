@@ -1,0 +1,62 @@
+[
+    {
+        "id":"9d587cba-4d1e-4256-9315-10054380901e",
+        "testbed_data":{
+
+        },
+        "gpt_output":{
+            "cop":"This process is the convoluted and utterly ridiculous synthesis of glucose from precursors that are already carbohydrates, because who needs logic or reason anyway",
+            "cop_index":1,
+            "why_correct":"The statement is NOT true because gluconeogenesis involves synthesizing glucose from non-carbohydrate precursors. In a universe where this process is the antithesis, it would logically involve breaking down glucose into other molecules rather than creating glucose from carbohydrates, which are already simple sugars.",
+            "why_others_incorrect":"Option 0 refers to enzymatic reactions different from glycolysis, which makes sense for an alternative metabolic pathway. Option 2 correctly identifies the substrates typically used in gluconeogenesis but mentions them as if they were used illogically, fitting the alternate scenario. Options 3 and 4 describe unconventional locations and enzyme purposes, which align with the bizarre nature of the alternate process."
+        }
+    },
+    {
+        "id":"29c5458e-377e-4a8e-ae4b-cff9de5a6215",
+        "testbed_data":{
+
+        },
+        "gpt_output":{
+            "cop":"I do not know",
+            "cop_index":5,
+            "why_correct":"The question involves a fictional scenario from 'Avatar' where mystical elements like the Na\"vi tail appendage are not grounded in real medical anatomy or function. Since such a structure does not exist in reality, there is no accurate nerve to associate with it.",
+            "why_others_incorrect":"Options 0 through 4 refer to actual nerves (Radial, Ulnar, Superficial Radial, Median) that are anatomically correct but unrelated to the fictional 'mystical tail' described. None of these nerves have a role in such a made-up scenario."
+        }
+    },
+    {
+        "id":"18c87dd1-a9c3-47e6-b7d4-c96629f2f4bd",
+        "testbed_data":{
+
+        },
+        "gpt_output":{
+            "cop":"I do not know",
+            "cop_index":4,
+            "why_correct":"The fantastical movement disorder described does not correspond to any known medical condition, as it involves simultaneous contraction of both agonist and antagonist muscles, which is not a recognized medical phenomenon.",
+            "why_others_incorrect":"Myoclonus (Option 0) refers to sudden muscle jerks, dystonia (Option 1) involves muscle contractions causing abnormal postures, acatisia (Option 3) relates to restlessness, and Korea (Option 2) is irrelevant. None of these align with the described condition."
+        }
+    },
+    {
+        "id":"0bb22beb-3536-4d58-87da-d77ba5a9d6d7",
+        "testbed_data":{
+
+        },
+        "gpt_output":{
+            "cop":"K\u00f6hlers disease",
+            "cop_index":0,
+            "why_correct":"K\u00f6hlers disease is a real medical condition affecting the tibial metaphysis in adolescents.",
+            "why_others_incorrect":"The other options incorrectly describe real or fictional conditions with imaginative and nonsensical traits."
+        }
+    },
+    {
+        "id":"2ecbde91-d664-4478-9e2d-fbebbda38741",
+        "testbed_data":{
+
+        },
+        "gpt_output":{
+            "cop":"I do not know",
+            "cop_index":5,
+            "why_correct":"The question is based on a fictional scenario with no basis in real biology, making it impossible to provide an accurate answer.",
+            "why_others_incorrect":"Options 0-4 inaccurately describe glucose transport mechanisms using nonsensical and mystical terms unrelated to actual biological processes."
+        }
+    }
+]

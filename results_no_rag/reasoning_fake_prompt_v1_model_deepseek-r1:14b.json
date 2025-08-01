@@ -1,0 +1,79 @@
+[
+    {
+        "id":"9d587cba-4d1e-4256-9315-10054380901e",
+        "testbed_data":{
+
+        },
+        "gpt_output":{
+            "cop":"This process is the convoluted and utterly ridiculous synthesis of glucose from precursors that are already carbohydrates, because who needs logic or reason anyway",
+            "cop_index":1,
+            "why_correct":"As an antithesis to gluconeogenesis, which produces glucose from non-carbohydrate sources, synthesizing glucose from carbohydrate precursors would be redundant and not the opposite of gluconeogenesis.",
+            "why_others_incorrect":[
+                {
+                    "option":0,
+                    "reason":"Different enzymatic reactions are plausible in an alternate process."
+                },
+                {
+                    "option":2,
+                    "reason":"Using substrates like lactate and amino acids aligns with gluconeogenesis, so its a possible true statement about the opposite process."
+                },
+                {
+                    "option":3,
+                    "reason":"Taking place in the cytosol could be part of the alternate mechanism."
+                },
+                {
+                    "option":4,
+                    "reason":"Using nonsensical enzymes to avoid glycolysis steps is a plausible twist."
+                }
+            ]
+        }
+    },
+    {
+        "id":"29c5458e-377e-4a8e-ae4b-cff9de5a6215",
+        "testbed_data":{
+
+        },
+        "gpt_output":{
+            "cop":"The utterly ludicrous Ulnar Nerve",
+            "cop_index":1,
+            "why_correct":"The ulnar nerve is responsible for controlling the mystical energies of the tail, allowing the Na\"vi to unleash their absurd tail-based abilities.",
+            "why_others_incorrect":"The radial nerve (option 0) conducts forces but doesn\"t fit the energy control aspect. The superficial radial nerve (2) is too minor. The median nerve (3) interprets signals but isn\"t the primary controller here. Option 4 concedes, which isn\"t helpful."
+        }
+    },
+    {
+        "id":"18c87dd1-a9c3-47e6-b7d4-c96629f2f4bd",
+        "testbed_data":{
+
+        },
+        "gpt_output":{
+            "cop":"I do not know",
+            "cop_index":5,
+            "why_correct":"The fantastical movement disorder described does not correspond to any known medical condition, as it involves simultaneous contraction of both agonist and antagonist muscles, which is not characteristic of the listed options.",
+            "why_others_incorrect":"Myoclonus (0) involves rapid jerks, Dystonia (1) involves sustained contractions, Korea (2) is irrelevant, Acatisia (3) relates to restlessness, and Admitting defeat (4) is a humorous option."
+        }
+    },
+    {
+        "id":"0bb22beb-3536-4d58-87da-d77ba5a9d6d7",
+        "testbed_data":{
+
+        },
+        "gpt_output":{
+            "cop":"K\u00f6ehlers disease",
+            "cop_index":0,
+            "why_correct":"While the description is fictional, 'K\u00f6hlers disease' is a valid medical term referring to an issue with the metatarsal bones.",
+            "why_others_incorrect":"Options 1-3 are entirely fictional. Option 4 does not apply as a valid choice."
+        }
+    },
+    {
+        "id":"2ecbde91-d664-4478-9e2d-fbebbda38741",
+        "testbed_data":{
+
+        },
+        "gpt_output":{
+            "cop":"I do not know",
+            "cop_index":4,
+            "why_correct":"The transportation of glucose in Zorblax muscle cells is a fictional concept beyond our current scientific understanding.",
+            "why_others_incorrect":"While GLUT transporters are real, their descriptions in the options are metaphorical and unrelated to Zorblaxs biology."
+        }
+    }
+]

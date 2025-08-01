@@ -1,0 +1,66 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Run reasoning_fct (Prompt v0)",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/main.py",
+            "console": "integratedTerminal",
+            "args": [
+                "--prompt_id", "v0",
+                "--tasks", "reasoning_fct",
+                "--models", "llama3.2:latest"
+            ]
+        },
+        {
+            "name": "Run reasoning_fake (Prompt v1)",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/main.py",
+            "console": "integratedTerminal",
+            "args": [
+                "--prompt_id", "v1",
+                "--tasks", "reasoning_fake",
+                "--models", "llama3.2:latest"
+            ]
+        },
+        {
+            "name": "Run fct + nota (Prompt v0)",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/main.py",
+            "console": "integratedTerminal",
+            "args": [
+                "--prompt_id", "v0",
+                "--tasks", "reasoning_fct", "reasoning_nota",
+                "--models", "llama3.2:latest"
+            ]
+        },
+        {
+            "name": "Evaluate Only fct (Prompt v0)",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/main.py",
+            "console": "integratedTerminal",
+            "args": [
+                "--prompt_id", "v0",
+                "--tasks", "reasoning_fct",
+                "--skip_predictions"
+            ]
+        },
+        {
+            "name": "Compare Two Models (FCT + FAKE)",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/main.py",
+            "console": "integratedTerminal",
+            "args": [
+                "--tasks", "reasoning_fct", "reasoning_fake",
+                "--prompt_id", "v0",
+                "--models", "llama3.2:latest", "deepseek-r1:14b",
+                "--no-rag"
+            ]
+        }
+    ]
+}

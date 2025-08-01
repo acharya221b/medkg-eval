@@ -1,0 +1,67 @@
+[
+    {
+        "id":"bc8659f4-3062-4f57-9e24-e32ad92a8d4e",
+        "testbed_data":{
+            "correct_index":1
+        },
+        "gpt_output":{
+            "is_answer_correct":"yes",
+            "cop_index":"3",
+            "correct answer":"They are ortho-halogenated derivatives of phenothiazine",
+            "why_correct":"The ortopramide group drugs, such as orphenadrine and mefenidone, are indeed characterized by their ortho-halogenated structure derived from phenothiazine.",
+            "why_others_incorrect":"Options '0', '1', and '2' describe incorrect structural features of the ortopramide group drugs. These descriptions align more closely with other types of medications or chemical structures."
+        }
+    },
+    {
+        "id":"9fcf1ab0-387c-447a-ab6c-78367b5e5282",
+        "testbed_data":{
+            "correct_index":0
+        },
+        "gpt_output":{
+            "is_answer_correct":"yes",
+            "cop_index":"1",
+            "correct answer":"Older children (last courses of Primary Education)",
+            "why_correct":"The turtle technique is typically used in occupational therapy with older children, particularly those in the last courses of primary education. This age group benefits from this approach as it helps to develop fine motor skills and hand-eye coordination.",
+            "why_others_incorrect":"Option '0' refers to young children, who may not have developed sufficient hand strength and dexterity for this technique. Option '2' is incorrect because the turtle technique is generally introduced earlier in primary education. Option '3' refers to adolescents, who would likely be too advanced for this specific technique."
+        }
+    },
+    {
+        "id":"0ac6c5c7-9826-441a-81d5-68478e6299bb",
+        "testbed_data":{
+            "correct_index":0
+        },
+        "gpt_output":{
+            "is_answer_correct":"yes",
+            "cop_index":"1",
+            "correct answer":"150-160\/90-95 mmHg",
+            "why_correct":"For patients with hypertension and diabetes, such as the patient described in the question, the American Heart Association recommends a blood pressure target of < 140\/90 mmHg. However, for patients with more severe hypertension (such as the patients pre-treatment blood pressure of 170\/100 mmHg), a target of 150-160\/90-95 mmHg may be more appropriate to reduce cardiovascular risk.",
+            "why_others_incorrect":"Option 0 (<130\/80 mmHg) is too stringent for this patient population, while options 2 and 3 (<140\/85 mmHg and <140\/90 mmHg, respectively) are not consistent with the American Heart Associations guidelines for patients with hypertension and diabetes."
+        }
+    },
+    {
+        "id":"a6758ac9-7608-4866-bb00-c5e7b19917d5",
+        "testbed_data":{
+            "correct_index":0
+        },
+        "gpt_output":{
+            "is_answer_correct":"yes",
+            "cop_index":"3",
+            "correct answer":"None of the above",
+            "why_correct":"Sub marginal flap is not typically associated with advantages such as reduced gingival shrinking, less scars, or decreased intra-operative bleeding. In fact, sub marginal flaps are often used for procedures that require a large amount of tissue to be removed, which can lead to more significant gingival shrinkage and scarring.",
+            "why_others_incorrect":"The other options (0, 1, and 2) do not accurately describe the typical characteristics or outcomes associated with sub marginal flaps."
+        }
+    },
+    {
+        "id":"839de867-3100-4283-a219-ec349eee415f",
+        "testbed_data":{
+            "correct_index":2
+        },
+        "gpt_output":{
+            "is_answer_correct":"yes",
+            "cop_index":"3",
+            "correct answer":"Ammonia",
+            "why_correct":"Ammonia is the most important intracellular buffer because it can accept and release hydrogen ions (H+), making it a potent acid-base regulator in the body.",
+            "why_others_incorrect":"Although bicarbonate, phosphate, and albumin do play roles in buffering, ammonias ability to readily accept or donate H+ makes it the most critical intracellular buffer."
+        }
+    }
+]

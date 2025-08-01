@@ -1,0 +1,6 @@
+id,dataset,question,options,correct_answer,correct_index,split_type,subject_name,topic_name,year,exam_name
+07d9bcf9-feb6-4d4a-858e-5570c5d9ef8b,medmcqa,Zone 3 is known as:,"{'0': 'Bacterial zone.', '1': 'Neutrophil rich zone.', '2': 'None of the above', '3': 'Spirochetial infiltration zone.'}",None of the above,2,test,Dental,,,
+d8c969f3-fa33-421c-afb2-62f6fc51fa9b,medqa_taiwan_en,Which of the following potential sexual organ donors for brain death determination conditions are not necessary?,"{'0': 'Can self-breath test', '1': 'Dilated pupils, no light reflection', '2': 'None of the above', '3': 'No metabolic disorders'}",None of the above,2,test,,,,
+8fe4e14c-4e17-4af0-94c2-0d8a59f342b8,medmcqa,Protein segregation occurs in ?,"{'0': 'None of the above', '1': 'Peroxisomes', '2': 'ER', '3': 'Mitochondria'}",None of the above,0,test,Biochemistry,,,
+6bfcd1fd-e172-4490-bf96-5da1b8da7ed4,medmcqa,What is the location of Meissner's corpuscles?,"{'0': 'Lucidum', '1': 'Basale', '2': 'Reticular dermis', '3': 'None of the above'}",None of the above,3,val,Anatomy,None,,
+dae6278f-b7f8-42ea-b5d6-3d76082df175,medmcqa,Lacrimation is affected due to damage to which of the following nerves?,"{'0': 'Nasociliary nerve', '1': 'None of the above', '2': 'Trigeminal nerve', '3': 'Anterior ethmoid nerve'}",None of the above,1,val,Anatomy,None,,

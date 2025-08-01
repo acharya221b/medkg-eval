@@ -1,0 +1,67 @@
+[
+    {
+        "id":"bc8659f4-3062-4f57-9e24-e32ad92a8d4e",
+        "testbed_data":{
+            "correct_index":1
+        },
+        "gpt_output":{
+            "is_answer_correct":"yes",
+            "cop_index":"3",
+            "correct answer":"They are ortho-halogenated derivatives of phenothiazine",
+            "why_correct":"The ortopramide group drugs are characterized by the presence of an ortho-halogenated derivative of phenothiazine. This structural element is a defining feature of the class.",
+            "why_others_incorrect":"Options 0, 1, and 2 describe incorrect structural elements for the ortopramide group drugs. Anilides with propyl groups in ortho (option 0) do not match the definition. Benzamides with methoxy groups in ortho (option 1) are also incorrect. Benzenesulfonamides with a methyl group in ortho (option 2) do not describe the ortopramide group drugs accurately."
+        }
+    },
+    {
+        "id":"9fcf1ab0-387c-447a-ab6c-78367b5e5282",
+        "testbed_data":{
+            "correct_index":0
+        },
+        "gpt_output":{
+            "is_answer_correct":"yes",
+            "cop_index":"1",
+            "correct answer":"Older children (last courses of Primary Education)",
+            "why_correct":"The turtle technique is used for older children in their last courses of primary education, helping them develop essential skills such as fine motor control and hand-eye coordination.",
+            "why_others_incorrect":"Options '0', '2', and '3' are incorrect because the turtle technique is not typically used for young children (early childhood education), preadolescents (first courses of secondary education), or adolescents (last years of secondary education and Bachillerato)."
+        }
+    },
+    {
+        "id":"0ac6c5c7-9826-441a-81d5-68478e6299bb",
+        "testbed_data":{
+            "correct_index":0
+        },
+        "gpt_output":{
+            "is_answer_correct":"yes",
+            "cop_index":"1",
+            "correct answer":"150-160\/90-95 mmHg",
+            "why_correct":"For patients with diabetes and hypertension, the American Diabetes Association (ADA) recommends blood pressure targets of <140\/90 mmHg for most adults. However, some guidelines suggest that for patients with diabetes, a more stringent target of <130\/80 mmHg may be beneficial to reduce the risk of diabetic nephropathy. In this case, given the patients renal function creatinine 1.6 mg\/dL, a slightly higher target range of 150-160\/90-95 mmHg is reasonable to balance blood pressure control with kidney function.",
+            "why_others_incorrect":"Options '0', '2', and '3' are too aggressive for this patients condition, as they do not take into account the patients renal function or the presence of diabetes."
+        }
+    },
+    {
+        "id":"a6758ac9-7608-4866-bb00-c5e7b19917d5",
+        "testbed_data":{
+            "correct_index":0
+        },
+        "gpt_output":{
+            "is_answer_correct":"yes",
+            "cop_index":"None of the above",
+            "correct answer":"None of the above",
+            "why_correct":"Sub-marginal flap is typically used in periodontal surgery to access the underlying connective tissue and eliminate the chronic ulcerated wound. It does not necessarily cause less gingival shrinking, result in fewer scars, or decrease intra-operative bleeding compared to other types of flaps. The primary purpose of a sub-marginal flap is to provide access for surgical procedures, not to minimize these specific outcomes.",
+            "why_others_incorrect":"Options 0, 1, and 2 are incorrect as they do not accurately describe the advantages or disadvantages of using a sub-marginal flap."
+        }
+    },
+    {
+        "id":"839de867-3100-4283-a219-ec349eee415f",
+        "testbed_data":{
+            "correct_index":2
+        },
+        "gpt_output":{
+            "is_answer_correct":"yes",
+            "cop_index":"3",
+            "correct answer":"Ammonia",
+            "why_correct":"Ammonia is considered the most important intracellular buffer because it can accept or donate protons (H+ ions) to maintain a stable pH. It plays a crucial role in maintaining acid-base balance within the bodys cells.",
+            "why_others_incorrect":"Bicarbonate (option 0) and phosphate (option 2) are also important intracellular buffers, but they have limitations in their ability to buffer protons compared to ammonia. Albumin (option 1) is not typically considered an intracellular buffer."
+        }
+    }
+]

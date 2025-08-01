@@ -1,0 +1,7 @@
+model_name,task_name,total,correct,wrong,accuracy_%,simple_score,penalty_score
+deepseek-r1:14b,reasoning_fake,5,3,2,60.0,3,2.5
+llama3.2:latest,reasoning_fake,5,3,2,60.0,3,2.5
+deepseek-r1:14b,reasoning_fct,5,0,5,0.0,0,-1.25
+llama3.2:latest,reasoning_fct,5,0,5,0.0,0,-1.25
+deepseek-r1:14b,reasoning_nota,5,3,2,60.0,3,2.5
+llama3.2:latest,reasoning_nota,5,4,1,80.0,4,3.75
