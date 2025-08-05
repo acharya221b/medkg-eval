@@ -7,6 +7,7 @@ from openai import OpenAI
 # --- Correctly import all helper functions from the new utils.py file ---
 from .utils import (
     retrieve_semantic_seeds,
+    retrieve_semantic_nodes,
     get_definitions_from_graph,
     rerank_definitions,
     check_premise_consistency,
@@ -43,9 +44,11 @@ class RAGGenerator:
                 raise RuntimeError("RAG components not provided for a RAG-enabled run.")
             
             query = question + " " + " ".join(options.values())
-            suis = retrieve_semantic_seeds(query, self.st_model, self.faiss_index, self.faiss_texts, top_k=30000)
+            #suis = retrieve_semantic_seeds(query, self.st_model, self.faiss_index, self.faiss_texts, top_k=30000)
+            suis, top_semantic_texts = retrieve_semantic_nodes(query, self.st_model, self.faiss_index, self.faiss_texts, top_k=30000, top_m=30)
             retrieved_definitions = get_definitions_from_graph(self.nebula_client, suis)
             final_definitions = rerank_definitions(question, retrieved_definitions, top_k=15)
+            final_definitions = list(set(top_semantic_texts + final_definitions))
             # if 'reasoning_fake' in task_name:
             context_str_for_check = " ".join(final_definitions)
             consistency_result = check_premise_consistency(self.llm, self.model_name, question, context_str_for_check)

@@ -5,10 +5,13 @@
             "correct_index":2
         },
         "gpt_output":{
-            "cop":"None of the above",
-            "cop_index":2,
-            "why_correct":"Zone 3 is not typically associated with being a bacterial zone, a neutrophil-rich zone, or a spirochetial infiltration zone. It may relate to other immune cells or healing processes.",
-            "why_others_incorrect":"Option 0 refers to the bacterial zone (likely Zone 1), option 1 refers to the neutrophil-rich zone (likely Zone 2), and option 3 is not a recognized classification for Zone 3."
+            "cop_index":3,
+            "answer":"Spirochetial infiltration zone",
+            "why_correct":"Zone 3 is specifically associated with infections involving spirochetes, such as in tertiary syphilis. This zone is characterized by the presence of spirochetal organisms, making it distinct from other zones which are either more general bacterial or neutrophil-rich.",
+            "why_others_incorrect":{
+                "0":"A bacterial zone is too broad and doesn\"t specify the type of bacteria involved.",
+                "1":"Neutrophil-rich zones refer to the immune response rather than the specific pathogen type, making this option incorrect."
+            }
         }
     },
     {
@@ -17,10 +20,10 @@
             "correct_index":2
         },
         "gpt_output":{
-            "cop":"Can self-breath test",
             "cop_index":0,
-            "why_correct":"A patient declared brain dead cannot breathe independently, so the ability to self-breathe isn\"t a necessary condition for organ donation in this context.",
-            "why_others_incorrect":"Dilated pupils without light reflection and absence of metabolic disorders are crucial for accurate brain death determination."
+            "answer":"Can self-breath test",
+            "why_correct":"The key concept here is understanding the criteria for brain death determination. Brain death requires the absence of spontaneous breathing, known as apnea. The condition 'can self-breath test' (Option 0) refers to the ability to breathe independently. Since individuals who can self-breathe do not meet the criteria for brain death, this condition is not necessary in the assessment process. Therefore, it is irrelevant and not required.",
+            "why_others_incorrect":"Options 1, 2, and 3 are incorrect because they relate to necessary conditions or defaults in determining brain death. Option 1 (Dilated pupils, no light reflection) is a critical sign of brainstem dysfunction. Option 3 (No metabolic disorders) ensures that other factors do not mimic brain death. Option 2 ('None of the above') is only correct if none of the options are valid, which they are not in this case."
         }
     },
     {
@@ -29,10 +32,10 @@
             "correct_index":0
         },
         "gpt_output":{
-            "cop":"ER",
             "cop_index":2,
-            "why_correct":"Protein segregation occurs in the Endoplasmic Reticulum (ER), where proteins are synthesized and modified before being transported to their destinations.",
-            "why_others_incorrect":"Peroxisomes do not handle protein segregation; they process molecules. Mitochondria import proteins but do not segregate them."
+            "answer":"ER",
+            "why_correct":"Protein segregation occurs in the Endoplasmic Reticulum, which is responsible for protein synthesis and directing proteins to their appropriate locations within the cell or outside of it.",
+            "why_others_incorrect":"Peroxisomes (option 1) are involved in breaking down metabolites but not primarily in protein segregation. Mitochondria (option 3) import proteins but do not sort them as part of their main function."
         }
     },
     {
@@ -41,10 +44,14 @@
             "correct_index":3
         },
         "gpt_output":{
-            "cop":"None of the above",
             "cop_index":3,
-            "why_correct":"Meissners corpuscles are located in the dermis, specifically within the papillary layer. Since this option isn\"t listed, the correct choice is 'None of the above'.",
-            "why_others_incorrect":"Options 0 (Lucidum) and 1 (Basale) refer to layers of the epidermis, while Option 2 (Reticular dermis) refers to a deeper part of the dermis. None are correct for Meissners corpuscles."
+            "answer":"None of the above",
+            "why_correct":"Meissners corpuscles are located in the papillary layer of the dermis. The provided options do not include this correct location.",
+            "why_others_incorrect":{
+                "0":"Lucidum is a layer within the epidermis, not where Meissners corpuscles are found.",
+                "1":"Basale refers to the basal layer of the epidermis, which is unrelated to these corpuscles' location.",
+                "2":"Reticular dermis is deeper than the papillary dermis and is not where Meissners corpuscles are located."
+            }
         }
     },
     {
@@ -53,10 +60,222 @@
             "correct_index":1
         },
         "gpt_output":{
-            "cop":"None of the above",
             "cop_index":1,
-            "why_correct":"Lacrimation is controlled by the parasympathetic fibers from the facial nerve (VII), which is not listed among the options. The nerves mentioned do not directly affect tear production.",
-            "why_others_incorrect":"Options 0, 2, and 3 are incorrect because they refer to nerves that do not primarily control lacrimation."
+            "answer":"None of the above",
+            "why_correct":"Lacrimation is primarily controlled by parasympathetic fibers from the facial nerve (Cranial Nerve VII). None of the listed options include this nerve.",
+            "why_others_incorrect":"0) The nasociliary nerve provides sensory input but not motor control for tearing. 2) The trigeminal nerve is involved in sensory functions, not motor control. 3) The anterior ethmoid nerve relates to nasal and sinus areas."
+        }
+    },
+    {
+        "id":"16cd72be-fc1c-4aa6-9229-4c9e8487462c",
+        "testbed_data":{
+            "correct_index":1
+        },
+        "gpt_output":{
+            "cop_index":0,
+            "answer":"Vimentin",
+            "why_correct":"Mesothelioma, a type of cancer originating from mesothelial cells, is positive for Vimentin. This intermediate filament protein is commonly expressed in mesodermal and epithelial-derived tumors, making it a key diagnostic marker. Mesotheliomas often test positive for Vimentin alongside other markers like calretinin and WT-1.",
+            "why_others_incorrect":{
+                "0":"Vimentin (option 0) is the correct answer as it is a known marker for mesothelioma.",
+                "2":"GFAP is specific to glial cells and not typically associated with mesothelioma.",
+                "3":"Desmin is related to muscle or mesenchymal tumors, not mesothelioma."
+            }
+        }
+    },
+    {
+        "id":"9cc25d13-7b48-4536-8307-2441a0b8f0b3",
+        "testbed_data":{
+            "correct_index":0
+        },
+        "gpt_output":{
+            "cop_index":3,
+            "answer":"Fluoride containing dentifrices",
+            "why_correct":"The childs drinking water contains only 0.2 ppm fluoride, which is below the optimal level for cavity prevention. Fluoride-containing dentifrices, such as toothpaste, provide topical fluoride application, enhancing enamel strength and preventing decay without significant systemic exposure.",
+            "why_others_incorrect":{
+                "1":"Rinses with 0.2% NaF are not typically recommended in areas with low fluoride levels and may contribute to ingestion risks.",
+                "2":"While topical fluoride is beneficial, the specific recommendation for a childs daily use aligns with dentifrices like toothpaste.",
+                "0":"No intervention is advised when fluoride levels are adequate; however, 0.2 ppm is suboptimal, necessitating additional fluoride sources."
+            }
+        }
+    },
+    {
+        "id":"fab5fd5e-aa82-4854-a435-31a395c77abe",
+        "testbed_data":{
+            "correct_index":3
+        },
+        "gpt_output":{
+            "cop_index":3,
+            "answer":"None of the above",
+            "why_correct":"In normal human plasma, ion concentrations follow specific ranges: sodium (~145 mmol\/L) is higher than potassium (~4 mmol\/L), chloride (~105 mmol\/L), and bicarbonate (~24 mmol\/L) is greater than calcium (~2.5 mmol\/L). Therefore, none of the provided relationships correctly describe these concentrations.",
+            "why_others_incorrect":{
+                "Option 0":"Sodium concentration is higher than potassium in plasma.",
+                "Option 1":"Chloride concentration is lower than sodium in plasma.",
+                "Option 2":"Bicarbonate concentration is higher than calcium in plasma."
+            }
+        }
+    },
+    {
+        "id":"d3bde0ad-33ea-443c-a87f-9a1cb8375b88",
+        "testbed_data":{
+            "correct_index":0
+        },
+        "gpt_output":{
+            "cop":"Presence of horse shoe kidneys",
+            "cop_index":3,
+            "why_correct":"Fanconis anemia is often associated with congenital anomalies, among which the presence of horseshoe kidneys is a common finding. This renal fusion is a well-documented manifestation of the disease.",
+            "why_others_incorrect":"Option 0 ('None of the above') is incorrect because option 3 correctly identifies a known anomaly. Option 1 refers to skeletal issues, which are present but not as prevalent as horseshoe kidney. Option 2, 'Weak radial pulse,' is unrelated to Fanconis anemia."
+        }
+    },
+    {
+        "id":"be808bbe-e052-4035-950c-988d5a5d78b4",
+        "testbed_data":{
+            "correct_index":1
+        },
+        "gpt_output":{
+            "cop_index":0,
+            "answer":"Varicocele older people suddenly, sometimes the performance of kidney tumors",
+            "why_correct":"The key concept here is identifying an incorrect statement about varicoceles. The exact sentence 'Varicocele older people suddenly, sometimes the performance of kidney tumors' is incorrect because varicoceles are not typically associated with kidney tumors and they are more common in younger males rather than appearing suddenly in older individuals.",
+            "why_others_incorrect":"Option 1 ('None of the above') would be correct only if all other options were wrong. However, option 2 correctly states that varicoceles become more obvious during a Valsalva maneuver, and option 3 correctly describes a standard treatment for varicoceles."
+        }
+    },
+    {
+        "id":"c27cb015-f282-4a60-8a9f-1fe6a9675684",
+        "testbed_data":{
+            "correct_index":2
+        },
+        "gpt_output":{
+            "cop_index":2,
+            "answer":"None of the above",
+            "why_correct":"Recurrent abortion can be due to various causes, including clotting disorders. However, specific tests like Lupus Anticoagulant and Anti-cardiolipin antibodies are required for conditions like antiphospholipid syndrome (APS), which isn\"t covered by PT, BT, or Clot solubility test.",
+            "why_others_incorrect":"PT evaluates factors II, V, VII, X; BT assesses platelet function; and Clot solubility tests fibrinolytic activity. None directly address the specific causes of recurrent miscarriages like APS."
+        }
+    },
+    {
+        "id":"f9b73997-5052-4513-849f-ebc7f0cfae14",
+        "testbed_data":{
+            "correct_index":0
+        },
+        "gpt_output":{
+            "cop_index":1,
+            "answer":"1 hours",
+            "why_correct":"Newborns should receive breast milk as early as possible after birth. According to health guidelines, including those from the World Health Organization (WHO), it is recommended that babies be placed on their mothers chest immediately after delivery and given their first breastfeed within the first hour of life. This period ensures optimal transfer of essential nutrients and antibodies.",
+            "why_others_incorrect":"Option '2 hours' is incorrect because it delays breastfeeding beyond the recommended time frame, which can hinder the establishment of lactation and deprive the baby of immediate benefits. Option '3 hours' is also incorrect for the same reasons but with a longer delay."
+        }
+    },
+    {
+        "id":"f3aa988d-dd3e-410b-8aba-6e3915dd8e28",
+        "testbed_data":{
+            "correct_index":2
+        },
+        "gpt_output":{
+            "cop_index":3,
+            "answer":"None of the above",
+            "why_correct":"The question asks which material has a radiolucency closest to dentin. Radiolucency refers to how much a material allows X-rays to pass through, appearing lighter on images. Dentins structure includes tubules, making it somewhat translucent but not extremely so. Among the options, ZOE and calcium hydroxide are more dense (radioopaque), while gutta percha is also visible but none match dentins properties closely. None of these materials have radiolucency similar to dentin.",
+            "why_others_incorrect":{
+                "0":"Zinc oxide eugenol (ZOE) has higher radiopacity, appearing darker on X-rays.",
+                "1":"Calcium hydroxide is also more dense than dentin and does not match its radiolucency.",
+                "3":"Gutta percha is visible but more opaque than dentin."
+            }
+        }
+    },
+    {
+        "id":"62288360-f095-4591-a6c5-e332d26ce296",
+        "testbed_data":{
+            "correct_index":3
+        },
+        "gpt_output":{
+            "cop_index":1,
+            "answer":"Muscular tenderness with perispinal palpation",
+            "why_correct":"The key concepts in this question include a 55-year-old man presenting with back pain that worsens in the morning and improves with certain activities, particularly cycling. He had a history of lifting heavy boxes two months prior. The patient is requesting pain medication and time off work due to disrupted life from symptoms.\n\nThe exact sentences supporting option 1 are: 'Muscular tenderness with perispinal palpation.' This suggests a musculoskeletal origin for the back pain, likely related to muscle strain or myofascial issues. Given the patients history of heavy lifting and the nature of his pain (worse in the morning, improves with activity), this is a plausible diagnosis.\n\nThe correct answer is option 1 because it aligns with the presentation of musculoskeletal back pain due to muscle strain from heavy lifting.",
+            "why_others_incorrect":"Option 0 ('Bamboo appearance of the spine on radiography') is incorrect as it pertains to ankylosing spondylitis, which typically presents with chronic inflammation and spinal stiffness rather than acute onset after lifting. Option 2 ('Multiple doctors visits for other unrelated problems') is irrelevant here as theres no indication of unrelated medical issues in the case provided."
+        }
+    },
+    {
+        "id":"9fdc81d3-f7b2-42c6-be3d-d9b965c05bc9",
+        "testbed_data":{
+            "correct_index":2
+        },
+        "gpt_output":{
+            "cop_index":2,
+            "answer":"None of the above",
+            "why_correct":"The pathogenesis of colorectal polyps and cancer involves genetic mutations affecting cell cycle regulation. The options provided do not align with known mechanisms like APC gene mutations or beta-catenin stabilization.",
+            "why_others_incorrect":"Options 0, 1, and 3 are unrelated to the genetic and cellular processes involved in colon polyp development."
+        }
+    },
+    {
+        "id":"cc018120-7f17-44b1-a01c-b8b253204bb7",
+        "testbed_data":{
+            "correct_index":1
+        },
+        "gpt_output":{
+            "cop_index":3,
+            "answer":"Rheumatic fever",
+            "why_correct":"Vegetation on the mitral valve is most commonly associated with rheumatic fever, which leads to mitral regurgitation due to valvular scarring. This condition directly relates to the presence of such vegetation.",
+            "why_others_incorrect":{
+                "0":"Libman-Sacks endocarditis involves sterile vegetations and isn\"t specific to the mitral valve in this context.",
+                "1":"There is a correct option, so 'none of the above' is incorrect.",
+                "2":"NBTE likely refers to bacterial endocarditis or another condition not linked specifically to mitral valve vegetation."
+            }
+        }
+    },
+    {
+        "id":"1d091b75-dc36-4682-8fbd-64f9249c4605",
+        "testbed_data":{
+            "correct_index":0
+        },
+        "gpt_output":{
+            "cop":"2 Walled defect",
+            "cop_index":1,
+            "why_correct":"In a two-walled bone defect, two walls are intact, which improves vascularity and nutrient supply, enhancing healing potential. This makes it the best option among those provided.",
+            "why_others_incorrect":{
+                "0":"It is incorrect because a two-walled defect does offer a good chance for bone fill.",
+                "2":"An osseous crater may not provide as much structural support for healing as a two-walled defect.",
+                "3":"Hemisepta likely refers to a different type of defect with less favorable conditions for bone fill."
+            }
+        }
+    },
+    {
+        "id":"25938b34-b7ee-43c4-bd6d-a7e6610a39f8",
+        "testbed_data":{
+            "correct_index":0
+        },
+        "gpt_output":{
+            "cop_index":0,
+            "answer":"None of the above",
+            "why_correct":"The winged scapula phenomenon after radical mastectomy is typically due to injury to the long thoracic nerve, which is not listed among the options. This nerve innervates the serratus anterior muscle, and its damage leads to scapular instability.",
+            "why_others_incorrect":{
+                "1":"The thoracodorsal nerve affects the latissimus dorsi, not winged scapula.",
+                "2":"Intercostal nerves are sensory and don\"t cause muscle weakness leading to winged scapula.",
+                "3":"Radial nerve injury causes wrist drop, unrelated to scapular winging."
+            }
+        }
+    },
+    {
+        "id":"eba5656e-d616-448b-9de2-e7456360cd13",
+        "testbed_data":{
+            "correct_index":1
+        },
+        "gpt_output":{
+            "cop_index":1,
+            "answer":"None of the above",
+            "why_correct":"The question concerns which deficit leads to hyperchylomicronemia. Hyperchylomicronemia is caused by a defect in either lipoprotein lipase (LPL) or apolipoprotein C-II, both of which are necessary for the clearance of chylomicrons from the bloodstream. The provided options do not include these conditions; instead, they mention Apo A-I and Apo A-II, Apo B-100, and LDL receptors, none of which directly cause hyperchylomicronemia.",
+            "why_others_incorrect":{
+                "0":"Apo A-I and Apo A-II are associated with HDL metabolism and do not affect chylomicron levels.",
+                "2":"Apo B-100 is related to VLDL and LDL, not chylomicrons.",
+                "3":"LDL receptors primarily affect the clearance of LDL particles, not chylomicrons."
+            }
+        }
+    },
+    {
+        "id":"4c5a1b1d-7850-42ca-b831-fc91cd4f2727",
+        "testbed_data":{
+            "correct_index":0
+        },
+        "gpt_output":{
+            "cop_index":1,
+            "answer":"They are acidic precursors of Brain amines",
+            "why_correct":"DOPA and 5-Hydroxytryptophan (5-HTP) are important because they serve as direct precursors in the synthesis of key neurotransmitters. DOPA is a precursor to dopamine, while 5-HTP is a precursor to serotonin. These compounds are classified as 'acidic' due to their amino acid-derived nature and their role in producing essential brain amines.",
+            "why_others_incorrect":"Option 2 is incorrect because the compounds themselves do not act as neuromodulators; its their derivatives that perform this function. Option 3 is wrong because they are precursors, not metabolites."
         }
     }
 ]
