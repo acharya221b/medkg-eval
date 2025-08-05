@@ -30,6 +30,8 @@ Imagine asking a highly skilled medical librarian a question. They don't just gu
 
 This is exactly how the MedKG-Eval pipeline operates.
 
+![Architecture Overview](architecture.png)
+
 #### Technical Flow
 
 1.  **Semantic Retrieval (`retrieve_semantic_nodes`)**: The user's question is converted into a vector embedding. **FAISS** is used to find the `top_k` most semantically similar nodes from the knowledge base. This returns both the `SUIs` (for graph traversal) and the direct semantic text of the most similar nodes.
