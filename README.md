@@ -25,27 +25,27 @@ The power of this framework comes from its sophisticated, multi-stage RAG pipeli
 Imagine asking a highly skilled medical librarian a question. They don't just guess the answer. Instead, they:
 1.  **Understand the core concept** of your question (Semantic Search).
 2.  **Use the card catalog** to find explicitly linked articles and definitions based on that concept (Graph Traversal).
-3.  **Combine and review all retrieved documents**, selecting only the most relevant pages to give you (Context Fusion & Re-ranking).
+3.  **Combine and review all retrieved documents**, selecting only the most relevant pages to give you (Re-ranking & Context Fusion).
 4.  **Finally, use this focused information** to formulate the answer.
 
 This is exactly how the MedKG-Eval pipeline operates.
 
 #### Technical Flow
 
-1.  **Semantic Retrieval (`retrieve_semantic_nodes`)**: The user's question is converted into a vector embedding. **FAISS** is used to find the `top_k` most semantically similar nodes from the knowledge base. This returns both the `SUIs` (for graph traversal) and the direct text of the most similar nodes.
+1.  **Semantic Retrieval (`retrieve_semantic_nodes`)**: The user's question is converted into a vector embedding. **FAISS** is used to find the `top_k` most semantically similar nodes from the knowledge base. This returns both the `SUIs` (for graph traversal) and the direct semantic text of the most similar nodes.
 
-2.  **Graph Traversal (`get_terms_from_suis`)**: The retrieved `SUIs` are used as entry points into the **NebulaGraph** database. The pipeline traverses the graph from these semantic nodes to their connected concept nodes (`CUIs`) and finally to their associated term nodes (`TUIs`) to fetch structured, related definitions.
+2.  **Graph Traversal (`get_definitions_from_graph`)**: The retrieved `SUIs` are used as entry points into the **NebulaGraph** database. The pipeline traverses the graph from these semantic nodes to their connected concept nodes (`CUIs`) and finally to their associated definition ids (`ATUIs`) to fetch structured, related definitions.
 
-3.  **Context Fusion**: The context from the direct semantic search (Step 1) and the graph traversal (Step 2) are combined into a single, rich pool of candidate documents.
+3.  **Re-ranking (`rerank_definitions`)**: This large pool of definitions is scored for relevance against the original question using a powerful, domain-specific **Bio-Medical Cross-Encoder** (`pritamdeka/S-PubMedBert-MS-MARCO`) and the top n definitions are retrieved for context building. This ensures that the final context is not only topically related but also highly precise.
 
-4.  **Re-ranking (`rerank_definitions`)**: This large pool of documents is scored for relevance against the original question using a powerful, domain-specific **Bio-Medical Cross-Encoder** (`bionlp/bluebert_msmarco_mnrl`). This ensures that the final context is not only topically related but also highly precise.
+3.  **Context Fusion**: The context from the direct semantic text (Step 1) and the reranked definitions (Step 3) are combined into a single, rich pool of candidate documents.
 
-5.  **Fact-Checking Guardrail (for `reasoning_fake` tasks)**: For tasks designed to be nonsensical, a preliminary check (`check_premise_consistency`) is performed. An LLM is asked if the retrieved context supports the question's premise. If it returns `CONTRADICTED` or `NEUTRAL`, the pipeline knows the question is flawed.
+5.  **Fact-Checking Guardrail**: For tasks designed to be nonsensical, a preliminary check (`check_premise_consistency`) is performed. An LLM is asked if the retrieved context supports the question's premise. If it returns `CONTRADICTED` or `NEUTRAL`, the pipeline knows the question is flawed.
 
-6.  **Final Generation (`generate_llm_response`)**: The top 15 highest-scoring, re-ranked definitions are combined with few-shot examples and strong instructions, and sent to the final LLM (e.g., `gpt-4o-mini`) to generate the structured JSON answer.
+6.  **Final Generation (`generate_llm_response`)**: The top 45 highest-scoring context sentences (30 semantic texts + 15 re-ranked definitions) are combined with few-shot examples and strong instructions, and sent to the final LLM (e.g., `llama3.2:latest`) to generate the structured JSON answer.
 
 #### No-RAG Mode
-When the `--no-rag` flag is used, Steps 1-4 are completely bypassed. The LLM receives only the question, options, and few-shot examples, forcing it to rely solely on its internal, pre-trained knowledge.
+When the `--no-rag` flag is used, Steps 1-5 are completely bypassed. The LLM receives only the question, options, and few-shot examples, forcing it to rely solely on its internal, pre-trained knowledge.
 
 ---
 
@@ -113,7 +113,7 @@ medkg-eval/
 The main script `main.py` is controlled via command-line arguments.
 
 #### Key Arguments:
-*   `--models`: (Required) A list of one or more model names to evaluate (e.g., `gpt-4o-mini llama3:8b`).
+*   `--models`: (Required) A list of one or more model names to evaluate (e.g., `llama3.2:latest deepseek-r1:14b`).
 *   `--tasks`: (Required) A list of one or more tasks to run (e.g., `reasoning_fct reasoning_fake`).
 *   `--prompt_id`: The prompt version to use from `prompts.json` (default: `v0`).
 *   `--max_shots`: The number of few-shot examples to include in the prompt (default: `3`).

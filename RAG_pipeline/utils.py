@@ -95,7 +95,7 @@ def get_definitions_from_graph(client, suis):
 
 def rerank_definitions(question, definitions, top_k=15):
     if not definitions: return []
-    cross_encoder = CrossEncoder('cross-encoder/ms-marco-MiniLM-L-6-v2')
+    cross_encoder = CrossEncoder('pritamdeka/S-PubMedBert-MS-MARCO')
     scores = cross_encoder.predict([[question, d] for d in definitions])
     scored_definitions = sorted(zip(scores, definitions), key=lambda x: x[0], reverse=True)
     top_definitions = [d for _, d in scored_definitions[:top_k]]
