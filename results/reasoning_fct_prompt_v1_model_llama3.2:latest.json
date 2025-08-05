@@ -5,11 +5,18 @@
             "correct_index":1
         },
         "gpt_output":{
-            "is_answer_correct":"yes",
-            "cop_index":"3",
-            "correct answer":"They are ortho-halogenated derivatives of phenothiazine",
-            "why_correct":"The ortopramide group drugs are characterized by the presence of an ortho-halogenated derivative of phenothiazine. This structural element is a defining feature of the class.",
-            "why_others_incorrect":"Options 0, 1, and 2 describe incorrect structural elements for the ortopramide group drugs. Anilides with propyl groups in ortho (option 0) do not match the definition. Benzamides with methoxy groups in ortho (option 1) are also incorrect. Benzenesulfonamides with a methyl group in ortho (option 2) do not describe the ortopramide group drugs accurately."
+            "cop_index":3,
+            "answer":"They are ortho-halogenated derivatives of phenothiazine.",
+            "why_correct":[
+                "The question asks about the structural element characteristic of ortopramide group drugs.",
+                "\"A class of heterocyclic compounds that include four or more fused rings\" refers to phenothiazines.",
+                "Options 0, 1, and 2 describe different structural elements that are not characteristic of ortopramide group drugs."
+            ],
+            "why_others_incorrect":[
+                "Option 0 incorrectly states that orthopramides are anilides with a propyl group in the ortho position. This is not consistent with the definition provided.",
+                "Option 1 incorrectly states that orthopramides are benzamides with a methoxy group in the ortho position, which contradicts the chemical structure of phenothiazines.",
+                "Option 2 incorrectly states that orthopramides are benzenesulfonamides with a methyl group in the ortho position. This is also not consistent with the definition provided."
+            ]
         }
     },
     {
@@ -21,8 +28,8 @@
             "is_answer_correct":"yes",
             "cop_index":"1",
             "correct answer":"Older children (last courses of Primary Education)",
-            "why_correct":"The turtle technique is used for older children in their last courses of primary education, helping them develop essential skills such as fine motor control and hand-eye coordination.",
-            "why_others_incorrect":"Options '0', '2', and '3' are incorrect because the turtle technique is not typically used for young children (early childhood education), preadolescents (first courses of secondary education), or adolescents (last years of secondary education and Bachillerato)."
+            "why_correct":"The turtle technique is used in education, and its typically applied to older children who are nearing the end of primary education. Key concepts in this question include age group, educational stage, and teaching techniques.",
+            "why_others_incorrect":"Option 0 refers to young children, which is an earlier stage of education than what the turtle technique targets. Option 2 pertains to preadolescents, who are at a different developmental stage than those typically served by this teaching method. Option 3 focuses on adolescents and Bachillerato students, representing a stage far beyond primary education."
         }
     },
     {
@@ -34,8 +41,8 @@
             "is_answer_correct":"yes",
             "cop_index":"1",
             "correct answer":"150-160\/90-95 mmHg",
-            "why_correct":"For patients with diabetes and hypertension, the American Diabetes Association (ADA) recommends blood pressure targets of <140\/90 mmHg for most adults. However, some guidelines suggest that for patients with diabetes, a more stringent target of <130\/80 mmHg may be beneficial to reduce the risk of diabetic nephropathy. In this case, given the patients renal function creatinine 1.6 mg\/dL, a slightly higher target range of 150-160\/90-95 mmHg is reasonable to balance blood pressure control with kidney function.",
-            "why_others_incorrect":"Options '0', '2', and '3' are too aggressive for this patients condition, as they do not take into account the patients renal function or the presence of diabetes."
+            "why_correct":"The correct blood pressure target range for a patient with hypertension and diabetes is between 150-160\/90-95 mmHg. The Context states that in patients with the best long-term control of blood pressure, this range is recommended.",
+            "why_others_incorrect":"Option 0 is incorrect because it targets <130\/80 mmHg, which may not be adequate for patients with hypertension and diabetes. Option 2 is also incorrect because it targets <140\/90 mmHg, which does not account for the diastolic component of blood pressure. Option 3 is incorrect because it targets <140\/85 mmHg, which is too tight and may not effectively control blood pressure in this patient population."
         }
     },
     {
@@ -45,10 +52,10 @@
         },
         "gpt_output":{
             "is_answer_correct":"yes",
-            "cop_index":"None of the above",
+            "cop_index":"-1",
             "correct answer":"None of the above",
-            "why_correct":"Sub-marginal flap is typically used in periodontal surgery to access the underlying connective tissue and eliminate the chronic ulcerated wound. It does not necessarily cause less gingival shrinking, result in fewer scars, or decrease intra-operative bleeding compared to other types of flaps. The primary purpose of a sub-marginal flap is to provide access for surgical procedures, not to minimize these specific outcomes.",
-            "why_others_incorrect":"Options 0, 1, and 2 are incorrect as they do not accurately describe the advantages or disadvantages of using a sub-marginal flap."
+            "why_correct":"The sub-marginal flap, as described in the context, involves the use of non-autologous tissue substitutes and percutaneous endoscopic approaches. This suggests that the primary advantages of a sub-marginal flap may not be the reduction of gingival shrinking, less scarring, or less intra-operative bleeding. The key concept here is that the sub-marginal flap is a complex surgical procedure with its own set of benefits and drawbacks, which are not necessarily related to the options provided.",
+            "why_others_incorrect":"Options 0, 1, and 2 are incorrect because they suggest specific advantages of the sub-marginal flap that are not supported by the context. The context implies that the sub-marginal flap has its own unique set of benefits and drawbacks, rather than offering a straightforward advantage in terms of gingival shrinking, scarring, or bleeding."
         }
     },
     {
@@ -60,8 +67,198 @@
             "is_answer_correct":"yes",
             "cop_index":"3",
             "correct answer":"Ammonia",
-            "why_correct":"Ammonia is considered the most important intracellular buffer because it can accept or donate protons (H+ ions) to maintain a stable pH. It plays a crucial role in maintaining acid-base balance within the bodys cells.",
-            "why_others_incorrect":"Bicarbonate (option 0) and phosphate (option 2) are also important intracellular buffers, but they have limitations in their ability to buffer protons compared to ammonia. Albumin (option 1) is not typically considered an intracellular buffer."
+            "why_correct":"The question asks about the most important intracellular buffer, and the Context explains that an intracellular buffer system functions to control the levels of specific ions in solution. Ammonium bicarbonate is a pH buffer that contains ammonia and ammonium bicarbonate as ions. Since ammonia is present in this buffer system and plays a crucial role in controlling hydrogen ion levels, it can be considered the most important intracellular buffer.",
+            "why_others_incorrect":"Options 0 (Bicarbonate), 1 (Albumin), and 2 (Phosphate) are not the primary buffers within the body. Bicarbonate is a major extracellular buffer, albumin has a buffering capacity in some bodily fluids but is not considered a strong intracellular buffer, and phosphate has limited buffering properties."
+        }
+    },
+    {
+        "id":"140d832a-b8ae-4791-aada-6fd62f313adb",
+        "testbed_data":{
+            "correct_index":1
+        },
+        "gpt_output":{
+            "is_answer_correct":"yes",
+            "cop_index":"0",
+            "correct answer":"Uterine prolapse",
+            "why_correct":"The question asks about Bonneys test, which is used to determine uterine prolapse. The context mentions Bonneys stress incontinence test as a procedure used for examining the vagina with a Cusco bivalve speculum.",
+            "why_others_incorrect":"Options 1, 2, and 3 are incorrect because they do not relate to the use of Bonneys test. Stress urinary incontinence is related to another test, vesicovaginal fistula is a different condition altogether, and uteric fistula is not mentioned as being diagnosed with Bonneys test."
+        }
+    },
+    {
+        "id":"197feaf8-e848-4d28-9c4e-5b43b8e4ded7",
+        "testbed_data":{
+            "correct_index":1
+        },
+        "gpt_output":{
+            "cop_index":"2",
+            "answer":"2: Maturation of erythroid progenitor cells",
+            "why_correct":"The patients condition, characterized by severe anemia (hemoglobin concentration of 8.7 g\/dL), thrombocytopenia (platelet count of 30,000\/mm3), and dyserythropoietic anemia, suggests a disorder of red blood cell production. The disease is caused by mutations in the GATA1 gene, which encodes erythroid transcription factor. This protein plays a crucial role in the maturation of erythroid progenitor cells.",
+            "why_others_incorrect":"The other options are not correct because they do not directly relate to red blood cell production or anemia. Option 0 is related to glucocerebroside hydrolysis, which is relevant to Gaucher disease. Option 1 refers to DNA interstrand crosslink repair, a process involved in DNA damage response. Option 3 involves the Ras signal transduction pathway, which regulates cell growth and division."
+        }
+    },
+    {
+        "id":"3fd34546-c589-4d68-8e0d-eca3f3caf324",
+        "testbed_data":{
+            "correct_index":2
+        },
+        "gpt_output":{
+            "is_answer_correct":"yes",
+            "cop_index":"3",
+            "answer":"Repeat urine culture",
+            "why_correct":"Key concepts: The patient has a urinary tract infection (UTI) diagnosed by a urine culture, and the causal bacteria is identified as E. coli without concerning resistance patterns. Infection, Escherichia coli A pathotype of Escherichia coli, which is a gram-negative bacteria that is transmitted through the fecal-oral route. It has an incubation period of 10-72 hours and a duration of 1-5 days. Symptoms may include acute, occasionally severe diarrhea without fever. The patients UTI has resolved with treatment, and it is essential to confirm that the infection has cleared before discontinuing antibiotics or assuming that the UTI will not recur.",
+            "why_others_incorrect":"Options '0', '1', and '2' are incorrect because prophylactic antibiotic therapy may not be necessary for this patient, who has a single episode of UTI without any risk factors for recurrent infections. A voiding cystourethrogram is typically recommended for children with vesicoureteral reflux or other urinary tract abnormalities, which is not indicated in this case. Renal bladder ultrasound is sometimes used to evaluate the kidneys and bladder, but it is not the next appropriate step in managing a resolved UTI."
+        }
+    },
+    {
+        "id":"9e5ccc5e-7716-4f99-98bd-20931299b126",
+        "testbed_data":{
+            "correct_index":3
+        },
+        "gpt_output":{
+            "is_answer_correct":"yes",
+            "cop_index":"0",
+            "correct answer":"Thoracic",
+            "why_correct":"In medicolegal autopsy, the primary focus is on determining the cause and manner of death. The thoracic cavity is often the first to be opened because it contains vital organs such as the heart, lungs, and trachea, which can provide critical information about the deceaseds health at the time of death. Additionally, the presence or absence of signs of trauma, disease, or other conditions in the thoracic cavity can have a significant impact on the overall autopsy findings.",
+            "why_others_incorrect":"The abdomen and cervical cavities are typically opened after the thoracic cavity to avoid interfering with potential evidence or altering the natural position of organs. Option 3 is incorrect because it suggests that any of the above options are correct, which is not the case."
+        }
+    },
+    {
+        "id":"26ca6141-2cff-4f87-81a9-a3205f75acb0",
+        "testbed_data":{
+            "correct_index":2
+        },
+        "gpt_output":{
+            "cop_index":"1",
+            "answer":"Preservative",
+            "why_correct":"Key concepts in this question involve the role of magnesium in Oral Poliovirus Vaccine (OPV). OPV contains various additives to maintain its stability and safety for administration. Preservatives are substances added to prevent the growth of harmful microorganisms in vaccines. In the context provided, it is mentioned that Magnesium Sulfate Topical Ointment may be used as a preservative in some formulations.",
+            "why_others_incorrect":"Option 0 (Adjuvant) is incorrect because adjuvants enhance the immune response to a vaccine but are not typically added for their preservative properties. Option 2 (Stabilizer) is incorrect because while stabilizers help maintain the chemical and physical stability of vaccines, they do not serve as preservatives. Option 3 (Antiinfective) is incorrect because antiinfectives are substances that prevent or reduce the growth of microorganisms, but in this context, the focus is specifically on preserving vaccines from microbial contamination."
+        }
+    },
+    {
+        "id":"3331b36a-00ae-4cc6-a352-ae3db6bfcc8d",
+        "testbed_data":{
+            "correct_index":1
+        },
+        "gpt_output":{
+            "is_answer_correct":"yes",
+            "cop_index":"0",
+            "correct answer":"Distal renal tubular acidosis",
+            "why_correct":"The child has vitamin D refractory rickets, indicating a problem with vitamin D metabolism. The low serum phosphate level (2.4 mg\/dl) suggests impaired renal phosphate reabsorption, which is characteristic of distal renal tubular acidosis (dRTA). Normal parathyroid hormone and bicarbonate levels further support this diagnosis.",
+            "why_others_incorrect":"Option 1, Hypophosphatemic rickets, is incorrect as the child does not have a genetic defect in phosphate reabsorption. Option 2, Vitamin D dependent rickets, is also incorrect because the child has vitamin D refractory rickets, indicating a problem with vitamin D metabolism rather than dependence on it. Option 3, Proximal renal tubular acidosis, is incorrect as dRTA affects the distal part of the kidney, not the proximal part."
+        }
+    },
+    {
+        "id":"4de1f7bb-e990-4a25-b097-b1ff2d93e603",
+        "testbed_data":{
+            "correct_index":3
+        },
+        "gpt_output":{
+            "is_answer_correct":"yes",
+            "cop_index":"1",
+            "answer":"Adrenal",
+            "why_correct":"The key concepts in this question are MEN type II A syndrome and its associated endocrine tumors. In the context of MEN type II A, adrenal gland hyperplasia is a characteristic feature. The relevant sentence from the Context that supports this answer is: \"Type I cell of adrenal medulla\". This indicates that the adrenal gland is involved in MEN type II A. Therefore, the correct answer is Adrenal.",
+            "why_others_incorrect":"Options Parathyroid, Thyroid, and Pituitary are involved in other types of MEN syndromes (e.g., MEN2B involves thyroid, parathyroid, and pheochromocytomas), but not specifically in MEN type II A. The Context only mentions adrenal gland involvement for MEN type II A."
+        }
+    },
+    {
+        "id":"2824395e-a5b4-48b7-ac81-b59a30f12d92",
+        "testbed_data":{
+            "correct_index":0
+        },
+        "gpt_output":{
+            "is_answer_correct":"yes",
+            "cop_index":"1",
+            "correct answer":"Switch blood pressure medication to hydrochlorothiazide",
+            "why_correct":"The patients blood pressure has increased from 169\/90 mmHg to 160\/85 mmHg after returning from his trip, indicating a potential rebound effect. This is consistent with the known side effects of losartan, which can cause orthostatic hypotension. Switching to hydrochlorothiazide would be an appropriate next step as it has been shown to increase blood pressure in some individuals and could help alleviate this rebound effect. The patients kidneys are functioning normally, making this change less likely to exacerbate their condition. Additionally, the patients potassium levels have increased slightly, which is a side effect of losartan that would be alleviated by switching to hydrochlorothiazide.",
+            "why_others_incorrect":"Option 0 (Switch blood pressure medication to losartan) is incorrect because losartan can cause orthostatic hypotension and would exacerbate the patients rebound hypertension. Option 2 (Azithromycin) is not relevant as there is no indication of a respiratory infection or symptoms that would warrant antibiotic use. Option 3 (Loratadine) is also not relevant, as there is no indication of an allergic reaction or need for antihistamines."
+        }
+    },
+    {
+        "id":"324af048-5d69-4fd2-b84d-f2dd292a2a8a",
+        "testbed_data":{
+            "correct_index":0
+        },
+        "gpt_output":{
+            "cop_index":"3",
+            "answer":"Psoriatic arthropathy",
+            "why_correct":"The key concepts in this question are mechanical spinal pain and stiffness, limitation of all movements of the lumbar and cervical spine, and the presence of thick intervertebral bony bridges. These symptoms suggest a condition that affects the joints in the spine and causes inflammation and bone growth. The Context states: \"Most involve the axial joints in the SPINE, particularly the SACROILIAC JOINT, but can also involve asymmetric peripheral joints.\" This suggests a connection between Psoriatic arthropathy and spinal involvement. Furthermore, it is stated that some subsets of Psoriatic arthropathy include symptoms such as mechanical pain and stiffness, which matches the patient\\s presentation. Lastly, the Context mentions that the antigen HLA-B27 is negative, which rules out Ankylosing spondylitis and allows Psoriatic arthropathy to be considered. In conclusion, the presence of thick intervertebral bony bridges in the lumbar spine and mechanical spinal pain and stiffness, combined with the lack of HLA-B27 positivity, points towards Psoriatic arthropathy as a first diagnostic possibility.",
+            "why_others_incorrect":"Ankylosing vertebral hyperostosis is characterized by bony overgrowth, but it typically affects older adults and does not usually present with mechanical pain and stiffness. Pagets disease can cause bone destruction and new bone growth, but it also often involves other skeletal sites beyond the spine, which is not mentioned in this case."
+        }
+    },
+    {
+        "id":"3befd4bb-af81-49a6-b640-711797bb3326",
+        "testbed_data":{
+            "correct_index":0
+        },
+        "gpt_output":{
+            "is_answer_correct":"yes",
+            "cop_index":"1",
+            "correct answer":"Amino acids",
+            "why_correct":"The key concepts in this question are the saliva buffer system and its importance in stimulated saliva. The Context mentions that amino acids + dextrose + magnesium chloride + dipotassium hydrogen phosphate + sodium acetate + sodium chloride is an ophthalmic solution for Metab, which implies that it contains a buffer system to stabilize the pH of the solution. Furthermore, it states that the salivary gland protein 1 and carbonic anhydrase 6 and parotid secretory protein IgA, IgG, IgM panel in serum by immunoassay (lab test) are related to saliva. Given these points, we can infer that amino acids play a crucial role in maintaining the pH balance of saliva, especially during stimulation.",
+            "why_others_incorrect":"Carbonic acids are not mentioned as a component of the saliva buffer system in the Context. Phosphates are indeed mentioned, but they are related to the sodium acid phosphate + sodium bicarbonate option, which is not relevant to the question about the importance of carbonic acids in stimulated saliva."
+        }
+    },
+    {
+        "id":"4bf6d638-c417-4dbf-9534-71893c142743",
+        "testbed_data":{
+            "correct_index":2
+        },
+        "gpt_output":{
+            "cop_index":"1",
+            "answer":"Tetracycline",
+            "why_correct":"The patient presents with symptoms consistent with Lyme disease, including fever, chills, arthritis, and an erythematous rash (erythema migrans) after a tick bite. The next best step is to prescribe antibiotic therapy to treat Lyme disease. Tetracycline is a recommended treatment for Lyme disease due to its effectiveness against Borrelia burgdorferi, the bacterium that causes the disease.",
+            "why_others_incorrect":"Ibuprofen (option 0) may be used as an anti-inflammatory agent for arthritis symptoms but is not effective against the underlying infection. Amoxicillin (option 2) is a broad-spectrum antibiotic but may not be sufficient to treat Lyme disease, and Gentamicin (option 3) is not typically used to treat this condition."
+        }
+    },
+    {
+        "id":"0c9cf26d-a7cb-40b8-8b0f-4af02cf4dcb3",
+        "testbed_data":{
+            "correct_index":0
+        },
+        "gpt_output":{
+            "is_answer_correct":"yes",
+            "cop_index":"2",
+            "correct answer":"Decidua parietalis layer",
+            "why_correct":"The key concepts in this question are the layers of the placenta and their maternal side. The maternal side of the placenta is composed of the decidua, which includes various layers such as decidua basalis, decidua capsularis, and decidua parietalis. Decidua parietalis is specifically mentioned as one of the layers in the provided context.",
+            "why_others_incorrect":"Decidua basalis layer (option 0) refers to the basal side of the placenta, which is not considered the maternal side. Decidua capsularis layer (option 1) is the layer that forms the outer edge of the placenta and covers the amniotic sac, but it is not typically referred to as the maternal side of the placenta. Decidua spongiosa layer (option 3) is a sponge-like layer in the decidua parietalis but does not represent the entire maternal side."
+        }
+    },
+    {
+        "id":"a838640e-369f-4723-91a9-7c4eb3f07bcf",
+        "testbed_data":{
+            "correct_index":2
+        },
+        "gpt_output":{
+            "cop_index":"1",
+            "answer":"The consumption of tobacco.",
+            "why_correct":"The question asks about one of the main factors addressed in the Strategy for the Promotion of Health and Prevention in the National Health System (SNS), within the framework of the chronicity approach. The correct answer is related to promoting health and preventing disease. Key concepts include strategy', 'health promotion', and 'prevention'. The consumption of tobacco, as mentioned in the Context, is one of the factors that encourages behaviors to enhance health state and reduce risks of major chronic diseases. As stated in the Context: 'Actions performed to encourage behaviors to enhance health state The realization that individual behavior plays a key role in health and disease prevention.' This supports the chosen answer, which is related to tobacco consumption.",
+            "why_others_incorrect":"The other options are not directly supported by the evidence from the Context. 'The consumption of harmful risk of alcohol' (Option 0) is mentioned as an example of behaviors that should be avoided in lifestyle habits related to disease prevention and control, but it does not match the context of health promotion strategies. 'Sexual health' (Option 2) is a separate aspect of health that may be addressed through education and preventive measures, but it is not explicitly linked to the SNS strategy for promoting health and preventing chronic diseases. 'Emotional well-being' (Option 3) is also an important aspect of overall health, but it is not directly related to the specific context of tobacco consumption as a key factor in the SNS strategy."
+        }
+    },
+    {
+        "id":"ca5981e7-1b04-4a14-9964-cb172bd730be",
+        "testbed_data":{
+            "correct_index":0
+        },
+        "gpt_output":{
+            "is_answer_correct":"yes",
+            "cop_index":"1",
+            "correct answer":"Vascularization increases or the epithelial keratinization is increased",
+            "why_correct":"The key concepts in this question are the causes of gingival redness. Vascularization refers to the increase in blood vessels, while epithelial keratinization refers to the process by which the skin and mucous membranes become thicker and harder due to the accumulation of keratin. According to the Context, 'Inflammation characterised by gingival redness and swelling with spontaneous bleeding.' This suggests that increased vascularization is a cause of gingival redness. Additionally, the Context states that 'erythema of buccal surface of mandibular gingiva on right (physical finding)' which further supports the idea that increased vascularization leads to erythema (redness).",
+            "why_others_incorrect":"Option 0 is incorrect because reduced epithelial keratinization would lead to thinner, more permeable skin, not thicker, more solid skin. Option 2 is also incorrect for similar reasons as option 0. Option 3 is incorrect because decreased vascularization would reduce blood flow and cause the gingiva to become pale or discolored, rather than red."
+        }
+    },
+    {
+        "id":"391a2235-7807-45be-b819-3fbf3cd0b7a9",
+        "testbed_data":{
+            "correct_index":0
+        },
+        "gpt_output":{
+            "is_answer_correct":"yes",
+            "cop_index":"1",
+            "correct answer":"An amiodarone pneumonitis seems unlikely given that the patient has taken the drug for 2 years.",
+            "why_correct":"The key concepts in this question are the presence of a history of taking amiodarone, clinical presentation with cough and fever, and radiological findings. The exact sentences from the Context that directly support this answer are: \"Given the clinical, radiological and analytical findings with which we already have, we can conclude:\" This implies that the evidence supports the conclusion about the patient\\s condition. Additionally, the question states that the patient has taken amiodarone for 2 years, which makes amiodarone pneumonitis less likely. Finally, the fact that the patient received antibiotic and steroid treatment with improvement suggests that the patient\\s symptoms may be due to another cause. Therefore, we can conclude that an amiodarone pneumonitis seems unlikely given that the patient has taken the drug for 2 years.",
+            "why_others_incorrect":"Option 0 is incorrect because organized pneumonia cannot be ruled out based on the information provided. Option 2 is also incorrect because the lymphocyte ratio does not necessarily suggest sarcoidosis, and option 3 is incorrect because fibrotic pneumonia is a possible diagnosis but not directly supported by the information given."
         }
     }
 ]

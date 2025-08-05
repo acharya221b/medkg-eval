@@ -84,14 +84,23 @@ def run_json_conversion_stage(args):
 def run_evaluation_stage(args):
     logging.info(f"--- Starting Final Consolidated Evaluation ---")
     json_pattern = f"*_prompt_{args.prompt_id}_model_*.json"
-    eval_simple = FullDataEval(args.results_dir, file_pattern=json_pattern, correct_score=1, incorrect_score=0).run_all_evaluations()
-    eval_penalty = FullDataEval(args.results_dir, file_pattern=json_pattern, correct_score=1, incorrect_score=-0.25).run_all_evaluations()
-    if eval_simple.empty:
+    evaluator = FullDataEval(
+        args.results_dir, 
+        file_pattern=json_pattern, 
+        correct_score=1, 
+        incorrect_score=-0.25
+    )
+    final_df = evaluator.run_all_evaluations()
+
+    if final_df.empty:
         logging.error("Evaluation produced no results.")
         return
-    eval_simple.rename(columns={'score': 'simple_score'}, inplace=True)
-    eval_penalty.rename(columns={'score': 'penalty_score'}, inplace=True)
-    final_df = pd.merge(eval_simple, eval_penalty[['task_name', 'model_name', 'penalty_score']], on=['task_name', 'model_name'], how='left')
+        
+    # 2. Rename the 'score' column to be specific.
+    #    The 'correct' column already serves the purpose of the old 'simple_score'.
+    final_df.rename(columns={'score': 'penalty_score'}, inplace=True)
+    
+    # 3. Filter, sort, and clean up the DataFrame as before.
     final_df = final_df[final_df['task_name'].isin(args.tasks)]
     final_df.sort_values(by=['task_name', 'model_name'], inplace=True)
     final_df.reset_index(drop=True, inplace=True)

@@ -5,11 +5,14 @@
             "correct_index":1
         },
         "gpt_output":{
-            "is_answer_correct":"no",
-            "cop_index":"None of the above",
-            "correct answer":"None of the above",
-            "why_correct":"Orthopramide drugs are characterized by being anilides with a propyl group in the ortho position (Option 0). The other options incorrectly describe their structure.",
-            "why_others_incorrect":"Options 1, 2, and 3 inaccurately describe the structural elements of orthopramide drugs."
+            "cop_index":3,
+            "answer":"They are ortho-halogenated derivatives of phenothiazine.",
+            "why_correct":"The key concepts involve identifying structural elements in orthopramide drugs. The context supports this by mentioning '10H-Phenothiazine-2-sulfonamide' and its use as a ligand for TSPO-expressing cells, indicating that phenothiazine derivatives are relevant. Ortho-halogenation is a structural feature that aligns with the description of orthopramide group drugs.",
+            "why_others_incorrect":{
+                "0":"Anilides with propyl groups in ortho are not mentioned in the context related to orthopramides.",
+                "1":"Benzamides with methoxy groups in ortho are unrelated to the described structural elements of orthopramide drugs.",
+                "2":"Benzenesulfonamides with methyl groups in ortho do not align with the phenothiazine-based structures discussed."
+            }
         }
     },
     {
@@ -18,11 +21,10 @@
             "correct_index":0
         },
         "gpt_output":{
-            "is_answer_correct":"no",
             "cop_index":"3",
-            "correct answer":"None of the above",
-            "why_correct":"The turtle technique is primarily used for teaching swimming to younger children, typically in early childhood education. None of the provided age groups accurately reflect this usage.",
-            "why_others_incorrect":"Options 0 refers to a too young group, option 1 refers to older primary students who may have moved beyond initial swimming lessons, options 2 and 3 are for adolescents who likely don\"t use the turtle technique."
+            "answer":"None of the above",
+            "why_correct":"The question asks for the age group indicated for the turtle technique, but the provided context does not mention the turtle technique or its indication. Without any supporting information in the context, it is impossible to determine a correct answer based on the given options.",
+            "why_others_incorrect":"All other options (0, 1, and 2) are incorrect because they suggest specific age groups without any evidence from the context to support their use with the turtle technique."
         }
     },
     {
@@ -31,11 +33,10 @@
             "correct_index":0
         },
         "gpt_output":{
-            "is_answer_correct":"yes",
             "cop_index":"1",
-            "correct answer":"150-160\/90-95 mmHg",
-            "why_correct":"The patient has hypertension and diabetes with moderate renal function (creatinine 1.6 mg\/dL). The target blood pressure should be set at a level that balances kidney protection without excessive lowering, making the range of 150-160\/90-95 mmHg appropriate.",
-            "why_others_incorrect":"Option 0 is too stringent for this patient. Options 2 and 3 are also more aggressive than needed given his creatinine level."
+            "answer":"150-160\/90-95 mmHg",
+            "why_correct":"The key concepts in the question involve determining the appropriate blood pressure target for a patient with hypertension, diabetes, and renal impairment. The context states that 'Most recent diastolic blood pressure greater than or equal to 90 mmHg (HTN, CKD, CAD) (DM)' and 'Advise patients with prehypertensive classification and comorbid conditions... to reduce BP to 130\/80 mmHg or less.' However, considering the patients high baseline BP of 170\/100 mmHg and the context mentioning targets for CKD and DM such as '<140\/90 mmHg,' a more realistic and protective target is 150-160\/90-95 mmHg. This aligns with managing comorbid conditions without overaggressive lowering.",
+            "why_others_incorrect":"Option 0 (<130\/80 mmHg) is too low given his baseline and comorbidities. Option 2 (<140\/90 mmHg) is closer but still lower than needed for his condition. Option 3 (<140\/85 mmHg) is even stricter and not indicated here."
         }
     },
     {
@@ -44,11 +45,10 @@
             "correct_index":0
         },
         "gpt_output":{
-            "is_answer_correct":"yes",
             "cop_index":"3",
-            "correct answer":"None of the above",
-            "why_correct":"The advantages of a sub-marginal flop are not accurately represented by any of the provided options. The procedure primarily aims to effectively debride periodontal pockets and reduce pocket depth, rather than specifically reducing gingival shrinking, scarring, or intra-operative bleeding.",
-            "why_others_incorrect":"Option 0 is incorrect because sub-marginal flop can lead to some degree of gingival recession. Option 1 is incorrect as it does not eliminate scar formation. Option 2 may not significantly reduce bleeding compared to other methods."
+            "answer":"None of the above",
+            "why_correct":"The question pertains to the advantages of a sub-marginal flop, a surgical technique involving the transfer of submarginal gingival tissue. However, the provided context does not contain any information or statements that directly address this procedure or its advantages. Without relevant supporting evidence in the context, none of the options can be confirmed as correct.",
+            "why_others_incorrect":"Options 0 ('Cause less gingival shrinking'), 1 ('Cause Less scars'), and 2 ('Less intra-operative bleeding') are not supported by the given context, which does not discuss sub-marginal flops or their advantages."
         }
     },
     {
@@ -57,11 +57,198 @@
             "correct_index":2
         },
         "gpt_output":{
-            "is_answer_correct":"no",
-            "cop_index":"2",
-            "correct answer":"Phosphate",
-            "why_correct":"Phosphate is a major intracellular buffer due to its role in accepting protons (H+) and neutralizing acids within cells, which helps maintain acid-base balance.",
-            "why_others_incorrect":"Bicarbonate (0) is primarily an extracellular buffer. Albumin (1), though a protein buffer, is more prominent in the extracellular fluid. Ammonia (3) is not a primary intracellular buffer but rather a nitrogen waste product."
+            "cop_index":"3",
+            "answer":"Ammonia",
+            "why_correct":"The key concept in this question is identifying the most important intracellular buffer. The context provides information about various buffering systems, including those containing ammonia and ammonium bicarbonate. It states that such combinations are used as buffers in assays to maintain pH. Additionally, it mentions that phosphate is a predominant intracellular anion involved in energy storage and cellular activities but does not specify it as the primary buffer. Therefore, ammonia emerges as the most important intracellular buffer based on the context provided.",
+            "why_others_incorrect":"Bicarbonate (option 0) is significant but primarily functions in extracellular spaces. Albumin (option 1) is an extracellular buffer and not relevant here. Phosphate (option 2), while crucial for cellular processes, isn\"t highlighted as the primary intracellular buffer."
+        }
+    },
+    {
+        "id":"140d832a-b8ae-4791-aada-6fd62f313adb",
+        "testbed_data":{
+            "correct_index":1
+        },
+        "gpt_output":{
+            "cop_index":"0",
+            "answer":"Uterine prolapsed",
+            "why_correct":"The key concept here is understanding what Bonneys test evaluates. From the context provided, it mentions 'Bonney test (procedure)' which is a recognized method for assessing pelvic organ prolapse, particularly uterine prolapse. This test involves evaluating the degree of uterine descent into the vagina by applying pressure to the rectum. It is specifically designed to assess uterine prolapse during a physical examination.",
+            "why_others_incorrect":"Stress urinary incontinence (option 1) is evaluated through other methods like the cough stress test, not Bonneys test. Vesicovaginal fistula (option 2) is diagnosed using procedures such as diagnostic cystoscopy and imaging studies, not Bonneys test. Uteric fistula (option 3) refers to an abnormal connection between the uterus and another organ, typically diagnosed through different diagnostic methods."
+        }
+    },
+    {
+        "id":"197feaf8-e848-4d28-9c4e-5b43b8e4ded7",
+        "testbed_data":{
+            "correct_index":1
+        },
+        "gpt_output":{
+            "cop_index":2,
+            "answer":"Maturation of erythroid progenitor cells",
+            "why_correct":"The key concepts here include pancytopenia, skeletal abnormalities, and a defect in a gene encoding a protein involved in blood cell development. The context directly supports this with the mention of 'Dyserythropoietic anemia... caused by a mutation in the COX4I2 gene,' which affects erythroid progenitor maturation. This condition leads to impaired red blood cell production, fitting the patients low hemoglobin and other blood count abnormalities.",
+            "why_others_incorrect":"Option 0 (glucocerebroside hydrolysis) relates to Gaucher disease, which isn\"t indicated here. Option 1 (DNA interstrand crosslink repair) pertains to Fanconi anemia, not this patients case. Option 3 (Ras signal transduction pathway) is linked to disorders like Noonan syndrome but doesn\"t match the hematologic findings."
+        }
+    },
+    {
+        "id":"3fd34546-c589-4d68-8e0d-eca3f3caf324",
+        "testbed_data":{
+            "correct_index":2
+        },
+        "gpt_output":{
+            "cop_index":"3",
+            "answer":"Repeat urine culture",
+            "why_correct":"The key concepts in this question revolve around managing a UTI in a child. The context states that 'in addition to her current therapy, what additional steps should be taken' after an initial UTI diagnosis and treatment with ceftriaxone. Quoting from the context: 'the causal bacteria was E. coli... susceptible to ceftriaxone.' To ensure effective treatment and prevent recurrence or resistance, confirming eradication through a repeat culture is crucial.",
+            "why_others_incorrect":"Prophylactic antibiotics (0) are unnecessary without risk factors; imaging studies (1,2) aren\"t indicated unless structural issues exist."
+        }
+    },
+    {
+        "id":"9e5ccc5e-7716-4f99-98bd-20931299b126",
+        "testbed_data":{
+            "correct_index":3
+        },
+        "gpt_output":{
+            "cop_index":"0",
+            "answer":"Thoracic",
+            "why_correct":"In medicolegal autopsies, the order of cavity opening is crucial for safety and ease of examination. The thoracic cavity contains vital organs such as the heart and lungs, which may have findings that necessitate immediate attention. According to the context provided, the use of a thoracoscope in accessing the pleural and thoracic cavities is highlighted, indicating the importance of this procedure. Additionally, injuries involving intrathoracic organs with open wounds into the cavity are noted, underscoring why the thoracic cavity should be prioritized for examination.",
+            "why_others_incorrect":"Option 1 (Abdomen) is incorrect because it delays access to critical thoracic findings. Option 2 (Cervical) is irrelevant unless neck injuries are suspected. Option 3 (Any of the above) ignores the standard protocol that prioritizes the thoracic cavity."
+        }
+    },
+    {
+        "id":"26ca6141-2cff-4f87-81a9-a3205f75acb0",
+        "testbed_data":{
+            "correct_index":2
+        },
+        "gpt_output":{
+            "cop_index":"-1",
+            "answer":"None of the above",
+            "why_correct":"The question asks about the role of magnesium in OPV (Oral Polio Vaccine). The context provided does not mention anything specific about the role of magnesium in vaccines, particularly OPV. It discusses magnesiums general roles as an electrolyte and cofactor in enzymatic reactions, but there is no information linking magnesium to its use as a preservative, stabilizer, adjuvant, or antiinfective in the context of polio vaccines.",
+            "why_others_incorrect":"The context does not provide any support for magnesium being used as an adjuvant (0), preservative (1), stabilizer (2), or antiinfective (3) in OPV. Therefore, all options are incorrect."
+        }
+    },
+    {
+        "id":"3331b36a-00ae-4cc6-a352-ae3db6bfcc8d",
+        "testbed_data":{
+            "correct_index":1
+        },
+        "gpt_output":{
+            "cop_index":"0",
+            "answer":"Distal renal tubular acidosis",
+            "why_correct":"The child presents with vitamin D refractory rickets, low serum phosphate (2.4 mg\/dl), and elevated alkaline phosphatase (1040 units). These findings suggest a problem with phosphate metabolism. The normal parathyroid hormone levels indicate no secondary hyperparathyroidism, which is often seen in hypophosphatemic conditions. Distal renal tubular acidosis (dRTA) is associated with hypokalemia, hypercalciuria, and normal serum calcium levels, leading to bone issues due to impaired bicarbonate reabsorption. The context supports dRTA as a cause of hypophosphatemia and rickets.",
+            "why_others_incorrect":"Hypophosphatemic rickets (option1) can present with low phosphate but doesn\"t explain the normal calcium or the renal acidosis. Vitamin D dependent rickets (option2) would show low 25-OH-D levels, which aren\"t mentioned. Proximal renal tubular acidosis (option3) causes more severe metabolic acidosis and isn\"t linked to hypophosphatemia."
+        }
+    },
+    {
+        "id":"4de1f7bb-e990-4a25-b097-b1ff2d93e603",
+        "testbed_data":{
+            "correct_index":3
+        },
+        "gpt_output":{
+            "cop_index":1,
+            "answer":"Adrenal",
+            "why_correct":"MEN type II A involves multiple endocrine glands. The key sentence from the context is: 'Patients with MEN 2A develop medullary thyroid carcinomas, and may also develop pheochromocytomas and parathyroid gland hyperplasia.' This indicates that adrenal glands (via pheochromocytoma) are involved in MEN type II A.",
+            "why_others_incorrect":"Parathyroid is involved but the primary focus here is Adrenal. Pituitary isn\"t directly associated with MEN2A, and Thyroid is more about medullary carcinoma."
+        }
+    },
+    {
+        "id":"2824395e-a5b4-48b7-ac81-b59a30f12d92",
+        "testbed_data":{
+            "correct_index":0
+        },
+        "gpt_output":{
+            "cop_index":1,
+            "answer":"Switch blood pressure medication to hydrochlorothiazide",
+            "why_correct":"The patients potassium level increased from 4.9 to 5.3 mEq\/L, which may be related to lisinopril use. Hydrochlorothiazide can help manage hyperkalemia and hypertension.",
+            "why_others_incorrect":{
+                "0":"Losartan does not address hyperkalemia.",
+                "2":"Azithromycin treats infections, not blood pressure.",
+                "3":"Loratadine is for allergies."
+            }
+        }
+    },
+    {
+        "id":"324af048-5d69-4fd2-b84d-f2dd292a2a8a",
+        "testbed_data":{
+            "correct_index":0
+        },
+        "gpt_output":{
+            "cop_index":3,
+            "answer":"Psoriatic arthropathy",
+            "why_correct":"The key concepts in the question involve a patient with mechanical spinal pain, stiffness, and radiological evidence of thick intervertebral bony bridges. The exact sentences from the context state that psoriatic arthropathy is a subset of spondyloarthropathies that can present with enthesitis and bony changes, including new bone formation at entheses (enthesophytes). This aligns with the radiological findings in the question. Therefore, the first diagnostic possibility is psoriatic arthropathy.",
+            "why_others_incorrect":"Ankylosing spondylitis (0) and ankylosing vertebral hyperostosis (1) are less likely due to negative HLA-B27 and non-inflammatory markers. Pagets disease (2) does not present with bony bridges separated from the spine."
+        }
+    },
+    {
+        "id":"3befd4bb-af81-49a6-b640-711797bb3326",
+        "testbed_data":{
+            "correct_index":0
+        },
+        "gpt_output":{
+            "cop_index":"3",
+            "answer":"None of the above",
+            "why_correct":"The key concepts involve determining the importance of buffer systems in saliva. The context mentions sodium acid phosphate and sodium bicarbonate but does not explicitly state which has lower importance. Without specific evidence on their relative roles, its impossible to definitively choose between the options provided.",
+            "why_others_incorrect":"Options 0 (Amino acids) and 1 (Carbonic acids) are present in the context but lack sufficient evidence to assess their importance compared to others. Option 2 (Phosphates) is mentioned but not prioritized."
+        }
+    },
+    {
+        "id":"4bf6d638-c417-4dbf-9534-71893c142743",
+        "testbed_data":{
+            "correct_index":2
+        },
+        "gpt_output":{
+            "cop_index":"1",
+            "answer":"Tetracycline",
+            "why_correct":"The key concepts in this question are a pregnant woman presenting with signs of infection (fever, chills, joint pain) following a tick bite. The erythematous rash on her arm suggests Lyme disease caused by Borrelia burgdorferi. Tetracycline is effective against this bacteria and is a recommended treatment for early Lyme disease. 'Tetracycline' is the correct answer as it directly targets the infection.",
+            "why_others_incorrect":{
+                "0":"Ibuprofen is an NSAID used for pain\/inflammation, not infections.",
+                "2":"Amoxicillin treats gram-positive bacteria, not Borrelia burgdorferi.",
+                "3":"Gentamicin targets different bacteria and is ineffective against Lyme disease."
+            }
+        }
+    },
+    {
+        "id":"0c9cf26d-a7cb-40b8-8b0f-4af02cf4dcb3",
+        "testbed_data":{
+            "correct_index":0
+        },
+        "gpt_output":{
+            "cop_index":"0",
+            "answer":"Decidua basalis layer",
+            "why_correct":"The question asks about the maternal side layer of the placenta, which is known as the decidua. The key concept here is understanding that the maternal portion of the placenta is derived from the uterine endometrium and forms three layers: capsularis, basalis, and spongiosa. Among these, the Decidua basalis layer specifically refers to the deepest layer of the decidua, which directly forms the maternal face of the placenta. This aligns with the provided context that describes the maternal portion as the decidua.",
+            "why_others_incorrect":"Option 1 (Decidua capsularis) is incorrect because it refers to the outermost layer covering the amnion, not the maternal side. Option 2 (Decidua parietalis) might be confused with Decidua basalis in some contexts but does not specifically denote the maternal layer. Option 3 (Decidua spongiosa) is also incorrect as it refers to a different layer within the decidua."
+        }
+    },
+    {
+        "id":"a838640e-369f-4723-91a9-7c4eb3f07bcf",
+        "testbed_data":{
+            "correct_index":2
+        },
+        "gpt_output":{
+            "cop_index":"0",
+            "answer":"The consumption of harmful risk of alcohol.",
+            "why_correct":"Key concepts in the question focus on main factors addressed in health promotion and prevention strategies. The context explicitly mentions 'control and prevention of adverse oral, behavioral, and systemic health effects associated with high-risk substance use,' which includes alcohol. This indicates that alcohol consumption is a significant factor addressed in the strategy.",
+            "why_others_incorrect":"The consumption of tobacco (option 1) and emotional well-being (option 3) are also mentioned or implied in the context, making them true statements. However, sexual health (option 2) is not explicitly addressed as a main factor."
+        }
+    },
+    {
+        "id":"ca5981e7-1b04-4a14-9964-cb172bd730be",
+        "testbed_data":{
+            "correct_index":0
+        },
+        "gpt_output":{
+            "cop_index":"1",
+            "answer":"Vascularization increases or the epithelial keratinization is increased",
+            "why_correct":"The key concept here is the change in gingival color due to pathological conditions. The context states that inflammation of gum tissue (GINGIVITIS) is characterized by redness and swelling. This occurs because vascularization increases, leading to more blood flow, which causes the reddening. Additionally, increased epithelial keratinization may contribute to the red appearance as part of the inflammatory response.",
+            "why_others_incorrect":"Options '0', '2', and '3' suggest decreases in vascularization or changes in keratinization that do not align with the mechanism causing redness in gingivae. Specifically, reduced vascularization would lead to paleness rather than redness."
+        }
+    },
+    {
+        "id":"391a2235-7807-45be-b819-3fbf3cd0b7a9",
+        "testbed_data":{
+            "correct_index":0
+        },
+        "gpt_output":{
+            "cop_index":"1",
+            "answer":"An amiodarone pneumonitis seems unlikely given that the patient has taken the drug for 2 years.",
+            "why_correct":"The key concepts in this question revolve around identifying the most likely pathological diagnosis based on clinical, radiological, and analytical findings. The exact sentence from the context supporting this is: 'Two years ago, he was diagnosed with paroxysmal atrial fibrillation and received treatment with amiodarone for 18 months at a dose of 200 mg \/ day and subsequently 400 mg \/ day in the last 6 months.' This indicates that the patient has been on amiodarone for two years. Amiodarone is known to cause pulmonary toxicity, but this usually occurs after prolonged use (typically several years). The fact that the patients symptoms improved with antibiotic and steroid treatment initially, along with the subsequent radiological normalization, makes amiodarone-induced pneumonitis less likely.",
+            "why_others_incorrect":"Option 0 is incorrect because the clinical presentation and test results do not suggest organized pneumonia. Option 2 is incorrect because the CD4\/CD8 ratio of 0.9 does not typically indicate sarcoidosis, which usually has a higher lymphocyte count with inverted ratios. Option 3 is incorrect because the findings do not point towards fibrotic-type pneumonia."
         }
     }
 ]

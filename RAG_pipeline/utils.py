@@ -53,6 +53,27 @@ def retrieve_semantic_seeds(query, model, index, texts, top_k=30000):
     _, indices = index.search(query_vec, top_k)
     return [texts[i]["sui"] for i in indices[0]]
 
+def retrieve_semantic_nodes(query, model, index, texts, top_k=50, top_m=10):
+    """
+    MODIFIED: This function now retrieves both the top_k SUIs for graph traversal
+    and the top_m full semantic texts for direct use.
+    """
+    query_vec = model.encode([query], convert_to_numpy=True)
+    _, indices = index.search(query_vec, top_k)
+    
+    top_indices = indices[0]
+    
+    # Get the SUIs for the top_k results (for potential graph traversal)
+    top_k_suis = [texts[i]["sui"] for i in top_indices]
+    
+    # --- YOUR NEW FEATURE ---
+    # Get the full text content for the top_m results directly.
+    # We use [:top_m] to select the m most similar results from the top_k.
+    top_m_texts = [texts[i]["name"] for i in top_indices[:top_m]]
+    
+    logging.info(f"Retrieved {len(top_k_suis)} SUIs and the top {len(top_m_texts)} semantic texts.")
+    return top_k_suis, top_m_texts
+
 def get_definitions_from_graph(client, suis):
     if not suis: return []
     try:
@@ -122,7 +143,16 @@ def generate_llm_response(llm_client, model_name, question, options, definitions
     main_prompt_instruction = prompt_assets.get("prompt", "")
     few_shot_str = format_shots(prompt_assets.get("shots", []))
     options_str = "\\n".join([f"{k}: {v}" for k, v in options.items()])
-    output_format_instruction = "You MUST provide your response as a single, valid JSON object."
+    output_format_instruction = (
+        "You MUST provide your response as a single, valid JSON object with the following keys:\n"
+        "1. `cop_index`: The integer index of the correct option.\n"
+        "2. `answer`: The full string value of the correct option.\n"
+        "3. `why_correct`: A detailed explanation of only the correct answer. This explanation MUST follow a specific three-part structure:\n"
+        "   - First, briefly state the key concepts in the question.\n"
+        "   - Second, quote all the exact sentences from the Context that directly support your answer.\n"
+        "   - Finally, provide a concluding sentence that links the evidence to the chosen answer.\n"
+        "4. `why_others_incorrect`: A brief explanation for why each of the other options is wrong."
+    )
     
     # --- DYNAMIC PROMPT COMPONENT LOGIC ---
     context_block = ""
@@ -152,7 +182,8 @@ def generate_llm_response(llm_client, model_name, question, options, definitions
         try:
             response = llm_client.chat.completions.create(model=model_name, messages=[{"role": "user", "content": prompt}], temperature=0.0, response_format={"type": "json_object"})
             raw_text = response.choices[0].message.content
-            
+            # response = llm_client.complete(prompt)
+            # raw_text = response.text
             repaired_json_str = repair_json(raw_text)
             
             # 2. Parse the now-guaranteed-to-be-valid JSON string.

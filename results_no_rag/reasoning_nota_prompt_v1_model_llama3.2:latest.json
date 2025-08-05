@@ -5,10 +5,10 @@
             "correct_index":2
         },
         "gpt_output":{
-            "cop":"None of the above",
             "cop_index":2,
-            "why_correct":"Zone 3 is not referred to as any of the options provided. Zone 3 typically refers to an area of tissue that has been ischemic for a long time and has undergone necrosis.",
-            "why_others_incorrect":"Option '0' (Bacterial zone) does not describe Zone 3, option '1' (Neutrophil rich zone) describes a different zone, and option '3' (Spirochetial infiltration zone) is also not accurate."
+            "answer":"None of the above",
+            "why_correct":"The key concept in this question is understanding the different zones of an infection. Zone 3 refers to the area where there is no microorganisms, but there are signs of inflammation and tissue damage. This zone is characterized by spirochetes being present but not multiplying.",
+            "why_others_incorrect":"Option 0 (Bacterial zone) is incorrect because it describes a different zone altogether. Option 1 (Neutrophil rich zone) does exist, but its Zone 2. Spirochetial infiltration zone is actually the definition of Zone 3 itself."
         }
     },
     {
@@ -17,10 +17,10 @@
             "correct_index":2
         },
         "gpt_output":{
-            "cop":"1",
-            "cop_index":1,
-            "why_correct":"A potential sexual organ donor for brain death determination must have dilated pupils with no light reflection (pupillary dilation without light reflex), as this indicates the presence of a lack of pupillary function, which is one of the criteria for brain death. The other options are necessary to confirm the persons identity and determine the cause of death.",
-            "why_others_incorrect":"Options '0', '2', and '3' are incorrect as they do not accurately represent conditions that must be met to determine a potential sexual organ donor for brain death."
+            "cop_index":2,
+            "answer":"None of the above",
+            "why_correct":"The key concepts in this question are potential sexual organ donors and brain death determination conditions. In the context of determining brain death, a persons ability to self-breathe is not directly relevant to their suitability as a donor. A persons metabolic disorders can be relevant, as they may affect their suitability for donation due to increased risk of disease transmission. The other options do not provide sufficient information about a potential donors condition to determine brain death.",
+            "why_others_incorrect":"Option 0 is incorrect because self-breathing ability is not a necessary condition for determining brain death. Option 1 is incorrect because dilated pupils with no light reflection can indicate the person has regained consciousness, making them unsuitable as a brain donor. Option 3 is incorrect because metabolic disorders can affect a persons suitability as a donor."
         }
     },
     {
@@ -29,10 +29,10 @@
             "correct_index":0
         },
         "gpt_output":{
-            "cop":"None of the above",
-            "cop_index":0,
-            "why_correct":"Protein segregation occurs in various cellular compartments, but not specifically in peroxisomes, endoplasmic reticulum (ER), or mitochondria as a primary site. While proteins are processed and modified in these organelles, protein segregation is a broader concept that involves the separation of proteins into different fractions based on their properties.",
-            "why_others_incorrect":"Peroxisomes are involved in the degradation of fatty acids and amino acids, but not primarily in protein segregation. The ER is responsible for protein synthesis, modification, and transport, but again, not specifically for protein segregation. Mitochondria have a different function involving energy production, and are not the primary site for protein segregation."
+            "cop_index":2,
+            "answer":"ER",
+            "why_correct":"Protein segregation occurs in the Endoplasmic Reticulum (ER). The ER is a crucial organelle responsible for protein synthesis, modification, and secretion. Proteins destined for the secretory pathway or lysosomes are often targeted to the ER for further processing.",
+            "why_others_incorrect":"Peroxisomes and mitochondria are involved in different cellular processes and do not primarily handle protein segregation. Peroxisomes are involved in fatty acid oxidation and detoxification, while mitochondria are primarily responsible for generating energy through oxidative phosphorylation."
         }
     },
     {
@@ -41,10 +41,10 @@
             "correct_index":3
         },
         "gpt_output":{
-            "cop":"None of the above",
             "cop_index":3,
-            "why_correct":"Meissners corpuscles are specialized sensory receptors found in the dermal papillae of the dermis, which is a layer of skin just beneath the epidermis. They are not located at the lucidum, basale, or reticular dermis.",
-            "why_others_incorrect":"The lucidum is a thin, transparent plate at the base of the scalps hair follicles; the basale is the deepest layer of the epidermis where melanocytes produce pigment; and the reticular dermis is one of the layers of skin that Meissners corpuscles are not located in."
+            "answer":"None of the above",
+            "why_correct":"Meissners corpuscles are specialized sensory receptors found in the skin, particularly in areas with high sensitivity to touch and pressure. They are associated with the dermal layer of skin, more specifically the epidermis.",
+            "why_others_incorrect":"The lucidum is a clear plate on the surface of the scalp; the basale is part of the hair follicle structure; and the reticular dermis is a deeper layer in the dermal matrix. None of these structures are directly related to Meissners corpuscles."
         }
     },
     {
@@ -53,10 +53,193 @@
             "correct_index":1
         },
         "gpt_output":{
-            "cop":"None of the above",
+            "cop_index":3,
+            "answer":"None of the above",
+            "why_correct":"The key concept in this question is lacrimation, which is the production of tears by the lacrimal gland. The lacrimal gland receives its innervation from the facial nerve (cranial nerve VII) through the greater petrosal nerve and the lesser petrosal nerve. The nasociliary nerve and anterior ethmoid nerve are branches of the ophthalmic division of the trigeminal nerve, but they do not directly affect lacrimation. Therefore, damage to these nerves would not impact tear production.",
+            "why_others_incorrect":"The nasociliary nerve is involved in the innervation of the eye, including providing sensory fibers for the cornea and conjunctiva, but it does not influence lacrimation. The trigeminal nerve is a large nerve that provides sensation to the face, but damage to this nerve would have widespread effects beyond just lacrimation. The anterior ethmoid nerve is also involved in the innervation of the eye, specifically related to the drainage of the frontal sinus and the nasal mucosa."
+        }
+    },
+    {
+        "id":"16cd72be-fc1c-4aa6-9229-4c9e8487462c",
+        "testbed_data":{
+            "correct_index":1
+        },
+        "gpt_output":{
+            "cop_index":0,
+            "answer":"Vimentin",
+            "why_correct":"Mesothelioma is a type of cancer that arises from the thin layer of cells (mesothelium) surrounding internal organs. The key concept here is that mesothelioma originates from epithelial cells, which are typically characterized by the presence of intermediate filaments like vimentin.",
+            "why_others_incorrect":"Option '2' (GFAP), which is associated with astrocytes in the brain, is incorrect because GFAP is not a marker for mesothelioma. Option '3' (Desmin) is also incorrect as it is specific to muscle cells and is not expressed by epithelial cells like those found in mesothelioma."
+        }
+    },
+    {
+        "id":"9cc25d13-7b48-4536-8307-2441a0b8f0b3",
+        "testbed_data":{
+            "correct_index":0
+        },
+        "gpt_output":{
+            "cop_index":2,
+            "answer":"Topical application of fluoride",
+            "why_correct":"The child can be administered topical fluoride to supplement their low fluoride intake from drinking water, especially since they are 4 years old and the recommended dental fluoride dose for children aged 3-9 years is 0.75 ppm. The American Dental Association recommends applying a 0.2% sodium fluoride gel or varnish topically on the teeth twice a week to help prevent tooth decay.",
+            "why_others_incorrect":"Option 1, 'Rinses 0.2% NaF', incorrectly implies that the child should rinse with 0.2 ppm fluoride solution, which is too low for optimal dental health. Option 3, 'Fluoride containing dentifrices', may provide some fluoride exposure but does not guarantee the recommended daily dose of 1.44 mg\/day for a child of this age."
+        }
+    },
+    {
+        "id":"fab5fd5e-aa82-4854-a435-31a395c77abe",
+        "testbed_data":{
+            "correct_index":3
+        },
+        "gpt_output":{
             "cop_index":1,
-            "why_correct":"Lacrimation is primarily controlled by the parasympathetic fibers from the facial nerve (cranial nerve VII). The nasociliary and anterior ethmoid nerves are branches of the ophthalmic division of the trigeminal nerve, which mainly provides sensory innervation to the face. Damage to these nerves may affect tear production or sensation but is not primarily responsible for lacrimation.",
-            "why_others_incorrect":"The correct answer 'None of the above' is because none of the listed options (nasociliary nerve, trigeminal nerve, and anterior ethmoid nerve) are directly responsible for controlling lacrimation. The facial nerve is the primary nerve involved in tear production."
+            "answer":"Chloride > Sodium.",
+            "why_correct":"The key concepts in this question are ion concentrations in normal human plasma. The correct relationship between these ions is that chloride ions are present in higher concentrations than sodium ions in normal human plasma.",
+            "Context":"In human physiology, the concentration of each ion in the blood plays a crucial role in maintaining homeostasis. The typical electrolyte composition of human plasma includes sodium (40-45 mmol\/L), chloride (95-105 mmol\/L), potassium (3.5-5.0 mmol\/L), calcium (8.9-10.2 mg\/dL), and bicarbonate (22-28 mmol\/L).",
+            "concluding_sentence":"Therefore, the correct relationship is that chloride ions are present in higher concentrations than sodium ions in normal human plasma.",
+            "why_others_incorrect":"Options '0' and '2' are incorrect because they do not accurately reflect the typical concentration ranges of these ions. Option '3', 'None of the above', is also incorrect as it does not correctly represent any of the provided relationships."
+        }
+    },
+    {
+        "id":"d3bde0ad-33ea-443c-a87f-9a1cb8375b88",
+        "testbed_data":{
+            "correct_index":0
+        },
+        "gpt_output":{
+            "cop_index":0,
+            "answer":"None of the above",
+            "why_correct":"Fanconis anemia is a genetic disorder characterized by bone marrow failure, physical abnormalities, and increased risk of cancer. The key concepts in this question are Fanconis anemia and its common anomalies. According to medical literature, Fanconis anemia often presents with skeletal abnormalities such as short stature, low-set hips, and radial ray anomalies. One specific anomaly frequently observed is absent or underdeveloped thumbs, which can occur in up to 70% of patients. Another common anomaly is radial ray defects, where the radial bones are either partially or completely absent, leading to limb deformities.",
+            "why_others_incorrect":"Option '1: Absent radii and thumb' is a correct description of a common anomaly in Fanconis anemia. Option '3: Presence of horse shoe kidneys' is also a known complication in some patients with Fanconis anemia, although it is not the most common anomaly. Option '2: Weak radial pulse' is not a commonly associated feature of Fanconis anemia."
+        }
+    },
+    {
+        "id":"be808bbe-e052-4035-950c-988d5a5d78b4",
+        "testbed_data":{
+            "correct_index":1
+        },
+        "gpt_output":{
+            "cop_index":0,
+            "answer":"Varicocele older people suddenly, sometimes the performance of kidney tumors",
+            "why_correct":"This statement highlights a potential complication of varicocele, which can cause renal vein thrombosis due to chronic venous hypertension. This condition is known as nephrotic syndrome or even renal failure in severe cases.",
+            "why_others_incorrect":"Option 1, stating that none of the above are incorrect, is correct because the provided option 0 actually describes a potential complication of varicocele. Option 2 is incorrect because Valsalva maneuver typically reduces varicocele size by increasing abdominal pressure and reducing venous return to the scrotum. Option 3, surgical ligation of internal spermatic veins, is indeed a treatment for varicocele but does not describe an error about varicocele in general."
+        }
+    },
+    {
+        "id":"c27cb015-f282-4a60-8a9f-1fe6a9675684",
+        "testbed_data":{
+            "correct_index":2
+        },
+        "gpt_output":{
+            "cop_index":3,
+            "answer":"Clot solubility test",
+            "why_correct":"The patient presents with recurrent abortion, which is a common cause of recurrent miscarriage. To confirm the diagnosis, a Clot Solubility Test (also known as Dohles test) is performed to check for antiphospholipid antibodies, which are associated with recurrent pregnancy loss. This investigation is crucial in identifying the underlying cause of recurrent abortion.",
+            "why_others_incorrect":"The options PT and BT refer to Prothrombin Time and Blood Type tests, respectively, which do not directly relate to diagnosing antiphospholipid syndrome or recurrent abortion. None of the above option is incorrect as it does not provide a viable alternative investigation."
+        }
+    },
+    {
+        "id":"f9b73997-5052-4513-849f-ebc7f0cfae14",
+        "testbed_data":{
+            "correct_index":0
+        },
+        "gpt_output":{
+            "cop_index":3,
+            "answer":"None of the above",
+            "why_correct":"A newborn can typically start receiving breast milk soon after birth, as early as within the first hour following normal delivery. This allows for effective colostrum transfer and initiation of breastfeeding. The World Health Organization (WHO) recommends that mothers be encouraged to initiate breastfeeding immediately after birth.",
+            "why_others_incorrect":"Option '1: 1 hours' is incorrect because it does not accurately represent the optimal time frame for newborns to start receiving breast milk. Option '2: 2 hours' is also incorrect as it delays initiation of breastfeeding beyond what is necessary. Option '3: 3 hours' is incorrect as well, as it suggests a longer delay in initiating breastfeeding than recommended."
+        }
+    },
+    {
+        "id":"f3aa988d-dd3e-410b-8aba-6e3915dd8e28",
+        "testbed_data":{
+            "correct_index":2
+        },
+        "gpt_output":{
+            "cop_index":3,
+            "answer":"Gutta percha",
+            "why_correct":"The question asks about radiolucency closest to dentin, which requires consideration of dental materials' properties. Gutta percha is a thermoplastic material used in endodontics due to its high density and low radiolucency, making it appear similar to dentin on radiographs. In contrast, ZOE (Zinc Oxide-Eugenol) is more radiopaque than dentin due to its heavy metal content, while Calcium hydroxide is less dense and therefore appears more radiolucent.",
+            "why_others_incorrect":"Option 0, ZOE, has higher radiopacity than dentin. Option 1, Calcium hydroxide, has lower radiopacity than dentin. Option 2 is incorrect because there are indeed multiple options that have varying degrees of radiolucency compared to dentin."
+        }
+    },
+    {
+        "id":"62288360-f095-4591-a6c5-e332d26ce296",
+        "testbed_data":{
+            "correct_index":3
+        },
+        "gpt_output":{
+            "cop_index":1,
+            "answer":"Muscular tenderness with perispinal palpation",
+            "why_correct":"The patients symptoms, such as back pain that worsens in the morning and improves with activity, are characteristic of acute lumbar strain. Muscular tenderness with perispinal palpation is a common finding in this condition.",
+            "why_others_incorrect":"Option 0, 'Bamboo appearance of the spine on radiography', is not typical for acute lumbar strain as it is more commonly associated with conditions like osteoporosis or vertebral fractures. Option 2, 'Multiple doctor visits for other unrelated problems', does not directly relate to the patients symptoms and diagnosis. Option 3, 'None of the above', is incorrect because muscular tenderness with perispinal palpation is indeed a possible finding in this condition."
+        }
+    },
+    {
+        "id":"9fdc81d3-f7b2-42c6-be3d-d9b965c05bc9",
+        "testbed_data":{
+            "correct_index":2
+        },
+        "gpt_output":{
+            "cop_index":0,
+            "answer":"Underexpression of COX-2",
+            "why_correct":"The key concepts in this question are colorectal polyps, low-grade neoplasia, and colon cancer. The patients condition is likely to be a form of Familial Adenomatous Polyposis (FAP) or Peutz-Jeghers syndrome (PJS), both of which are associated with an increased risk of colorectal cancer. A key feature of these conditions is the aberrant expression of COX-2, a protein that plays a role in cell proliferation and survival. The correct answer, underexpression of COX-2, is supported by the fact that mutations in the APC gene, which regulates COX-2 expression, are common in FAP and PJS. Additionally, the photomicrograph of the biopsy specimen likely shows glandular dysplasia or adenomatous changes, which are characteristic of low-grade neoplasia and can be driven by COX-2 underexpression.",
+            "why_others_incorrect":"Increased phosphorylation of serine and threonine is a process involved in signaling pathways that regulate cell growth and division, but it is not directly related to the pathogenesis of this patients condition. Abnormal transfer of phosphate to cellular proteins is also not relevant to the development of colorectal polyps and cancer. None of the above option is incorrect because underexpression of COX-2 is a known risk factor for the development of colorectal polyps and cancer in conditions like FAP and PJS."
+        }
+    },
+    {
+        "id":"cc018120-7f17-44b1-a01c-b8b253204bb7",
+        "testbed_data":{
+            "correct_index":1
+        },
+        "gpt_output":{
+            "cop_index":0,
+            "answer":"None of the above",
+            "why_correct":"The key concepts in this question are vegetation in mitral valve and its associated conditions. Vegetation in mitral valve is typically seen in conditions such as infective endocarditis, not Libman-Sacks or rheumatic fever.",
+            "why_others_incorrect":"Option 0, Libman-Sacks, is incorrect because it refers to vegetations on the valves that occur in systemic lupus erythematosus (SLE), not mitral valve. Option 2, NBTE, is also incorrect as it stands for Non-Bacterial Thrombotic Endocarditis, which does not typically involve vegetation on the mitral valve. Option 3, Rheumatic fever, is incorrect because while it can cause heart damage, it is less commonly associated with vegetation in the mitral valve."
+        }
+    },
+    {
+        "id":"1d091b75-dc36-4682-8fbd-64f9249c4605",
+        "testbed_data":{
+            "correct_index":0
+        },
+        "gpt_output":{
+            "cop":"3 Hemisepta",
+            "cop_index":3,
+            "answer":"Hemisepta",
+            "why_correct":"A hemisepta is a bone defect where only one side of the tooth socket is exposed, whereas a 2-walled defect and osseous crater are both defects that involve two or three sides of the tooth socket. Hemiseptas typically offer the best chance for bone fill because they have less surface area exposed to the oral environment, reducing the risk of infection and promoting better healing.",
+            "why_others_incorrect":"Option 1 is incorrect because a 2-walled defect has more surface area exposed to the oral environment, increasing the risk of infection. Option 2 is incorrect because an osseous crater also has multiple sides exposed, making it challenging for bone fill to occur. None of the above is not correct because option 3, Hemisepta, does indeed offer a better chance for bone fill."
+        }
+    },
+    {
+        "id":"25938b34-b7ee-43c4-bd6d-a7e6610a39f8",
+        "testbed_data":{
+            "correct_index":0
+        },
+        "gpt_output":{
+            "cop_index":2,
+            "answer":"Intercostal nerve (Intercostal nerve)",
+            "why_correct":"The key concept in this question is understanding what causes a winged scapula after Radical mastectomy surgery. A Radical mastectomy involves the removal of the breast, underlying chest muscles, and lymph nodes under the arm. An intercostal nerve injury can occur during this surgery due to its proximity to the area being operated on. The intercostal nerves supply the muscles between the ribs, including the serratus anterior muscle, which helps move the scapula (shoulder blade) downward and forward. When an intercostal nerve is injured, it can cause weakness or paralysis of these muscles, leading to a winged scapula. ",
+            "why_others_incorrect":"Option 1, Thoracodorsal nerve injury, could potentially cause trapezius muscle weakness, but this would more likely result in a scapular winging on the opposite side. Option 3, Radial nerve injury, affects the muscles of the forearm and wrist, not the scapula, so its an unlikely cause of winged scapula."
+        }
+    },
+    {
+        "id":"eba5656e-d616-448b-9de2-e7456360cd13",
+        "testbed_data":{
+            "correct_index":1
+        },
+        "gpt_output":{
+            "cop_index":0,
+            "answer":"None of the above",
+            "why_correct":"Hyperchylomicronemia is a condition characterized by elevated levels of chylomicrons in the blood. It occurs when there is an abnormality in lipoprotein metabolism, leading to impaired clearance of chylomicrons from the circulation.",
+            "why_others_incorrect":"Apo A-I and Apo A-II (Option 0) are components of HDL cholesterol, which actually helps lower levels of LDL cholesterol in the blood. Apo B-100 (Option 2) is a component of LDL cholesterol, but high levels of LDL cholesterol typically lead to decreased chylomicronemia. LDL receptors (Option 3) help remove LDL cholesterol from the bloodstream, but their dysfunction would not directly cause hyperchylomicronemia."
+        }
+    },
+    {
+        "id":"4c5a1b1d-7850-42ca-b831-fc91cd4f2727",
+        "testbed_data":{
+            "correct_index":0
+        },
+        "gpt_output":{
+            "cop_index":3,
+            "answer":"They are metabolites of various neurogenic amines",
+            "why_correct":"DOPA and 5-Hydroxytryptophan (5-HTP) are involved in the synthesis of neurotransmitters such as dopamine, serotonin, and norepinephrine. They serve as precursors or substrates for these neurotransmitters.",
+            "why_others_incorrect":"Option 1 is incorrect because DOPA and 5-HTP do not directly relate to brain amines being acidic. Option 2 is also incorrect because while they can influence neurotransmitter levels, their primary role is as precursors or metabolites rather than direct neuromodulators. Option 3 is incorrect as it oversimplifies the complex biochemical pathways involved in DOPA and 5-HTPs role."
         }
     }
 ]
