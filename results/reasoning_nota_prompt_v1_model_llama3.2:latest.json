@@ -5,10 +5,10 @@
             "correct_index":2
         },
         "gpt_output":{
-            "cop_index":1,
-            "answer":"Neutrophil rich zone.",
-            "why_correct":"This question requires understanding of the Zone 3 region in relation to neutrophils. Zone 3 refers to a specific area within the lateral hypothalamic area, which is part of the motor lateral hypothalamus. Functionally, all three zones belong to the motor lateral hypothalamus (Swanson-2004). The question states that zone 3 is known as a 'neutrophil rich zone', and this information is supported by the fact that functionally all three zones belong to the motor lateral hypothalamus of the subcortical motor system.",
-            "why_others_incorrect":"Option 0, Bacterial zone, is incorrect because Zone 3 does not specifically refer to a bacterial zone. Option 2, Spirochetial infiltration zone, is also incorrect for the same reason. Option 3, None of the above, is incorrect because option 1 correctly describes zone 3 as a neutrophil rich zone."
+            "cop_index":3,
+            "answer":"Spirochetial infiltration zone",
+            "why_correct":"In this context, 'Zone 3' refers to the area of inflammation in a tissue where spirochetal infections are prevalent. Spirochetes are types of bacteria that have a spiral shape and include pathogens such as those causing syphilis (Treponema pallidum), Lyme disease (Borrelia burgdorferi), and others.\nThe Context mentions Chlamydophila psittaci, which is known to cause psittacosis in humans. However, this bacterium is not typically associated with spirochetial infiltration.\nFurther context from the Found In section states 'Mycobacterium avium complex' as a slow-growing bacterial species that may require different treatments compared to tuberculosis, indicating its not spirochetia.\nTherefore, Zone 3 specifically refers to an area of inflammation primarily associated with spirochetal infections rather than Chlamydophila or Mycobacteria.",
+            "why_others_incorrect":"Option 0 is incorrect because 'Zone 3' does not refer to the bacterial zone itself. Option 1 is also incorrect as it describes a neutrophil-rich area, which isn\"t directly stated in the context as being Zone 3."
         }
     },
     {
@@ -18,9 +18,9 @@
         },
         "gpt_output":{
             "cop_index":3,
-            "answer":"None of the above",
-            "why_correct":"Can self-breath test, dilated pupils with no light reflection, and metabolic disorders are all conditions that can indicate a persons ability to breathe on their own and respond to stimuli, which is essential for determining brain death. The text does not explicitly state what conditions are necessary or unnecessary for the determination of brain death.",
-            "why_others_incorrect":"Can self-breath test (option 0) and dilated pupils with no light reflection (option 1) are actual clinical indicators that can be relevant to the diagnosis of brain death. Metabolic disorders (option 3), on the other hand, may not be directly related to the determination of brain death."
+            "answer":"No metabolic disorders",
+            "why_correct":"Key concepts in this question are potential sexual organ donors and brain death determination conditions. According to the context, the potential donors state or condition of being either living or brain dead at the time of organ harvesting is not related to their sexual health. The correct answer, 'No metabolic disorders', is unrelated to the criteria for determining brain death from a potential donor.",
+            "why_others_incorrect":"Option 0, 'Can self-breath test', is incorrect because it is actually one of the criteria used to determine brain death in a potential organ donor. Option 1, 'Dilated pupils, no light reflection', and option 2, 'None of the above', are also incorrect as they relate to specific conditions that may be considered when determining brain death."
         }
     },
     {
@@ -30,9 +30,9 @@
         },
         "gpt_output":{
             "cop_index":2,
-            "answer":"Mitochondria",
-            "why_correct":"Protein segregation in the cell involves the orderly organization of genetic material, such as chromosomes. In eukaryotes, chromosome segregation begins with the condensation of chromosomes, includes chromosome separation, and ends when chromosomes have completed movement to the spindle poles. This process is crucial for mitosis.",
-            "why_others_incorrect":"Options '1' (Peroxisomes) and '2' (ER) are not directly related to protein segregation, which is a fundamental aspect of cell division. Option '0' (None of the above) is incorrect because one of the options provided does relate to protein segregation."
+            "answer":"ER",
+            "why_correct":"The key concepts in the question are about protein localization and segregation in different organelles. The correct answer, ER, is supported by the Context as it mentions 'protein localization in endoplasmic reticulum' and 'establishment of protein localization to endoplasmic reticulum membrane'.",
+            "why_others_incorrect":"Options 1 (Peroxisomes) and 3 (Mitochondria) are incorrect because they are mentioned as locations for different processes, such as peroxisome biogenesis disorder 2B (involving Peroxisomes) and mitochondrial disorders (involving Mitochondria). Option 0 (None of the above) is also incorrect because one of the options provided does indeed accurately describe a location where protein segregation occurs."
         }
     },
     {
@@ -43,8 +43,11 @@
         "gpt_output":{
             "cop_index":1,
             "answer":"Basale",
-            "why_correct":"The question asks about the location of Meissners corpuscles, which are sensory receptors in the skin. The key concepts here are the structure and function of Meissners corpuscles. According to the Context, 'Meissners corpuscle refers to a predominantly cellular structure medial to the subcallosal fasciculus.' This indicates that it is located within the basal layer of the dermis.",
-            "why_others_incorrect":"Option 0, Lucidum, refers to the yellowish, plate-like structure at the scalps surface. Option 2, Reticular dermis, is a deeper layer in the dermal plexus. Neither of these options accurately describe the location of Meissners corpuscles."
+            "why_correct":"Key concepts in this question are about the location of Meissners corpuscles, which are sensory receptors found in the skin.",
+            "context_sentences":[
+                "A morphologic finding indicating the presence of a cellular infiltrate composed of neoplastic cells with granular, PAS-positive cytoplasm in a tissue sample. "
+            ],
+            "concluding_sentence":"Therefore, the location of Meissners corpuscles is indeed the basal layer (basale) of the skin, as indicated by the context."
         }
     },
     {
@@ -53,10 +56,10 @@
             "correct_index":1
         },
         "gpt_output":{
-            "cop_index":3,
-            "answer":"Anterior ethmoid nerve",
-            "why_correct":"The question asks which nerve affects lacrimation, and the context mentions 'lateral internal nasal branches of anterior ethmoidal nerve' as a potential cause of lacrimation disorders. The key concepts here are damage to a specific cranial nerve and its effect on lacrimation. Damage to the recurrent laryngeal nerve was also mentioned in the context as affecting lacrimation, but that is related to the glossopharyngeal nerve, not the anterior ethmoidal nerve.",
-            "why_others_incorrect":"Option 0, Nasociliary nerve, is partially correct as it relates to lacrimation disorders, but the context specifies 'lateral internal nasal branches', which are a subset of nasociliary nerves. Option 2, Trigeminal nerve, is incorrect because the context does not directly link trigeminal nerve damage to lacrimation. Option 1, None of the above, is also incorrect as the anterior ethmoidal nerve is indeed mentioned in the context."
+            "cop_index":0,
+            "answer":"Nasociliary nerve",
+            "why_correct":"The key concepts in this question are lacrimation disorders and the nerves involved. Damage to a specific nerve can lead to abnormal tear production or decreased tear function.",
+            "why_others_incorrect":"In addition, option 3 is also not correct because while it does have some branches that innervate facial structures, its primary function is related to sensory perception rather than motor control of lacrimal glands or tear ducts."
         }
     },
     {
@@ -67,8 +70,8 @@
         "gpt_output":{
             "cop_index":0,
             "answer":"Vimentin",
-            "why_correct":"Mesothelioma, also known as malignant mesothelioma, is cancer of the mesothelium. Mesotheliomas are often found when it is advanced. This makes it harder to treat. Treatment options may include: Surgery, Radiation therapy, Chemotherapy, Immunotherapy, Targeted therapy...",
-            "why_others_incorrect":"GFAP is an intermediate filament protein found in astrocytes and glial cells of glial origin, not in mesothelioma cells. Desmin is a protein that primarily constitutes an intermediate filament which provide strength or anchorage of other cellular structures, but it is not specific to mesothelioma cells."
+            "why_correct":"Mesothelioma and mesothelial cells are characterized by the presence of vimentin, a type of intermediate filament protein that is typically expressed in non-muscle cells. This protein plays a crucial role in maintaining cell shape and integrity.",
+            "why_others_incorrect":"GFAP (glial fibrillary acidic protein) is commonly associated with brain and spinal cord tissues, as well as certain types of glial tumors. Desmin is primarily found in muscle cells and is not typically expressed in mesothelial cells or mesothelioma tissue."
         }
     },
     {
@@ -77,10 +80,10 @@
             "correct_index":0
         },
         "gpt_output":{
-            "cop_index":2,
-            "answer":"Topical application of fluoride",
-            "why_correct":"The child has low levels of fluoride in their drinking water, and topical application of fluoride is recommended as a way to supplement their diet with more fluoride. According to the context, \"Healthy teeth are important to your child\\s overall health. From the time your child is born, there are things you can do to promote healthy teeth and prevent cavities. For babies, you should clean teeth with a soft, clean cloth or baby\\s toothbrush.\" This suggests that topical fluoride application is appropriate for infants.",
-            "why_others_incorrect":"Options 0, 1, and 3 are incorrect because the child does not need to use a fluoride-containing dentifrice (option 3) or rinse with a 0.2% NaF solution (option 1), as their drinking water already contains some fluoride, which is better than none at all. Option 1 is also incorrect because rinsing with a higher concentration of NaF might be unnecessary and could lead to excessive fluoride intake."
+            "cop_index":1,
+            "answer":"None of the above",
+            "why_correct":"The key concepts in this question are the fluoride concentration in drinking water and the need to supplement it with a fluoridated solution for a childs oral health. The Context mentions that the child has 0.2 ppm fluoride in drinking water, which is below the recommended level for optimal oral health. Therefore, the correct answer is None of the above, as no option provides a sufficient amount of fluoride to supplement the childs diet.",
+            "why_others_incorrect":"Options 1 and 3 are incorrect because they do not provide enough fluoride to supplement the childs diet, given the low concentration in their drinking water. Option 2 is also incorrect because topical application of fluoride may not be sufficient for oral health supplementation, especially for a child with inadequate exposure to fluoride through their drinking water."
         }
     },
     {
@@ -89,10 +92,10 @@
             "correct_index":3
         },
         "gpt_output":{
-            "cop_index":0,
-            "answer":"Sodium <Potassium",
-            "why_correct":"The key concepts in this question are the ion concentrations in normal human plasma and their relationships. The correct answer, Sodium < Potassium, indicates that sodium has a lower concentration than potassium in normal human plasma. According to the Context, 'Chloride > Sodium.', which directly supports this answer. Additionally, it is mentioned that 'Sodium chloride (NaCl) 0.0848 MEQ\/ML' has a lower concentration than 'Sodium acetate 0.0118 MEQ\/ML'. This further confirms that sodium has a lower concentration than potassium in normal human plasma.",
-            "why_others_incorrect":"Options 1 and 2 are incorrect because they state the opposite relationship between chloride and sodium concentrations. Option 3 is also incorrect because it suggests that none of the provided relationships are correct, but one of them (Sodium < Potassium) does indeed describe an accurate relationship between ion concentrations in normal human plasma."
+            "cop_index":1,
+            "answer":"Chloride > Sodium",
+            "why_correct":"The key concepts in this question are the ion concentrations in normal human plasma, specifically sodium, chloride, and their relationship.",
+            "why_others_incorrect":"Option 1 states that chloride > sodium, which aligns with the known physiological relationships between these ions in normal human plasma."
         }
     },
     {
@@ -101,10 +104,10 @@
             "correct_index":0
         },
         "gpt_output":{
-            "cop_index":1,
-            "answer":"None of the above",
-            "why_correct":"The question asks for the most common anomaly in patients with Fanconis anemia. The Context mentions that Congenital dyserythropoietic anemia type II (CDA II) is the most common form of CDA, but it does not specify that it is the most common anomaly in Fanconis anemia.\n\nIt also states that there are at least 7 complementation groups in Fanconi anemia: FANCA, FANCB, FANCC, FANCD1, FANCD2, FANCE, FANCF, and FANCG, but it does not mention any specific anomalies associated with these groups.\n\nThe Context also mentions that patients with Fanconis anemia often have bone marrow failure, physical abnormalities, and an increased risk of certain cancers, but it does not specify what the most common anomaly is.",
-            "why_others_incorrect":"Options 1, 2, and 3 are incorrect because they describe specific anomalies that can occur in patients with Fanconis anemia, but they are not specified as being the most common. The Context does not provide enough information to determine which of these options is correct."
+            "cop_index":3,
+            "answer":"Presence of horse shoe kidneys",
+            "why_correct":"The key concepts in this question are Fanconis anemia, its common characteristics, and the most frequent anomaly associated with it. In Fanconis anemia, the most common anomalies include aplastic anemia, bone marrow failure, cancer predisposition, congenital abnormalities such as renal anomalies, heart defects, and skeletal abnormalities like those described in this question. Specifically, Fanconis anemia is often characterized by the presence of horseshoe kidneys. This is directly supported by the Context text which states 'Spinal and skeletal manifestations were thoracolumbar scoliosis, spinabifida (spina bifida occulta or spina bifida cystic), Bochdalek diaphragmatic hernia, and radial defects.' The presence of horseshoe kidneys is indeed another renal anomaly that can occur in patients with Fanconis anemia. In conclusion, the most common anomaly in patients with Fanconis anemia is the presence of horse shoe kidneys.",
+            "why_others_incorrect":"Option 1 (Absent radii and thumb) is incorrect as it is only mentioned in the context of Radial hypoplasia-triphalangeal thumbs-hypospadias-maxillary diastema syndrome, which is a different condition. Option 2 (Weak radial pulse) is also incorrect because there is no mention of this symptom in the Context text related to Fanconis anemia. Option 0 (None of the above) cannot be correct since one of the options does indeed describe a common anomaly associated with Fanconis anemia."
         }
     },
     {
@@ -115,12 +118,8 @@
         "gpt_output":{
             "cop_index":1,
             "answer":"None of the above",
-            "why_correct":"The question asks which statement about varicocele is incorrect. The key concepts involve understanding varicocele, its characteristics, and common misconceptions. None of the provided options (0, 2, or 3) accurately represent an error regarding varicocele narrative.",
-            "why_others_incorrect":[
-                "Option 0 incorrectly states that varicocele occurs in older people suddenly, sometimes with kidney tumors. Varicocele is more common in younger men and is related to the internal spermatic veins rather than kidney issues.",
-                "Option 2 suggests that a Valsalva maneuver will make varicocele more obvious. However, a Valsalva maneuver can actually help reduce the size of varicoceles by increasing abdominal pressure, which can temporarily improve venous return and alleviate symptoms.",
-                "Option 3 correctly states that surgical ligation of internal spermatic veins is a treatment for varicocele. This statement accurately represents a common treatment approach for varicocele."
-            ]
+            "why_correct":"Key concepts in this question are varicocele, its causes and effects, and surgical treatments. The correct answer can be inferred from the context by identifying options that contradict established medical knowledge about varicocele.",
+            "why_others_incorrect":"Option 0 is incorrect because varicocele is not typically associated with sudden onset in older people, nor is it directly related to kidney tumors. Option 2 is incorrect because valsalva maneuver may actually worsen the symptoms of a varicocele by increasing venous pressure, rather than making them more obvious. Option 3 is correct as surgical ligation of internal spermatic veins is a recognized treatment for varicocele."
         }
     },
     {
@@ -131,8 +130,8 @@
         "gpt_output":{
             "cop_index":3,
             "answer":"Clot solubility test",
-            "why_correct":"The investigation needed to confirm a diagnosis of recurrent abortion involves assessing for antiphospholipid antibodies, which are associated with clotting and miscarriage. The clot solubility test is used to detect these antibodies. Key concepts in this question include recurrent abortion and the need for an investigation to confirm the underlying cause. \"Investigation or care in a nonpregnant woman with history of recurrent pregnancy loss\" indicates that testing for antiphospholipid antibodies, such as the clot solubility test, is necessary to diagnose the cause of recurrent miscarriage. A concluding statement is that the clot solubility test is chosen because it directly assesses for antiphospholipid antibodies associated with recurrent abortion.",
-            "why_others_incorrect":"PT (Option 0) and BT (Option 1) are tests used to evaluate coagulation, but they do not directly confirm the diagnosis of recurrent abortion. 'None of the above' (Option 2) is incorrect because the clot solubility test is indeed a relevant investigation for this condition."
+            "why_correct":"Key concepts in this question relate to confirming a diagnosis for recurrent abortion. The Context mentions that the investigation should be performed to confirm the diagnosis of recurrent abortion. The Clot solubility test is a diagnostic tool used to detect and differentiate between different types of thrombosis, particularly in patients with recurrent miscarriages. As stated in the Context, 'thrombosis during pregnancy or puerperium as antepartum condition (diagnosis)', this test can help identify the underlying cause of recurrent abortion.",
+            "why_others_incorrect":"Options PT and BT are blood tests used to evaluate coagulation and bleeding tendencies, but they do not directly confirm the diagnosis of recurrent abortion. Option 'None of the above' is incorrect as Clot solubility test is indeed an investigation that can be performed to confirm the diagnosis."
         }
     },
     {
@@ -141,10 +140,10 @@
             "correct_index":0
         },
         "gpt_output":{
-            "cop_index":2,
-            "answer":"2 hours",
-            "why_correct":"The key concepts in this question are the timing of breastfeeding initiation after a normal delivery. The context states that newborns can be given breast milk four to seven days after birth, with no identifiable causes for jaundice, and it mentions that breastfeeding offers many benefits to infants. Additionally, the text clarifies that regular medical checkups and prenatal tests are very important during pregnancy. According to the NIH, 'it appears four to seven days after birth, lasts longer than the physiologic jaundice,' which supports the answer of 2 hours. The correct time frame is also mentioned in relation to normal delivery, as stated in the text: 'the period of time immediately after labor and delivery.' Therefore, it can be inferred that newborns can be given breast milk two hours following a normal delivery.",
-            "why_others_incorrect":"Option 1 (None of the above) is incorrect because one of the options provided does indeed correctly answer the question. Option 2 (2 hours) is correct based on the explanation above, making it wrong to categorize this option as 'none of the above.' Option 3 (3 hours) is also incorrect for the same reason."
+            "cop_index":3,
+            "answer":"3 hours",
+            "why_correct":"Newborns can be safely given breast milk after 3 hours following normal delivery, as the American Academy of Pediatrics recommends that newborns receive human milk within the first hour after birth. The World Health Organization also suggests that breastfeeding should start soon after birth, ideally within the first hour. The evidence from the provided context supports this answer.",
+            "why_others_incorrect":"Options 0 and 1 are incorrect because they do not align with established medical guidelines for postpartum care. Option 2 is also incorrect as it is too short a time frame for safe breast milk introduction."
         }
     },
     {
@@ -153,10 +152,10 @@
             "correct_index":2
         },
         "gpt_output":{
-            "cop_index":2,
-            "answer":"None of the above",
-            "why_correct":"The question asks which of the following has a radiolucency closest to the dentin. The correct answer, None of the above, is based on the definition of radiolucency, which refers to an area where x-rays can penetrate through and expose the receptor, appearing as black or dark on the processed radiograph. This type of lesion does not have a radiolucency closest to the dentin but rather appears as a radiolucent area around the apex of the dental root.",
-            "why_others_incorrect":"Options ZOE, Calcium hydroxide, and Gutta percha are all materials or substances that may be used in dentistry, but they do not have a radiolucency closest to the dentin. ZOE is an acrylic resin material, Calcium hydroxide is a dental material used for pulpotomy and as a medicament, and Gutta percha is a natural latex product used as a filling material. None of these substances are characterized by having a radiolucency closest to the dentin."
+            "cop_index":3,
+            "answer":"Gutta percha",
+            "why_correct":"Key concepts in this question include radiolucency, dentin, and dental materials. The correct answer can be determined by understanding the properties of each material mentioned. Specifically, gutta percha is a solid, compact substance that absorbs or reflects X-ray radiation, resulting in a dense radiolucency. On the other hand, ZOE (Zinc Oxide Eugenol) has an alveolar bone-like appearance but also exhibits some degree of transparency and thus appears more as a radiolucent material than a dense one with respect to dentin. Calcium hydroxide is a paste that can form an interfacial layer between the tooth structure and restorative materials, giving it less distinct radiolucency with respect to dentin compared to solid materials like gutta percha.",
+            "why_others_incorrect":"The other options are incorrect because ZOE appears more as a radiolucent material with respect to dentin due to its alveolar bone-like appearance and lower density, while Calcium hydroxide lacks the dense radiolucency of a solid material like gutta percha."
         }
     },
     {
@@ -166,9 +165,17 @@
         },
         "gpt_output":{
             "cop_index":1,
-            "answer":"Bamboo appearance of the spine on radiography",
-            "why_correct":"The patients symptoms are characteristic of chronic back pain, specifically spondylosis or bamboo spine. Key concepts in this question include chronic back pain, morning stiffness that improves with activity, and worsening of pain when going from sitting to standing.",
-            "why_others_incorrect":"Muscular tenderness with perispinal palpation (option 1) is a non-specific finding and could be seen in many conditions. Multiple doctor visits for other unrelated problems (option 2) are not directly related to the patients symptoms or diagnosis. None of the above (option 3) is incorrect because bamboo appearance of the spine on radiography is indeed a possible finding in this patient."
+            "answer":"Muscular tenderness with perispinal palpation",
+            "why_correct":[
+                "The key concepts in this question are back pain, morning worsening, improvement with activities and specific triggers such as standing or walking, recent heavy lifting event, and symptoms disrupting the patients life.",
+                "I have dressed more slowly than usual because of back pain in the last 2 weeks:Finding:2 weeks:^Patient:Ord:STarT Back",
+                "Overall, how bothersome has your back pain been in the last 2W:Find:2W:^Patient:Ord:STarT Back"
+            ],
+            "why_others_incorrect":[
+                "The other options are not supported by the context as they do not directly relate to common signs of muscle strain or low back injuries, which are likely given the patients recent lifting event and symptoms.",
+                "A bamboo appearance of the spine on radiography is more indicative of conditions such as ankylosing spondylitis or spinal trauma, rather than a simple musculoskeletal injury from lifting heavy boxes.",
+                "Multiple doctor visits for unrelated problems are not mentioned in the context, making it unlikely that this option is relevant to the patients current presentation."
+            ]
         }
     },
     {
@@ -179,16 +186,8 @@
         "gpt_output":{
             "cop_index":2,
             "answer":"None of the above",
-            "why_correct":[
-                "The key concepts in this question are colonoscopy findings and pathogenesis processes.",
-                "The Context mentions that the patient has a 2.3-cm polypoid mass in the ascending colon, which suggests a colorectal neoplasm.",
-                "The Context also mentions that the patients hemoglobin concentration is 8.3 g\/dL, indicating anemia."
-            ],
-            "why_others_incorrect":[
-                "Underexpression of COX-2 (Option 0) is associated with increased risk of colorectal cancer but is not directly related to this patients condition.",
-                "Increased phosphorylation of serine and threonine (Option 1) is a process involved in various cellular signaling pathways, but it is not specifically relevant to the pathogenesis of colorectal neoplasms.",
-                "Abnormal transfer of phosphate to cellular proteins (Option 3) is related to protein kinase activity, which is not directly implicated in the development of colorectal polyps."
-            ]
+            "why_correct":"The question describes a patient with a polypoid mass in the ascending colon, showing pale conjunctivae and low hemoglobin concentration. This suggests a gastrointestinal bleeding issue, possibly due to a colorectal neoplasm such as a colon cancer or polyp. COX-2 underexpression (option 0) is often associated with colorectal carcinogenesis through chronic inflammation and promotion of cell proliferation and survival.",
+            "why_others_incorrect":"Option 0 refers to the underexpression of COX-2, which can contribute to cancer development but doesn\"t directly explain the bleeding episodes. Increased phosphorylation of serine and threonine (option 1) is a general cellular signaling process that can be involved in various pathological conditions, including cancer. However, its too broad and nonspecific for this scenario. Option 3 refers to abnormal transfer of phosphate to cellular proteins, which is also not directly related to the described gastrointestinal issue."
         }
     },
     {
@@ -200,14 +199,14 @@
             "cop_index":0,
             "answer":"Libman sacks",
             "why_correct":[
-                "The question asks about the condition associated with vegetation in the mitral valve.",
-                "Sentences that directly support this answer can be found in the Context, specifically within the descriptions of various endocarditis conditions and their characteristic vegetations.",
-                "Therefore, the correct answer is Libman-Sacks, as it is a condition characterized by sterile fibrofibrinous vegetations on the left-sided heart valves, including the mitral valve."
+                "The question asks about a specific condition associated with vegetation in the mitral valve.",
+                "\"Sometimes a valve can have both regurgitation and stenosis.\" This indicates that the valves are not functioning properly, which is relevant to Libman-Sacks syndrome.",
+                "\"In some cases, valve replacement is necessary. There are 2 types of replacement valves: biologic valves made from pig, cow, or human tissue.\" The mention of valve problems in general aligns with Libman-Sacks, a condition where the mitral valve becomes inflamed and can lead to its malfunction."
             ],
             "why_others_incorrect":[
-                "Option 1, None of the above, is incorrect because one of the options (Libman sacks) does indeed cause vegetation in the mitral valve.",
-                "Option 2, NBTE, refers to non-bacterial thrombotic endocarditis, which is not associated with vegetations on the mitral valve.",
-                "Option 3, Rheumatic fever, can cause valvular heart disease, but it is specifically described as causing fibrous or granulomatous lesions, not vegetations."
+                "Rheumatic fever is not directly mentioned as a cause for vegetation in the mitral valve.",
+                "NBTE (Non-Bacterial Thrombotic Endocarditis) typically involves the formation of small blood clots on heart valves, but its not specifically associated with vegetation in the mitral valve. Libman-Sacks is more closely related to this type of vegetation.",
+                "Option 1 is incorrect because none of the provided options match the condition described in the question."
             ]
         }
     },
@@ -217,10 +216,14 @@
             "correct_index":0
         },
         "gpt_output":{
-            "cop_index":2,
-            "answer":"Osseous crater",
-            "why_correct":"A bone defect that is unilocular and cystic, such as an osseous crater, offers a better chance for bone fill because it has a single compartment that can be filled with bone grafts or other materials. The context explains that in most cases, the lesion is asymptomatic and is usually detected after a pathologic fracture or during radiologic examination for unrelated reasons. This suggests that the osseous crater defect, which is commonly found as a result of osteolytic lesions, has a higher likelihood of being filled by bone grafts or other materials.",
-            "why_others_incorrect":"Walled defects and hemisepta are usually considered more challenging to fill because they have multiple compartments and may be associated with more complex pathologies. Option 1, 2 Walled defect, is not correct because walled defects often require more extensive procedures to remove the bone and fill the defect. Option 3, Hemisepta, is also incorrect because hemisepta are usually smaller and more challenging to fill than osseous craters."
+            "cop_index":1,
+            "answer":"2 Walled defect",
+            "why_correct":"A 2-walled defect, also known as an osseous crater with a small wall, offers the best chance for bone fill. This is because it has minimal cortical and cancellous bone loss, allowing for more stable and natural-appearing bone regeneration. The key concepts in this question are the type of bone defects and their potential for bone fill.",
+            "why_others_incorrect":[
+                "Option 0 'None of the above' is incorrect because option 2 Walled defect does offer a good chance for bone fill.",
+                "Option 2 Osseous crater offers better opportunities for bone fill compared to an osseous crater with a larger wall (option 3 Hemisepta).",
+                "Options 1 and 3 are not correct as they do not specify a type of defect that would offer the best chance for bone fill."
+            ]
         }
     },
     {
@@ -229,10 +232,14 @@
             "correct_index":0
         },
         "gpt_output":{
-            "cop_index":1,
-            "answer":"Thoracodorsal nerve (Thoracodorsal nerve)",
-            "why_correct":"The key concepts in this question are 'eradicate breast wing-shaped shoulder' and 'Radical mastectomy'. The thoracodorsal nerve controls the serratus anterior muscle, which helps to move the scapula against the chest wall. During a radical mastectomy, the thoracodorsal nerve is often damaged due to its proximity to the surgical site. The exact sentences from the Context that support this answer are: 'A question about whether an individual is or was bothered by decreased range of motion in arm on surgery side.' This indicates that the damage to the nerve has caused a problem with scapular movement, which would contribute to a winged scapula.\n\"Radical mastectomy (& [Halsted] or [+ axillary nodes]) (procedure)', The thoracodorsal nerve is often damaged during this type of surgery. A concluding sentence that links the evidence to the chosen answer is: Damage to the thoracodorsal nerve after a radical mastectomy can cause a winged scapula due to its role in controlling scapular movement.",
-            "why_others_incorrect":"The intercostal nerves are not directly involved in controlling scapular movement, so they are unlikely to be responsible for a winged scapula. The radial nerve controls wrist and finger movement, not scapular movement, so it is also an incorrect answer."
+            "cop_index":3,
+            "answer":"None of the above",
+            "why_correct":"The key concept here is 'eradicate breast wing-shaped shoulder' which is caused by a nerve injury after Radical mastectomy surgery.",
+            "why_others_incorrect":[
+                "Thoracodorsal nerve (Thoracodorsal nerve): The thoracodorsal nerve innervates the latissimus dorsi muscle, and its injury could cause winged scapula. However, this is not directly related to Radical mastectomy.",
+                "Intercostal nerve (Intercostal nerve): The intercostal nerves are responsible for the movement of the ribs and are not directly involved in the development of winged scapula.",
+                "Radial nerve (Radial nerve): The radial nerve controls the extension of the elbow joint and is not related to the development of winged scapula."
+            ]
         }
     },
     {
@@ -242,9 +249,9 @@
         },
         "gpt_output":{
             "cop_index":2,
-            "answer":"LDL receiver",
-            "why_correct":"The question asks about a deficit that can lead to hyperchylomicronemia, which is characterized by massive chylomicronemia and decreased levels of other lipoproteins. The correct answer is LDL receptor, as mutations in the low-density lipoprotein receptor (LDLR) or apolipoprotein B (APOB) gene can impair the clearance of chylomicrons from the blood.",
-            "why_others_incorrect":"Option 0 (Apo A-I and Apo A-II) is incorrect because these apolipoproteins are involved in the formation and transport of high-density lipoproteins, not chylomicrons. Option 1 (None of the above) is also incorrect because one of the options provided does lead to hyperchylomicronemia. Option 2 (Apo B-100) is partially correct but not specific enough, as mutations in ApoB are more commonly associated with hypercholesterolemia rather than hyperchylomicronemia."
+            "answer":"Apo B-100",
+            "why_correct":"The question asks about hyperchylomicronemia, a condition characterized by elevated levels of chylomicrons in the blood. The correct answer, Apo B-100, is a key component of low-density lipoproteins (LDLs) that transport cholesterol from the liver to the cells. A deficiency in Apo B-100 can lead to the overproduction of chylomicrons, resulting in hyperchylomicronemia. The context directly supports this answer by stating that hypercholesterolemia due to a genetic defect of apolipoprotein B is a familial hypercholesterolaemia co-occurrent and due to combined heterozygous low density lipoprotein receptor and low density lipoprotein receptor adaptor protein 1 mutations. This implies that abnormalities in the LDL receptor, which recognizes Apo B-100, can lead to hyperchylomicronemia.",
+            "why_others_incorrect":"Option 0, Apo A-I and Apo A-II, is incorrect because these apolipoproteins are involved in lipoprotein metabolism but are not directly related to chylomicron production. Option 1, None of the above, is also incorrect because Apo B-100 is indeed a key component involved in hyperchylomicronemia. Option 3, LDL receiver, is an incomplete term and does not accurately represent the receptor responsible for recognizing Apo B-100."
         }
     },
     {
@@ -255,8 +262,8 @@
         "gpt_output":{
             "cop_index":2,
             "answer":"They act as neuromodulators",
-            "why_correct":"Key concepts in this question include DOPA and 5-Hydroxytryptophan, which are both precursors to neurotransmitters. The evidence states that they exert their clinical importance through conversion into these neurotransmitters. Specifically, it is mentioned that oxitriptan is converted into serotonin as well as other neurotransmitters, indicating that 5-HTP has neuromodulatory effects.",
-            "why_others_incorrect":"Option 0 is incorrect because the question specifically asks for the clinical importance of DOPA and 5-Hydroxytryptophan. Option 1 is partially correct but too general, as it only mentions amines without specifying the neurotransmitter pathway. Option 3 is also incorrect because while they are metabolites, their primary importance lies in their role as neuromodulators."
+            "why_correct":"Key concepts: DOPA and 5-Hydroxytryptophan are amino acids that play a crucial role in the synthesis of neurotransmitters in the brain. Neuromodulation refers to the process by which these molecules regulate various physiological processes in the body. Brain amines are chemicals produced by the brain that transmit signals between neurons. DOPA and 5-Hydroxytryptophan are clinically important because they are precursors to brain amines.",
+            "why_others_incorrect":"Option 0 is incorrect because the text does not mention DOPA and 5-Hydroxytryptophan as acidic precursors of brain amines. Option 1 is incorrect because while DOPA and 5-Hydroxytryptophan do relate to brain amines, their primary role is not as acidic precursors but rather as neuromodulators themselves. Option 3 is also incorrect for the same reason: it incorrectly states that DOPA and 5-Hydroxytryptophan are metabolites of various neurogenic amines."
         }
     }
 ]
