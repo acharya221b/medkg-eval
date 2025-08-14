@@ -1,5 +1,6 @@
 # main.py
 import os
+import sys
 import pandas as pd
 import argparse
 import logging
@@ -11,7 +12,7 @@ from tqdm import tqdm
 # --- CRITICAL: Import all necessary components from the correct files ---
 import faiss
 import numpy as np
-from sentence_transformers import SentenceTransformer
+from sentence_transformers import SentenceTransformer, CrossEncoder
 from nebula3.gclient.net import ConnectionPool
 from nebula3.Config import Config
 
@@ -19,9 +20,90 @@ from RAG_pipeline.generator import RAGGenerator
 from RAG_pipeline.utils import load_faiss_index, connect_nebula, MODEL_NAME
 from evaluation.evaluator import FullDataEval
 from evaluation.utils import clean_output # Assuming this is in the root evaluation folder
+import asyncio # Add this import
+from tqdm.asyncio import tqdm_asyncio
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 TASK_TO_PROMPT_MAP = {'reasoning_fct': 'reasoning_fct', 'reasoning_fake': 'reasoning_fake', 'reasoning_nota': 'reasoning_nota'}
+
+# async def run_prediction_for_model_async(args, model_name, generator): # Make it async
+#     for task_name in args.tasks:
+#         # ... (the file path and skip logic is the same) ...
+        
+#         input_csv = os.path.join(args.data_dir, f"{task_name}.csv")
+#         df = pd.read_csv(input_csv)
+#         prompt_assets = load_prompt_assets(TASK_TO_PROMPT_MAP[task_name], args.prompt_id, args.max_shots)
+        
+#         # --- ASYNC BATCHING LOGIC ---
+#         tasks = []
+#         for _, row in df.iterrows():
+#             # Create a task for each row. The tasks don't run yet.
+#             options = ast.literal_eval(row['options'])
+#             task = generator.predict(row['question'], options, prompt_assets, task_name, args.no_rag)
+#             tasks.append(task)
+
+#         # Now, run all tasks concurrently and show a progress bar
+#         predictions_outputs = await tqdm_asyncio.gather(*tasks)
+        
+#         # Process the results
+#         predictions = []
+#         for i, output in enumerate(predictions_outputs):
+#             row_id = df.iloc[i]['id']
+#             if output is None:
+#                 logging.error(f"Error on id {row_id}: Prediction returned None")
+#                 predictions.append({'id': row_id, 'output': "{}"})
+#             else:
+#                 predictions.append({'id': row_id, 'output': str(output)})
+        
+#         # Save the collected predictions
+#         pd.DataFrame(predictions).to_csv(output_path, index=False, header=True)
+#         logging.info(f"Predictions saved to {output_path}")
+
+# --- NEW: Helper function to manage concurrency for a single row ---
+async def process_row(row, generator, prompt_assets, task_name, no_rag, semaphore):
+    # This function waits for the semaphore before running the prediction
+    async with semaphore:
+        try:
+            options = ast.literal_eval(row['options'])
+            output_dict = await generator.predict(row['question'], options, prompt_assets, task_name, no_rag)
+            return (row['id'], output_dict)
+        except Exception as e:
+            logging.error(f"Error on id {row['id']}: {e}")
+            return (row['id'], None)
+        
+async def run_prediction_for_model_async(args, model_name, generator):
+    for task_name in args.tasks:
+        # --- FIXED: Added back the file checking and path definition logic ---
+        output_filename = f"{task_name}_predictions_prompt_{args.prompt_id}_model_{model_name}.csv"
+        output_path = os.path.join(args.predictions_dir, output_filename)
+        if os.path.exists(output_path) and not args.force_rerun:
+            logging.info(f"Skipping task '{task_name}' for model '{model_name}', file exists.")
+            continue
+
+        input_csv = os.path.join(args.data_dir, f"{task_name}.csv")
+        df = pd.read_csv(input_csv)
+        prompt_assets = load_prompt_assets(TASK_TO_PROMPT_MAP[task_name], args.prompt_id, args.max_shots)
+        
+        semaphore = asyncio.Semaphore(10)
+        
+        tasks = [process_row(row, generator, prompt_assets, task_name, args.no_rag, semaphore) for _, row in df.iterrows()]
+        #print(tasks)
+        logging.info(f"Executing {len(tasks)} predictions for task '{task_name}' with concurrency limit...")
+        predictions_outputs = await tqdm_asyncio.gather(*tasks, desc=f"Predicting for {task_name} with {model_name}")
+        
+        # Process the results
+        predictions = []
+        for i, output in predictions_outputs:
+            #row_id = df.iloc[i]['id']
+            if output is None:
+                logging.error(f"Error on id {i}: Prediction returned None")
+                predictions.append({'id': i, 'output': "{}"})
+            else:
+                # Ensure the output is a string representation of the dict/JSON
+                predictions.append({'id': i, 'output': json.dumps(output)})
+        
+        pd.DataFrame(predictions).to_csv(output_path, index=False, header=True)
+        logging.info(f"Predictions saved to {output_path}")
 
 def load_prompt_assets(task_name, prompt_id, max_shots, library_dir="prompt_library"):
     assets = {"prompt": "", "output_format": "", "shots": []}
@@ -41,27 +123,31 @@ def load_prompt_assets(task_name, prompt_id, max_shots, library_dir="prompt_libr
     logging.info(f"Loaded {len(assets['shots'])} shots for '{task_name}' (max_shots: {max_shots}).")
     return assets
 
-def run_prediction_for_model(args, model_name, generator):
-    for task_name in args.tasks:
-        output_filename = f"{task_name}_predictions_prompt_{args.prompt_id}_model_{model_name}.csv"
-        output_path = os.path.join(args.predictions_dir, output_filename)
-        if os.path.exists(output_path) and not args.force_rerun:
-            logging.info(f"Skipping task '{task_name}' for model '{model_name}', file exists.")
-            continue
-        input_csv = os.path.join(args.data_dir, f"{task_name}.csv")
-        df = pd.read_csv(input_csv)
-        prompt_assets = load_prompt_assets(TASK_TO_PROMPT_MAP[task_name], args.prompt_id, args.max_shots)
-        predictions = []
-        for _, row in tqdm(df.iterrows(), total=len(df), desc=f"Predicting for {task_name} with {model_name}"):
-            try:
-                options = ast.literal_eval(row['options'])
-                output = generator.predict(row['question'], options, prompt_assets, task_name, args.no_rag)
-                predictions.append({'id': row['id'], 'output': str(output)})
-            except Exception as e:
-                logging.error(f"Error on id {row['id']}: {e}")
-                predictions.append({'id': row['id'], 'output': "{}"})
-        pd.DataFrame(predictions).to_csv(output_path, index=False, header=True)
-        logging.info(f"Predictions saved to {output_path}")
+# def run_prediction_for_model(args, model_name, generator):
+#     for task_name in args.tasks:
+#         output_filename = f"{task_name}_predictions_prompt_{args.prompt_id}_model_{model_name}.csv"
+#         output_path = os.path.join(args.predictions_dir, output_filename)
+#         if os.path.exists(output_path) and not args.force_rerun:
+#             logging.info(f"Skipping task '{task_name}' for model '{model_name}', file exists.")
+#             continue
+#         input_csv = os.path.join(args.data_dir, f"{task_name}.csv")
+#         df = pd.read_csv(input_csv)
+#         prompt_assets = load_prompt_assets(TASK_TO_PROMPT_MAP[task_name], args.prompt_id, args.max_shots)
+#         predictions = []
+
+#         progress_bar = tqdm(df.iterrows(), total=len(df), desc=f"Predicting for {task_name} with {model_name}", file=sys.stderr)
+        
+#         for _, row in progress_bar:
+#         #for _, row in tqdm(df.iterrows(), total=len(df), desc=f"Predicting for {task_name} with {model_name}"):
+#             try:
+#                 options = ast.literal_eval(row['options'])
+#                 output = generator.predict(row['question'], options, prompt_assets, task_name, args.no_rag)
+#                 predictions.append({'id': row['id'], 'output': str(output)})
+#             except Exception as e:
+#                 logging.error(f"Error on id {row['id']}: {e}")
+#                 predictions.append({'id': row['id'], 'output': "{}"})
+#         pd.DataFrame(predictions).to_csv(output_path, index=False, header=True)
+#         logging.info(f"Predictions saved to {output_path}")
 
 def run_json_conversion_stage(args):
     for model_name in args.models:
@@ -111,12 +197,13 @@ def run_evaluation_stage(args):
 
 def main(args):
     """The main execution function, now aware of the --no-rag flag."""
-    st_model, faiss_index, faiss_texts, nebula_client, nebula_pool = None, None, None, None, None
+    st_model, cross_encoder, faiss_index, faiss_texts, nebula_pool = None, None, None, None, None
     try:
         # --- CONDITIONAL LOADING OF HEAVY RESOURCES ---
         if not args.no_rag:
             logging.info("--- RAG mode enabled. Loading all shared resources... ---")
             st_model = SentenceTransformer(MODEL_NAME)
+            cross_encoder = CrossEncoder('pritamdeka/S-PubMedBert-MS-MARCO')
             faiss_index, faiss_texts = load_faiss_index()
             nebula_client, nebula_pool = connect_nebula()
             if st_model is None or faiss_index is None or nebula_client is None:
@@ -128,8 +215,9 @@ def main(args):
             for model in args.models:
                 try:
                     # Initialize the generator, passing RAG components (or None if in no-RAG mode)
-                    rag_generator = RAGGenerator(model, st_model, faiss_index, faiss_texts, nebula_client)
-                    run_prediction_for_model(args, model, rag_generator)
+                    rag_generator = RAGGenerator(model, st_model, cross_encoder, faiss_index, faiss_texts, nebula_pool)
+                    asyncio.run(run_prediction_for_model_async(args, model, rag_generator))
+                    #run_prediction_for_model(args, model, rag_generator)
                 except Exception as e:
                     logging.critical(f"FATAL: Generator for model {model} failed. Error: {e}")
                     continue

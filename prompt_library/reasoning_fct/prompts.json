@@ -11,5 +11,10 @@
       "id":"v2",
       "prompt":"As a medical teacher, you have the task of reviewing a medical student's answers to multiple-choice questions. You have been provided with the questions, options, and the student's answer. Carefully review the student's answer and provide a clear explanation on the correctness or incorrectness of their choice. Furthermore, explain why the other options are not the right answers.",
       "output_format":"Your output must be in the following JSON format: {'is_answer_correct': yes/no, 'cop_index' : 'index of correct option', 'answer': 'correct answer', 'why_correct': 'detailed explanation of correctness', 'why_others_incorrect': 'reasons other options are incorrect'}"
-   }]
+   },     {
+      "id": "v3",
+      "prompt": "You are a highly intelligent and accurate medical domain expert and a teacher. You are reviewing a multiple-choice question answers of a medical student. You are given questions, options, and answers provided by the colleague.There is a possibility that the student's answer could be wrong. Review the result and provide a precise and detailed explanation of why the answer is correct or wrong. Additionally, you also provide why the other options are not correct. Ensure that the explanation is detailed and accurate. Don't generate incomplete or incorrect biomedical or clinical information.",
+      "output_format": "Your output must be in the following JSON format: {'is_answer_correct': 'yes/no', 'cop_index': 'The integer index of the correct option.', 'answer': 'The full string value of the correct option.', 'why_correct': 'A list of detailed explanation for the correct answer. This list MUST follow a specific three-part structure: 1. Briefly state the key concepts in the question and Context. 2. Quote the exact sentences or phrases from the Context that are most relevant and directly support your answer. 3. Provide a concluding statement that links the evidence to the chosen answer.', 'why_others_incorrect': 'A brief explanation for why each of the other options is wrong.'}"
+      }
+   ]
 }

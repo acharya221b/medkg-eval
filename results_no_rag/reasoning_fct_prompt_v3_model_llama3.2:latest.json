@@ -1,0 +1,1725 @@
+[
+    {
+        "id":"bc8659f4-3062-4f57-9e24-e32ad92a8d4e",
+        "testbed_data":{
+            "correct_index":1
+        },
+        "gpt_output":{
+            "is_answer_correct":"yes",
+            "cop_index":"3",
+            "correct answer":"They are ortho-halogenated derivatives of phenothiazine",
+            "why_correct":[
+                "The question and context focus on the structural characteristics of ortopramide group drugs.",
+                "\"Ortopramide is an antipsychotic drug that belongs to the class of phenothiazines, specifically being an ortho-halogenated derivative.\"",
+                "This connection between ortopramide and its classification as an ortho-halogenated derivative of phenothiazine supports this as the correct answer."
+            ],
+            "why_others_incorrect":"Options 0, 1, and 2 incorrectly describe the structural characteristics of ortopramide group drugs. These descriptions are more accurate for other classes of drugs, such as anilides or benzamides, rather than specifically addressing the phenothiazine subclass that includes ortopramide."
+        }
+    },
+    {
+        "id":"9fcf1ab0-387c-447a-ab6c-78367b5e5282",
+        "testbed_data":{
+            "correct_index":0
+        },
+        "gpt_output":{
+            "is_answer_correct":"yes",
+            "cop_index":"1",
+            "correct answer":"Older children (last courses of Primary Education)",
+            "why_correct":[
+                "The key concept in the question revolves around the application and suitability age range for the turtle technique.",
+                "\"The turtle technique is recommended for older children, particularly those in the last courses of primary education, as it helps them develop fine motor skills and hand-eye coordination.\"",
+                "Based on this explanation from the context, the turtle technique is specifically indicated for older children, making option 1 the correct choice."
+            ],
+            "why_others_incorrect":"The other options are not supported by the context. Young children would likely require a simpler activity, preadolescents may be too developed for such a basic skill-building exercise, and adolescents typically need more complex activities to refine their motor skills."
+        }
+    },
+    {
+        "id":"0ac6c5c7-9826-441a-81d5-68478e6299bb",
+        "testbed_data":{
+            "correct_index":0
+        },
+        "gpt_output":{
+            "is_answer_correct":"no",
+            "cop_index":"3",
+            "correct answer":"150-160\/90-95 mmHg",
+            "why_correct":[
+                "The key concepts in this question and context relate to blood pressure control in patients with hypertension.",
+                "\"In general, the goal is to achieve a blood pressure level that minimizes cardiovascular risk, which typically falls within the range of 130\/80 to 140\/90 mmHg for most adults.\"",
+                "However, specific criteria can vary depending on factors like age and comorbid conditions.",
+                "For patients with diabetes (like this patient), the target blood pressure level is somewhat higher than for those without diabetes.",
+                "The American Diabetes Association recommends a target blood pressure of < 140\/90 mmHg to minimize cardiovascular risk."
+            ],
+            "why_others_incorrect":"Option 0 (<130\/80 mmHg) may be too low for some patients, particularly those with comorbid conditions like diabetes. Option 2 (<140\/90 mmHg) does not account for the higher target blood pressure levels recommended for diabetic patients."
+        }
+    },
+    {
+        "id":"a6758ac9-7608-4866-bb00-c5e7b19917d5",
+        "testbed_data":{
+            "correct_index":0
+        },
+        "gpt_output":{
+            "is_answer_correct":"yes",
+            "cop_index":"3",
+            "answer":"None of the above",
+            "why_correct":[
+                "The key concept in the question and context revolves around the sub-marginal flap procedure.",
+                "\"The primary disadvantage of a sub-marginal flap is that it can cause significant gingival shrinkage due to the removal of a large amount of tissue.\"",
+                "Given this information, options 0 through 2 are not correct because they all imply advantages of a sub-marginal flap, which contradicts the actual disadvantages mentioned in the context."
+            ],
+            "why_others_incorrect":"Options 0, 1, and 2 all describe potential benefits or reduced complications of using a sub-marginal flap incorrectly as an advantage. However, according to the provided text, the primary drawback is that it causes more gingival shrinkage."
+        }
+    },
+    {
+        "id":"839de867-3100-4283-a219-ec349eee415f",
+        "testbed_data":{
+            "correct_index":2
+        },
+        "gpt_output":{
+            "is_answer_correct":"yes",
+            "cop_index":"3",
+            "correct answer":"Ammonia",
+            "why_correct":[
+                "The key concept in the question and context is identifying the most important intracellular buffer.",
+                "The context states: 'Ammonium ion (NH4+) is considered the most important intracellular buffer.', which highlights its role in maintaining acid-base balance within cells.",
+                "Based on the provided context, ammonias ability to accept a proton (H+), forming ammonium ion (NH4+), makes it the crucial intracellular buffer that helps maintain cellular pH homeostasis."
+            ],
+            "why_others_incorrect":"Bicarbonate, albumin, and phosphate have roles in buffering but are not considered the most important intracellular buffers. Bicarbonate plays a significant role in extracellular buffering, while albumin primarily serves as an osmotic buffer. Phosphate can participate in buffering but is less critical than ammonia."
+        }
+    },
+    {
+        "id":"140d832a-b8ae-4791-aada-6fd62f313adb",
+        "testbed_data":{
+            "correct_index":1
+        },
+        "gpt_output":{
+            "is_answer_correct":"yes",
+            "cop_index":"0",
+            "correct answer":"Uterine prolapsed",
+            "why_correct":[
+                "The key concept in the question and context is the purpose of Bonneys test.",
+                "The context states: 'Bonney\u2019s test is used to assess for uterine prolapse.' It also explains that the test helps determine if there is a 'protrusion of the cervix or uterus beyond the introitus.'",
+                "Based on the provided context, which specifically mentions Bonneys test in relation to assessing uterine prolapse, this is the correct answer for determining uterine prolapsed."
+            ],
+            "why_others_incorrect":"Bonneys test is not used for stress urinary incontinence, vesicovaginal fistula, or uteric fistula. These conditions are assessed through other medical tests and procedures."
+        }
+    },
+    {
+        "id":"197feaf8-e848-4d28-9c4e-5b43b8e4ded7",
+        "testbed_data":{
+            "correct_index":1
+        },
+        "gpt_output":{
+            "is_answer_correct":"yes",
+            "cop_index":"2",
+            "correct answer":"Maturation of erythroid progenitor cells",
+            "why_correct":[
+                "The key concepts in the question and context are the clinical presentation, laboratory findings, and the underlying pathophysiology.",
+                "The clinical presentation of severe anemia, recurrent infections, and limb abnormalities is highly suggestive of Diamond-Blackfan anemia (DBA), a congenital disorder that affects red blood cell production.",
+                "This condition is caused by mutations in genes encoding proteins involved in erythropoiesis, particularly the genes responsible for the maturation of erythroid progenitor cells."
+            ],
+            "why_others_incorrect":"Options 0, 1, and 3 are not directly related to the pathophysiology of DBA. Hydrolysis of glucocerebroside is a process involved in lysosomal function, DNA interstrand crosslink repair is a process involved in maintaining genome stability, and Ras signal transduction pathway is a signaling mechanism involved in cell growth and proliferation."
+        }
+    },
+    {
+        "id":"3fd34546-c589-4d68-8e0d-eca3f3caf324",
+        "testbed_data":{
+            "correct_index":2
+        },
+        "gpt_output":{
+            "is_answer_correct":"yes",
+            "cop_index":"3",
+            "answer":"Repeat urine culture",
+            "why_correct":[
+                "The key concepts in the question and context are the management of a newly diagnosed UTI and follow-up testing.",
+                "\"A repeat urine culture is necessary to assess treatment efficacy and ensure that the causative organism has not developed resistance to ceftriaxone.\"",
+                "This is particularly important in this case, as the patient has been treated with ceftriaxone, a commonly used antibiotic for UTIs, without any concerning resistance patterns. However, it is still essential to confirm that the infection has cleared and the causative organism remains susceptible to the prescribed treatment."
+            ],
+            "why_others_incorrect":"Prophylactic antibiotic therapy may not be necessary in this case, as the patient has no family history of renal abnormalities or vesicourethral reflux, which are common risk factors for recurrent UTIs. Voiding cystourethrogram is typically used to assess the anatomy and function of the urinary tract in patients with symptoms of lower urinary tract dysfunction or signs of vesicourethral reflux, rather than as a routine follow-up test. A renal bladder ultrasound may be useful in some cases, but it is not specifically indicated for this patients condition."
+        }
+    },
+    {
+        "id":"9e5ccc5e-7716-4f99-98bd-20931299b126",
+        "testbed_data":{
+            "correct_index":3
+        },
+        "gpt_output":{
+            "is_answer_correct":"yes",
+            "cop_index":"0",
+            "answer":"Thoracic",
+            "why_correct":[
+                "The key concept in this question and context revolves around the order of opening during a medicolegal autopsy.",
+                "The provided information states: 'In a medicolegal autopsy, the sequence of opening is based on the most critical areas of interest to the investigating officer and forensic pathologist.'",
+                "Given that the thoracic cavity houses vital organs like the heart and lungs, which are crucial for determining cause of death, it makes logical sense to open this cavity first.",
+                "This approach allows for immediate examination of internal injuries or signs of foul play, which can be pivotal in a medicolegal context."
+            ],
+            "why_others_incorrect":"Opening the abdomen (Option 1) next would follow logically after thoracic cavity, given its placement between the chest and abdominal regions. The cervical region (Option 2), while also critical for certain types of injuries or evidence collection, is typically examined later in the process."
+        }
+    },
+    {
+        "id":"26ca6141-2cff-4f87-81a9-a3205f75acb0",
+        "testbed_data":{
+            "correct_index":2
+        },
+        "gpt_output":{
+            "is_answer_correct":"yes",
+            "cop_index":"1",
+            "correct answer":"Preservative",
+            "why_correct":[
+                "The key concepts in the question and context are related to the composition and function of Oral Poliovirus Vaccine (OPV).",
+                "The context states: 'Magnesium is added as a preservative to prevent degradation and extend shelf-life.'",
+                "Based on this, it is clear that magnesium serves a role as a preservative in OPV, making option 1 the correct answer."
+            ],
+            "why_others_incorrect":"Option 0 (Adjuvant) incorrectly describes the primary function of magnesium in OPV. Option 2 (Stabilizer) is not supported by the context. Option 3 (Antiinfective) is also incorrect, as there is no mention of its antimicrobial properties."
+        }
+    },
+    {
+        "id":"3331b36a-00ae-4cc6-a352-ae3db6bfcc8d",
+        "testbed_data":{
+            "correct_index":1
+        },
+        "gpt_output":{
+            "is_answer_correct":"yes",
+            "cop_index":"0",
+            "correct answer":"Distal renal tubular acidosis",
+            "why_correct":[
+                "The key concepts in this question and context revolve around a diagnosis for vitamin D refractory rickets.",
+                "A serum calcium level of 9 mg\/dl is low, which is consistent with rickets. However, the phosphate level is only slightly elevated at 2.4 mg\/dl.",
+                "Normal parathyroid hormone (PTH) and bicarbonate levels suggest that hyperparathyroidism or metabolic acidosis are less likely causes of this patients rickets.",
+                "Given these biochemical findings, a diagnosis of distal renal tubular acidosis (dRTA) is strongly considered due to the low calcium level with elevated phosphate.",
+                "This condition results in impaired kidney ability to reabsorb calcium and increase urinary excretion.",
+                "why_others_incorrect\": \"Hypophosphatemic rickets primarily presents with low serum phosphorus levels but does not typically cause low serum calcium; Vitamin D dependent rickets is characterized by elevated PTH and normal or high phosphate levels, as seen in this case; Proximal renal tubular acidosis typically shows a different pattern of electrolyte imbalance."
+            ]
+        }
+    },
+    {
+        "id":"4de1f7bb-e990-4a25-b097-b1ff2d93e603",
+        "testbed_data":{
+            "correct_index":3
+        },
+        "gpt_output":{
+            "is_answer_correct":"yes",
+            "cop_index":"3",
+            "correct answer":"Pituitary",
+            "why_correct":[
+                "The key concepts in the question and context are Multiple Endocrine Neoplasia type II A (MEN II A) and its component endocrine glands.",
+                "The context states: 'MEN II A is characterized by medullary thyroid carcinoma, pheochromocytoma of the adrenal gland, and hyperparathyroidism.'",
+                "Based on this definition, which explicitly links MEN II A to both pituitary and parathyroid components, but excludes adrenal involvement as a distinct characteristic, this is the correct answer."
+            ],
+            "why_others_incorrect":"Options 0 (Parathyroid) and 1 (Adrenal) are involved in MEN II A, while option 2 (Thyroid) is also involved but only in the form of medullary thyroid carcinoma. The adrenal component specifically refers to pheochromocytoma."
+        }
+    },
+    {
+        "id":"2824395e-a5b4-48b7-ac81-b59a30f12d92",
+        "testbed_data":{
+            "correct_index":0
+        },
+        "gpt_output":{
+            "is_answer_correct":"yes",
+            "cop_index":"1",
+            "answer":"Switch blood pressure medication to hydrochlorothiazide",
+            "why_correct":[
+                "The key concepts in this scenario involve patient management, blood pressure control, and potential side effects of medications.",
+                "\"The patient was started on lisinopril, which is an ACE inhibitor. In patients with acute kidney injury or significant renal impairment, the use of ACE inhibitors can worsen renal function due to decreased glomerular filtration rate (GFR) and increased intraglomerular pressure.\"",
+                "Given the patients elevated creatinine level from 1.0 mg\/dL to 1.2 mg\/dL upon return from his trip, it is likely that he experienced a deterioration in kidney function. Switching his blood pressure medication to hydrochlorothiazide, which is less likely to further impair renal function, would be the most appropriate next step."
+            ],
+            "why_others_incorrect":"Option 0 (losartan) is also an ACE inhibitor and could potentially worsen renal function in a patient with decreased kidney function. Option 2 (azithromycin), while indicated for treating his respiratory symptoms (cough), does not address the primary concern of blood pressure management. Option 3 (loratadine), an antihistamine, would be ineffective in managing elevated blood pressure."
+        }
+    },
+    {
+        "id":"324af048-5d69-4fd2-b84d-f2dd292a2a8a",
+        "testbed_data":{
+            "correct_index":0
+        },
+        "gpt_output":{
+            "is_answer_correct":"yes",
+            "cop_index":"3",
+            "correct answer":"Psoriatic arthropathy",
+            "why_correct":[
+                "The key concepts in this question and context are related to the diagnosis of spinal conditions.",
+                "\"The column radiology demonstrates the presence of thick intervertebral bony bridges separated from the spine, which is indicative of a specific type of spondyloarthritis.\"",
+                "Given that the clinical presentation includes mechanical pain and stiffness, limitation of movement in both lumbar and cervical spine regions, and normal pelvic radiology, Psoriatic Arthropathy is a highly likely diagnosis."
+            ],
+            "why_others_incorrect":"Ankylosing Spondylitis (AS) typically presents with more pronounced spinal rigidity, especially in the upper spine, whereas AS was ruled out due to negative HLA-B27. Ankylosing vertebral hyperostosis would involve thick intervertebral bony bridges but is usually associated with aging and genetic predispositions; Pagets disease primarily affects bone remodeling rather than bridging formation."
+        }
+    },
+    {
+        "id":"3befd4bb-af81-49a6-b640-711797bb3326",
+        "testbed_data":{
+            "correct_index":0
+        },
+        "gpt_output":{
+            "is_answer_correct":"yes",
+            "cop_index":"1",
+            "correct answer":"Carbonic acids",
+            "why_correct":[
+                "The key concepts in the question and context are the components and importance of the saliva buffer system.",
+                "\"In terms of buffering, saliva contains sodium bicarbonate and carbonic acid. The latter plays a role in this process.\"",
+                "Although amino acids and phosphates do contribute to the buffering capacity of saliva, they have lesser importance compared to carbonic acids, which are more crucial for maintaining the pH balance."
+            ],
+            "why_others_incorrect":"Amino acids contribute to salivary buffer system but their role is less significant. Phosphates also play a part in the buffering mechanism but with lower relative importance than carbonic acids."
+        }
+    },
+    {
+        "id":"4bf6d638-c417-4dbf-9534-71893c142743",
+        "testbed_data":{
+            "correct_index":2
+        },
+        "gpt_output":{
+            "is_answer_correct":"yes",
+            "cop_index":"1",
+            "answer":"Tetracycline",
+            "why_correct":[
+                "The key concepts in this question and context are Lyme disease, its symptoms, diagnosis, and treatment.",
+                "\"In the early stages of Lyme disease, patients may present with fever, headache, and a distinctive erythematous rash (erythema migrans), which is often accompanied by joint pain and swelling. The rash is usually self-limiting but can be treated with antibiotics if it persists or worsens.\",\"The context emphasizes the importance of early diagnosis and treatment to prevent long-term complications and promote prompt recovery.",
+                "Given that this patient has symptoms consistent with Lyme disease (fever, headache, erythema migrans, joint pain), antibiotic treatment is necessary. Among the options provided, tetracycline is a recommended treatment for Lyme disease, especially in pregnant women."
+            ],
+            "why_others_incorrect":"Ibuprofen and Amoxicillin are antibiotics but not first-line treatments for Lyme disease. Gentamicin is an aminoglycoside antibiotic with limited efficacy against Lyme disease."
+        }
+    },
+    {
+        "id":"0c9cf26d-a7cb-40b8-8b0f-4af02cf4dcb3",
+        "testbed_data":{
+            "correct_index":0
+        },
+        "gpt_output":{
+            "is_answer_correct":"yes",
+            "cop_index":"1",
+            "correct answer":"Decidua parietalis layer",
+            "why_correct":[
+                "The key concept in the question and context relates to the anatomy of the placenta.",
+                "The context states: 'The decidua parietalis is one of the layers of the placental bed.' It also notes that 'the decidua capsularis forms the chorionic membrane and covers the embryo,' and 'decidua basalis lies closer to the maternal blood vessels and nourishes the fetus.'",
+                "Based on this information, which specifically identifies the 'decidua parietalis layer' as a distinct component of the placenta, it is clear that this option is correct."
+            ],
+            "why_others_incorrect":"The decidua basalis layer is involved with maternal blood vessels and nourishment, while the decidua capsularis forms the chorionic membrane. Neither of these descriptions matches the description provided for the 'decidua parietalis layer'."
+        }
+    },
+    {
+        "id":"a838640e-369f-4723-91a9-7c4eb3f07bcf",
+        "testbed_data":{
+            "correct_index":2
+        },
+        "gpt_output":{
+            "is_answer_correct":"yes",
+            "cop_index":"3",
+            "correct answer":"Emotional well-being",
+            "why_correct":[
+                "The key concepts in the question and context are related to the Strategy for the Promotion of Health and Prevention within the framework of chronicity approach.",
+                "The context states: 'Emotional well-being is one of the fundamental elements addressed in the National Health System (SNS) as part of the strategy for promoting health.' It also notes that this component is a critical aspect of overall health promotion.",
+                "Based on the provided context, which explicitly highlights emotional well-being as a main factor within the SNSs chronicity approach, this option is the correct choice among those listed."
+            ],
+            "why_others_incorrect":"Options 0 (alcohol consumption) and 1 (tobacco consumption) are related to specific health risks but do not represent the main focus of the Strategy for Health Promotion. Option 2 (sexual health) might be mentioned in some contexts, but it is not directly addressed as a primary factor within this particular framework."
+        }
+    },
+    {
+        "id":"ca5981e7-1b04-4a14-9964-cb172bd730be",
+        "testbed_data":{
+            "correct_index":0
+        },
+        "gpt_output":{
+            "is_answer_correct":"yes",
+            "cop_index":"1",
+            "correct answer":"Vascularization increases or the epithelial keratinization is increased",
+            "why_correct":[
+                "The key concepts in the question and context are the physiological changes that occur in the gingiva during inflammation.",
+                "The context states: 'When the gingival tissue becomes inflamed, one of the first visible signs is a reddening of the color. This occurs because the inflammatory process increases vascularization while decreasing epithelial keratinization.'",
+                "Based on the provided context, which explicitly links the inflammation of the gingiva to increased vascularization and decreased keratinization, this is the correct reason for the red coloration of the gingiva."
+            ],
+            "why_others_incorrect":"Options 0 and 2 are incorrect because they incorrectly describe the changes in vascularization and epithelial keratinization. Option 1 is actually incorrect because it states that keratinization increases, whereas the context states that it decreases."
+        }
+    },
+    {
+        "id":"391a2235-7807-45be-b819-3fbf3cd0b7a9",
+        "testbed_data":{
+            "correct_index":0
+        },
+        "gpt_output":{
+            "is_answer_correct":"yes",
+            "cop_index":"1",
+            "answer":"An amiodarone pneumonitis seems unlikely given that the patient has taken the drug for 2 years.",
+            "why_correct":[
+                "The key concepts in this question are related to the clinical presentation, laboratory findings, and medication history of the patient.",
+                "Although the patient received amiodarone for paroxysmal atrial fibrillation, the context notes that he took the drug for only 18 months, which is less than the recommended duration (2 years).",
+                "Given this information, it is reasonable to question whether amiodarone pneumonitis might be a concern, making option 1 an unlikely diagnosis."
+            ],
+            "why_others_incorrect":"Option 0, organized pneumonia, and option 3, fibrotic pneumonia, are possible diagnoses but require further evaluation. Option 2, sarcoidosis, may also be considered with the lymphocyte ratio but is not directly supported by this specific information."
+        }
+    },
+    {
+        "id":"a01e155f-13bd-4332-b984-b3ddec7e0043",
+        "testbed_data":{
+            "correct_index":1
+        },
+        "gpt_output":{
+            "is_answer_correct":"yes",
+            "cop_index":"3",
+            "correct answer":"None",
+            "why_correct":[
+                "The question and context focus on identifying calcified pulmonary metastasis in carcinomas.",
+                "The context does not explicitly mention a type of carcinoma commonly associated with calcified pulmonary metastases.",
+                "Consequently, the correct answer is 'None', as there isn\"t enough information to directly link any specific carcinoma type to calcified pulmonary metastasis."
+            ],
+            "why_others_incorrect":"Pancreatic carcinoma (0) and thyroid carcinoma (1) are known to have a tendency for forming calcifications in their metastases, while endometrial carcinoma (2) can also exhibit this characteristic. Thus, each of these options has a connection to the specified condition."
+        }
+    },
+    {
+        "id":"dd57ff3a-0ba0-4e1b-8010-05c9e0629c0c",
+        "testbed_data":{
+            "correct_index":2
+        },
+        "gpt_output":{
+            "is_answer_correct":"yes",
+            "cop_index":"3",
+            "correct answer":"Recruitment of neutrophils",
+            "why_correct":[
+                "The key concepts in the question and context relate to cell types involved in alveolar epithelium regeneration after acute lung injury.",
+                "\"Neutrophils play a crucial role in the innate immune response, including the recruitment of white blood cells to sites of infection or inflammation.\"",
+                "This statement directly links neutrophil function to the context of alveolar epithelium regeneration following an injury, confirming that recruitment of neutrophils is indeed correct."
+            ],
+            "why_others_incorrect":"Protease release and surfactant secretion are involved in different cellular processes, but not directly related to alveolar epithelial regeneration. Recruitment of neutrophils, however, is a key process in this context."
+        }
+    },
+    {
+        "id":"9da229c7-d35b-4941-baf6-a005d73a925c",
+        "testbed_data":{
+            "correct_index":1
+        },
+        "gpt_output":{
+            "is_answer_correct":"yes",
+            "cop_index":"2",
+            "correct answer":"Acetyl-CoA",
+            "why_correct":[
+                "The key concepts in this question focus on gluconeogenesis, a metabolic pathway generating glucose from non-carbohydrate sources.",
+                "Acetyl-CoA is a critical intermediate in both the citric acid cycle and fatty acid oxidation, serving as the primary source of carbon atoms for gluconeogenesis.",
+                "Given that Acetyl-CoA is involved in both lactate metabolism and glycerol utilization through gluconeogenic pathways, it serves as a common compound connecting these processes."
+            ],
+            "why_others_incorrect":[
+                "Pyruvate (Option 0) is more directly related to glycolysis rather than gluconeogenesis from lactate or glycerol.",
+                "Glucose-6-phosphate (Option 1) is indeed a key metabolite in gluconeogenesis but does not share the same level of connection with both lactate and glycerol as Acetyl-CoA.",
+                "Fosfoenolpiruvato (Option 3) plays a role in glycolysis rather than serving as a compound common to both gluconeogenesis from lactate and glycerol."
+            ]
+        }
+    },
+    {
+        "id":"e08522b9-f4e1-44ee-a21b-cbeada082ebb",
+        "testbed_data":{
+            "correct_index":0
+        },
+        "gpt_output":{
+            "is_answer_correct":"no",
+            "cop_index":"2",
+            "correct answer":"Plasma Glucose levels < 3 mmol\/l",
+            "why_correct":[
+                "The key concepts in this question and context relate to the diagnosis of Insulinoma using various tests.",
+                "\"Insulinomas are often diagnosed through a combination of clinical presentation, biochemical investigations, and imaging studies.\"",
+                "However, when considering specific diagnostic tests for insulinoma, plasma glucose levels < 3 mmol\/l stands out as a strong indicator. This is because insulinomas typically cause hypoglycemia due to excessive insulin production, which would be reflected in low blood glucose levels."
+            ],
+            "why_others_incorrect":"The '72 hour' fast test (option 0) is used to diagnose insulinoma but requires fasting for a longer period and does not directly measure blood glucose levels. Plasma Insulin levels > 6uU\/ml (option 2) can be elevated in insulinomas but is not as specific or sensitive as plasma glucose levels, which more accurately reflect the bodys metabolic response to insulin."
+        }
+    },
+    {
+        "id":"fbd5b780-9418-437f-a77f-9d7db2bc4e4e",
+        "testbed_data":{
+            "correct_index":3
+        },
+        "gpt_output":{
+            "is_answer_correct":"yes",
+            "cop_index":"0",
+            "correct answer":"Dubin-Johnson syndrome",
+            "why_correct":[
+                "The key concepts in the question and context include the patients presentation of jaundice, abdominal distention with a positive fluid wave, and laboratory results showing elevated bilirubin levels.",
+                "The context states: 'The clinical picture is consistent with Dubin-Johnson syndrome due to chronic conjugated hyperbilirubinemia associated with liver discoloration.'",
+                "This diagnosis aligns with the patients symptoms and lab results, making it the most likely explanation for their condition."
+            ],
+            "why_others_incorrect":"Breast feeding jaundice is unlikely in a newborn without any recent breastfeeding, Erythroblastosis fetalis would typically present with more severe anemia and hemolysis, and Gilbert syndrome primarily affects unconjugated bilirubin levels"
+        }
+    },
+    {
+        "id":"eeebfaaa-866a-424e-8fc9-23d4071e8858",
+        "testbed_data":{
+            "correct_index":0
+        },
+        "gpt_output":{
+            "is_answer_correct":"yes",
+            "cop_index":"1",
+            "correct answer":"Amauratic pupil",
+            "why_correct":[
+                "The key concepts in this question revolve around the effects of an optic tract lesion.",
+                "An optic tract lesion typically results in a contralateral homonymous hemianopia, which can lead to various ocular and pupillary changes.",
+                "Given that the correct answer is Amauratic pupil, it is crucial to understand that this condition arises from the altered pupillary response due to the damage to the optic tract. This leads to an inappropriate pupillary constriction in response to light on the affected side."
+            ],
+            "why_others_incorrect":"Options 0 (Wernickes hemianopic pupil) and 2 (Amauratic pupil) are duplicates, whereas option 3 (None) is incorrect as Amauratic pupil is indeed a valid consequence of an optic tract lesion. Wernickes hemianopic pupil specifically refers to the pupillary response seen in patients with superior and inferior quadrantanopia due to lesions affecting different parts of the visual pathway."
+        }
+    },
+    {
+        "id":"0555ee2d-c726-4b90-b7b4-ff67c5e846ba",
+        "testbed_data":{
+            "correct_index":0
+        },
+        "gpt_output":{
+            "is_answer_correct":"yes",
+            "cop_index":"3",
+            "answer":"Inhaled salmeterol",
+            "why_correct":[
+                "The key concepts in the question and context are the patients asthma diagnosis, symptoms, and medication regimen.",
+                "\"The pediatrician starts him on a low dose of another inhaler which needs to be taken once daily. She asks his mother to avoid any conditions that might aggravate her son\u2019s symptoms and make it difficult for him to breathe.\"",
+                "Given that the patient has not been able to participate in sports due to asthma, uses an inhaler more than 3 times a week, and experiences symptoms such as shortness of breath, wheezes, and crackles in both lungs, the most likely prescribed medication is a long-acting beta2-adrenergic receptor agonist (LABA) like salmeterol. LABAs are used to control symptoms in patients with asthma who require additional assistance beyond what can be achieved with inhaled corticosteroids alone."
+            ],
+            "why_others_incorrect":"Inhaled beclomethasone is a corticosteroid, inhaled ipratropium bromide is an anticholinergic used for bronchospasm relief, and nebulized theophylline is a bronchodilator but not typically prescribed as a long-term controller medication."
+        }
+    },
+    {
+        "id":"4044e002-b85e-41e7-ba7d-83450385b43a",
+        "testbed_data":{
+            "correct_index":3
+        },
+        "gpt_output":{
+            "is_answer_correct":"yes",
+            "cop_index":"1",
+            "answer":"Eosinophils",
+            "why_correct":[
+                "The key concepts in the question and context revolve around cell surface markers on immune cells.",
+                "Context states that HLA-DR\u03b1 is a non-polymorphic component of MHC class II molecules, which are found on antigen-presenting cells (APCs).",
+                "Given that HLA-DQ and HLA-DP genes encode for components of the MHC class II molecule, it implies these APCs will also express molecules encoded by HLA-DR\u03b1.",
+                "Since eosinophils are a type of white blood cell known to participate in immune responses and could be considered as part of the 'antigen presenting cells' or related immune response."
+            ],
+            "why_others_incorrect":"Mesenchymal cells, platelets, and thymic epithelial cells do not express HLA-DR\u03b1 molecules. Mesenchymal cells are involved in tissue repair and regeneration, which they accomplish without the involvement of MHC class II molecules. Platelets primarily participate in blood clotting, which is unrelated to MHC class II expression. Thymic epithelial cells help develop T cells but do not express HLA-DR\u03b1."
+        }
+    },
+    {
+        "id":"2cb33259-62c2-4d07-9e70-bc78f698a8bd",
+        "testbed_data":{
+            "correct_index":0
+        },
+        "gpt_output":{
+            "is_answer_correct":"yes",
+            "cop_index":"1",
+            "correct answer":"Tm values and ionic concentration was about",
+            "why_correct":[
+                "The question focuses on factors that affect the Tm value of double-stranded DNA.",
+                "The context states: 'The melting temperature (Tm) of a double-stranded DNA molecule is influenced by its base composition, ionic strength, and other factors.' Specifically, it notes that \"the Tm value is influenced by the concentration of salts in the solution,\" which supports option 1 as correct."
+            ],
+            "why_others_incorrect":[
+                "Option 0, stating a relationship between Tm value and GC content of DNA, is an oversimplification; while GC content does affect Tm, its not the primary factor mentioned in the context.",
+                "Option 2 incorrectly states that pH has no effect on the Tm value, when in fact, changes in pH can also impact the Tm.",
+                "Option 3 suggests a direct relationship between Tm and DNA length, which is not accurate; other factors like concentration of salts are more relevant to Tm."
+            ]
+        }
+    },
+    {
+        "id":"9c65160f-eba7-4dd7-9d87-17606366e997",
+        "testbed_data":{
+            "correct_index":2
+        },
+        "gpt_output":{
+            "is_answer_correct":"yes",
+            "cop_index":"1",
+            "correct answer":"Can increase insulin secretion by inhibition of ATP-sensitive K + channel of",
+            "why_correct":[
+                "The key concepts in the question and context are the mechanism of action of Tolbutamide, a type of sulfonylurea used to treat diabetes.",
+                "\"Tolbutamide stimulates the release of insulin from the pancreatic beta cells by inhibiting the ATP-sensitive potassium channels in these cells.\"",
+                "Based on this direct statement from the context, which explicitly links Tolbutamides mechanism of action to the inhibition of ATP-sensitive K+ channels, this is the correct description of its effect."
+            ],
+            "why_others_incorrect":"Options 0 and 3 are incorrect because they describe an increase in insulin secretion due to a direct stimulation of pancreatic \u03b2 cells or enhanced glucose uptake by muscle and fat cells, respectively. Option 2 is incorrect because Tolbutamide is not a polypeptide, but rather a small molecule with the chemical formula C15H22N4O3S."
+        }
+    },
+    {
+        "id":"8394ca43-4d74-4ad5-88a4-eee77608d6ad",
+        "testbed_data":{
+            "correct_index":2
+        },
+        "gpt_output":{
+            "is_answer_correct":"no",
+            "cop_index":"3",
+            "correct answer":"None of the above",
+            "why_correct":[
+                "The key concepts in the question and context are the relationship between foot drop, nerve involvement, and the appropriate neural pathway.",
+                "The context states: 'Foot drop is a condition where inability to dorsiflex the foot occurs.' It also notes that it 'can result from damage or dysfunction of the nerve supply to the muscles involved in ankle movement.'",
+                "However, the context does not specify which nerve is responsible for causing foot drop. Instead, it generalizes that 'any nerve injury affecting the motor pathways can cause muscle weakness and paralysis'. This lack of specificity means that options 0, 1, and 2 are also incorrect as they all refer to specific nerves involved in lower limb movement, rather than a more general or indirect involvement."
+            ],
+            "why_others_incorrect":"Option 0 (Femoral nerve) is incorrect because it primarily affects hip and knee movement. Option 1 (Tibial nerve) is also incorrect as it mainly controls ankle and toe movements. Option 2 (Common peroneal nerve) is partially correct, but the context indicates that foot drop can result from damage to a broader range of nerves affecting lower limb motor function."
+        }
+    },
+    {
+        "id":"90a389bf-1025-4549-974f-a5e4e71891d6",
+        "testbed_data":{
+            "correct_index":2
+        },
+        "gpt_output":{
+            "is_answer_correct":"yes",
+            "cop_index":"0",
+            "correct answer":"alprazolam",
+            "why_correct":[
+                "The key concepts in the question and context are about comparing the half-lives of different benzodiazepine drugs.",
+                "The context states: 'Alprazolam has a half-life of approximately 11\u201323 hours, making it one of the longer-acting benzodiazepines.'",
+                "Based on the provided context, which explicitly mentions alprazolams long half-life compared to other benzodiazepines, this is the correct answer."
+            ],
+            "why_others_incorrect":"Chlordiazepoxide has a shorter half-life (10\u201330 hours), flurazepams half-life varies but is generally shorter than alprazolams, and zaleplon is actually a non-benzodiazepine hypnotic with a unique pharmacokinetic profile."
+        }
+    },
+    {
+        "id":"01eacf32-b20a-49a5-b60d-03a0eec997b0",
+        "testbed_data":{
+            "correct_index":1
+        },
+        "gpt_output":{
+            "is_answer_correct":"yes",
+            "cop_index":"3",
+            "correct answer":"Transferrin",
+            "why_correct":[
+                "The key concepts in the question and context are the relationship between hepcidin, iron absorption, and the specific mechanism of action.",
+                "Hepcidin is a hormone that plays a crucial role in regulating iron homeostasis by inhibiting iron absorption from the gut.",
+                "This statement directly supports the idea that hepcidin decreases iron absorption through its effect on transferrin, which is responsible for transporting iron in the blood. Therefore, the correct answer is Transferrin."
+            ],
+            "why_others_incorrect":"The other options are not directly related to how hepcidin decreases iron absorption. Hephaestin is involved in iron acquisition, ferropoin is a protein that binds to metals, and Divalent metal ion transporter plays a role in the transport of essential minerals but is not directly inhibited by hepcidin."
+        }
+    },
+    {
+        "id":"daaed6c2-9a6a-4806-955d-f1e793262afa",
+        "testbed_data":{
+            "correct_index":2
+        },
+        "gpt_output":{
+            "is_answer_correct":"no",
+            "cop_index":"1",
+            "correct answer":"Aspaic acid",
+            "why_correct":[
+                "The question and context focus on the properties of amino acids at physiological pH.",
+                "At physiological pH, the isoelectric point (pI) of an amino acid determines its net charge.",
+                "Aspartic acid has a pI of approximately 2.85-3.17, meaning it will have a net negative charge at physiological pH."
+            ],
+            "why_others_incorrect":"Valine and Isoleucine are non-polar, uncharged amino acids that do not have a positive charge at physiological pH. Arginine has a pI of approximately 9.66, resulting in a positive charge at physiological pH; however, this is more related to its basic properties rather than its primary structure."
+        }
+    },
+    {
+        "id":"21c05d6f-33bc-423b-bc68-c7176a8d06e0",
+        "testbed_data":{
+            "correct_index":0
+        },
+        "gpt_output":{
+            "is_answer_correct":"no",
+            "cop_index":"2",
+            "correct answer":"Cherry red spots",
+            "why_correct":[
+                "The key concepts in this question are related to Wilsons disease, a genetic disorder characterized by excessive copper accumulation in the body.",
+                "Wilsons disease is known for causing damage to various organs, including the liver, brain, and eyes. One of the hallmark signs of Wilsons disease is the deposition of copper on the cornea.",
+                "Based on this information, the correct answer can be determined as Cherry red spots are a result of copper accumulation in the retina, not directly related to corneal deposition."
+            ],
+            "why_others_incorrect":"Kayser-Fleischer ring refers to the deposition of copper on the cornea, but it is more typically seen in conditions like Wilsons disease. Latte spots and Lisch nodules are unrelated to Wilsons disease and copper accumulation."
+        }
+    },
+    {
+        "id":"1174fa28-da74-4c00-b8c3-0f415db8574a",
+        "testbed_data":{
+            "correct_index":1
+        },
+        "gpt_output":{
+            "is_answer_correct":"yes",
+            "cop_index":"3",
+            "correct answer":"Ordinal scales.",
+            "why_correct":[
+                "The key concepts in the question and context are related to classification systems used for abnormal behavior, such as those employed in the DSM (Diagnostic and Statistical Manual of Mental Disorders).",
+                "The context states: 'Classification systems used in psychiatry include categorical systems, dimensional systems, and ordinal scales.'",
+                "Ordinal scales are explicitly identified by the context as a type of classification system used for abnormal behavior, making this the correct answer."
+            ],
+            "why_others_incorrect":"The reason scales and interval systems are not correct because they refer to different types of measurement and classification. Rated classification systems are also incorrect as it is a method rather than a type of scale."
+        }
+    },
+    {
+        "id":"2471d4ee-f72c-41d4-a2a6-dfe2eba44b80",
+        "testbed_data":{
+            "correct_index":0
+        },
+        "gpt_output":{
+            "is_answer_correct":"yes",
+            "cop_index":"1",
+            "correct answer":"Zn",
+            "why_correct":[
+                "The key concepts in this question are related to the composition and properties of silver amalgam alloy.",
+                "According to the context, 'Silver is added to Zinc (Zn) to form Silver-Zinc (Ag-Zn) alloy' which is commonly used as a filling material in dentistry.",
+                "Its mentioned that 'the addition of small amounts of other elements such as Platinum (Pt), Gold (Au), Indium (In), Tin (Sn), and Copper (Cu)' helps in achieving the desired mechanical properties, but it does not contribute to whitening the alloy. Only Zinc is responsible for the whitening effect."
+            ],
+            "why_others_incorrect":"Zinc contributes to the strength of the amalgam alloy but its addition leads to a decrease in melting point and increase in corrosion susceptibility when compared to silver alloy. \n Platinum (Pt) and Gold (Au) are primarily added to increase the durability of the alloy while Indium (In) is used for reducing the friction between the amalgam and opposing teeth surfaces, thus not affecting the whiteness of the amalgam."
+        }
+    },
+    {
+        "id":"c4d055bd-6efa-4897-bfc7-37d349ecab2f",
+        "testbed_data":{
+            "correct_index":3
+        },
+        "gpt_output":{
+            "is_answer_correct":"yes",
+            "cop_index":"1",
+            "correct answer":"Stop smoking and screen for cancer",
+            "why_correct":[
+                "The key concepts in this question are related to the diagnosis and management of oral candidiasis, specifically the best approach to treating a patient with symptoms presented.",
+                "\"Oral candidiasis is typically associated with poor oral hygiene and can be treated with antifungal agents such as nystatin or clotrimazole, or by reducing the Candida population through improved hygiene and treatment of underlying conditions.\" This statement from the context supports the answer that managing the patients overall health is key.',\n    \"The correct answer is 'Stop smoking and screen for cancer' because it addresses both risk factors associated with oral candidiasis. Smoking can weaken the immune system, making patients more susceptible to infections like oral candidiasis, while screening for cancer helps identify patients who may benefit from preventive measures or earlier intervention.\""
+            ],
+            "why_others_incorrect":"Dapsone plus steroids and antifungals are treatments that target specific symptoms of oral candidiasis but do not address underlying causes. Vitamin supplements are generally not recommended as a primary treatment approach for this condition, and there is no direct evidence to support their use in managing oral candidiasis."
+        }
+    },
+    {
+        "id":"70a7a7b4-ecf2-4614-87d3-7d0faef59dce",
+        "testbed_data":{
+            "correct_index":2
+        },
+        "gpt_output":{
+            "is_answer_correct":"yes",
+            "cop_index":"2",
+            "correct answer":"Complex syndactyly",
+            "why_correct":[
+                "The key concepts in the question and context are the relationship between Apert syndrome, its diagnostic features, and other possible conditions.",
+                "The context states: 'Apert syndrome is characterized by a range of symptoms including craniosynostosis, midface hypoplasia, mandibular hypoplasia, and syndactyly.' It specifically highlights that \"syndactyly\" refers to the joining of two or more digits together.",
+                "Based on the provided context, which clearly lists midface hypoplasia, mandibular hypoplasia, and syndactyly as diagnostic features of Apert syndrome, but omits complex syndactyly, this is the correct answer."
+            ],
+            "why_others_incorrect":"Complex syndactyly is indeed a feature seen in Apert syndrome; however, according to the context provided, it does not fall under the specific diagnostic criteria highlighted for Apert syndrome. "
+        }
+    },
+    {
+        "id":"1057bee8-b9a9-4411-8752-474f86a5defb",
+        "testbed_data":{
+            "correct_index":0
+        },
+        "gpt_output":{
+            "is_answer_correct":"yes",
+            "cop_index":"2",
+            "correct answer":"Oblique group",
+            "why_correct":[
+                "The key concepts in the question and context are the types of fibers that prevent tooth extrusion and resist lateral movements.",
+                "\"The periodontal ligament contains different groups of fibers that serve distinct functions. The oblique group consists of fibers that extend from the roots to the alveolar crest, thus preventing tooth extrusion.\"",
+                "Based on the provided context, which explicitly states the function of the oblique group, this is the correct choice for the described condition."
+            ],
+            "why_others_incorrect":"The other procedures, such as Alveolar crest group, Trans-septal group, and Apical group, are used for different purposes in tooth movement or support. The Alveolar crest group works to maintain the position of the alveolar crest, the Trans-septal group facilitates tooth movement within a particular direction, and the Apical group extends from the apex of the tooth to prevent excessive rotation."
+        }
+    },
+    {
+        "id":"41de83f0-cc07-4b4a-ba4b-475c4cdc2369",
+        "testbed_data":{
+            "correct_index":0
+        },
+        "gpt_output":{
+            "is_answer_correct":"yes",
+            "cop_index":"3",
+            "correct answer":"I must limit the amount of liquids I drink.",
+            "why_correct":[
+                "The key concepts in this question relate to the specific dietary needs and restrictions imposed on individuals undergoing hemodialysis due to renal insufficiency.",
+                "\"The patient needs to limit fluid intake to maintain stable kidney function during hemodialysis.\"",
+                "Limiting fluids helps manage waste buildup, maintains electrolyte balance, and reduces strain on the kidneys. These are essential factors in managing Renal Insufficiency while participating in Hemodialysis programs."
+            ],
+            "why_others_incorrect":"Options 0, 1, and 2 do not accurately convey the need for hydration restriction that is critical during hemodialysis sessions."
+        }
+    },
+    {
+        "id":"24056d58-ecde-493c-8e74-91cb16ed2279",
+        "testbed_data":{
+            "correct_index":2
+        },
+        "gpt_output":{
+            "is_answer_correct":"yes",
+            "cop_index":"0",
+            "correct answer":"A strategy that has several elements comprising in an integrated manner several programs aimed at populations for general health.",
+            "why_correct":[
+                "The key concepts in the question and context are the definition and scope of health promotion.",
+                "The context states: 'Health promotion is defined as the processes and actions taken to enable people to increase control over, and to improve their health.' It also explains that health promotion 'involves activities intended to promote healthy behaviors (e.g., being physically active, eating a healthy diet) and to prevent disease and disability.'",
+                "Based on the provided context, which explicitly describes health promotion as an integrated strategy comprising several programs aimed at populations for general health, this is the correct definition of health promotion."
+            ],
+            "why_others_incorrect":"Options 1 and 2 are overly broad and confusing, while option 3 focuses too much on specific disease management rather than overall health promotion. Options 1 and 2 might be related to broader concepts in public health, but they do not accurately capture the essence of health promotion as defined in the context."
+        }
+    },
+    {
+        "id":"25e4a364-b852-4bf9-b278-8a88bf9c1989",
+        "testbed_data":{
+            "correct_index":2
+        },
+        "gpt_output":{
+            "is_answer_correct":"yes",
+            "cop_index":"0",
+            "correct answer":"It should start with activities that have not been part of the persons repertoire.",
+            "why_correct":[
+                "The key concepts in the question and context are related to Behavioral Activation, a therapeutic approach for treating depression and other mental health issues.",
+                "The context states: 'Behavioral Activation begins with identifying activities that are not currently part of the patients routine or repertoire.'",
+                "This is the core principle of Behavioral Activation, emphasizing the importance of introducing new activities into an individuals behavior pattern to foster change and improvement."
+            ],
+            "why_others_incorrect":"Options 1 and 2 describe structured approaches that may not align with the principles of Behavioral Activation, which focuses on increasing activity levels without strict planning. Option 3 introduces a concept (starting small) that is not directly related to the core principle of starting with new activities."
+        }
+    },
+    {
+        "id":"43926a58-4704-4e1e-8ab9-c5ae05ad8eae",
+        "testbed_data":{
+            "correct_index":0
+        },
+        "gpt_output":{
+            "is_answer_correct":"yes",
+            "cop_index":"2",
+            "correct answer":"Upper respiratory tract infection may be",
+            "why_correct":[
+                "The key concepts in the question and context are the clinical presentation, physical examination findings, and potential causes of a newborn with a slowly progressive condition.",
+                "The context provides details about the infants initial normal development, followed by the appearance of a systolic murmur, delayed feeding, slow weight gain, and rib margin subsidence."
+            ],
+            "why_others_incorrect":[
+                "Options 0 and 1 are unlikely as they imply significant cardiac pathology requiring surgical intervention, which is not supported by the provided context.",
+                "Option 3 is also incorrect as pulmonary stenosis would likely present with more severe respiratory symptoms and potentially different echocardiographic findings."
+            ]
+        }
+    },
+    {
+        "id":"d434bd81-5f7d-4e1e-92ff-12e85a16e5b8",
+        "testbed_data":{
+            "correct_index":2
+        },
+        "gpt_output":{
+            "is_answer_correct":"yes",
+            "cop_index":"0",
+            "correct answer":"Insulin stimulates the HMG-CoA reductase",
+            "why_correct":[
+                "The key concepts in this question and context relate to the regulation of cholesterol synthesis.",
+                "'Insulin stimulates the HMG-CoA reductase' is a direct statement about how insulin influences cholesterol production in the liver. This concept is crucial for understanding glucose homeostasis and lipid metabolism.",
+                "In the context provided, it is stated: 'Insulin stimulates HMG-CoA reductase.' The context highlights the role of insulin in promoting lipogenesis and increasing the synthesis of cholesterol in the liver cells."
+            ],
+            "why_others_incorrect":"The other options provide incorrect information about how intracellular cholesterol levels affect lipid metabolism or dietary cholesterol intake on liver cell synthesis of cholesterol. The correct mechanism involves insulin signaling pathways directly influencing HMG-CoA reductase activity, not the described relationships between cholesterol and lipid synthesis."
+        }
+    },
+    {
+        "id":"c41126df-e1cd-43e7-8c83-852567828085",
+        "testbed_data":{
+            "correct_index":2
+        },
+        "gpt_output":{
+            "is_answer_correct":"no",
+            "cop_index":"0",
+            "correct answer":"Withdrawal symptoms do not appear in Disables five days after",
+            "why_correct":[
+                "The key concepts are benzodiazepine cessation, withdrawal symptoms, and timeline.",
+                "\"Benzodiazepines can lead to physical dependence and tolerance. Stopping or significantly reducing the dose of diazepam abruptly can cause severe withdrawal symptoms.\"",
+                "\"According to the literature, withdrawal symptoms from benzodiazepines typically do not appear until 2-4 days after cessation, with symptoms intensifying over the next 7-14 days.\""
+            ],
+            "why_others_incorrect":"Options 0 and 3 are incorrect because they state that withdrawal symptoms do not appear at all or that they can occur without producing delirium. Option 1 is also incorrect as it states that symptoms do not appear within five days, which contradicts the expected timeline for benzodiazepine withdrawal."
+        }
+    },
+    {
+        "id":"21b58ebc-1217-46ba-bbe0-779eed61036f",
+        "testbed_data":{
+            "correct_index":3
+        },
+        "gpt_output":{
+            "is_answer_correct":"yes",
+            "cop_index":"1",
+            "correct answer":"vWD type 2A",
+            "why_correct":[
+                "The question and context focus on the classification and rarity of Von Willebrand disease types.",
+                "The context states: 'Von Willebrand disease (VWD) is classified into three main types: Type I, Type II, and Type III. Type II can be further divided into subtypes 2A, 2B, and 2M.'",
+                "It also mentions that 'Type II is the rarest type of VWD,' which directly supports the answer that vWD type 2A is the rarest type."
+            ],
+            "why_others_incorrect":"Option 0 (vWD type 1) is incorrect because it is not rare. Option 3 (vWD type 3) is also incorrect as it is not the rarest type, but rather more severe. Option 2 (vWD type 2N) might be considered a subtype of vWD type 2A, so option 2 could be considered partially correct but still would incorrectly label vWD type 2A."
+        }
+    },
+    {
+        "id":"431100d5-2cd8-48e3-ae9c-049dcd8b7fdb",
+        "testbed_data":{
+            "correct_index":2
+        },
+        "gpt_output":{
+            "is_answer_correct":"yes",
+            "cop_index":"3",
+            "correct answer":"It is propagative",
+            "why_correct":[
+                "The question and context focus on defining a point source epidemic.",
+                "The context states: 'A point-source outbreak occurs when people become sick from consuming food or water contaminated with the same pathogen.' This definition highlights the key characteristic of a point source epidemic, which is that it arises from a single source and can be propagative.",
+                "This single-source origin allows for the rapid spread of disease through a population, as outlined by the World Health Organization (WHO). The WHO defines a point-source outbreak as 'an epidemiologic event in which most or all cases are attributed to a single source'"
+            ],
+            "why_others_incorrect":"Options 0 and 1 describe secondary waves and plateau phases that are more characteristic of propagated epidemics, while option 2 describes the incubation period rather than the nature of point-source outbreaks."
+        }
+    },
+    {
+        "id":"68ed2d19-6ebe-4581-baf9-c2aacfc2d2d2",
+        "testbed_data":{
+            "correct_index":0
+        },
+        "gpt_output":{
+            "is_answer_correct":"yes",
+            "cop_index":"3",
+            "correct answer":"Ulnar",
+            "why_correct":[
+                "The key concepts in this question are related to hand anatomy and the clinical impact of a specific nerve injury.",
+                "\"Loss of flexion at the interphalangeal joint of the thumb is a classic sign of ulnar nerve injury.\"",
+                "Given that the fracture mentioned is supracondylar, which involves the distal humerus near the elbow, it is plausible that an ulnar nerve injury could occur due to swelling or compression from the fracture. The evidence supports this conclusion by highlighting the specific symptom associated with ulnar nerve damage."
+            ],
+            "why_others_incorrect":"The other options do not accurately describe the nerve responsible for loss of flexion in the interphalangeal joint of the thumb following a supracondylar fracture. The anterior interosseous and posterior interosseous nerves are primarily involved with wrist function rather than thumb movements, while the median nerves involvement is more commonly associated with hand function at higher levels."
+        }
+    },
+    {
+        "id":"0449dab0-d20e-4df0-92c6-6be459a16172",
+        "testbed_data":{
+            "correct_index":0
+        },
+        "gpt_output":{
+            "is_answer_correct":"yes",
+            "cop_index":"1",
+            "correct answer":"Superior olivary complex",
+            "why_correct":[
+                "The key concepts in the question and context are related to the Auditory Evoked Response (BERA) and its waveforms.",
+                "\"In BERA, the first wave (N1), the second wave (N2), and the third wave (P1) represent activity in different parts of the auditory pathway, with the first wave representing cochlear activation.\"",
+                "However, the question asks about the wave 'V', which is a later wave in the BERA waveform. The wave 'V' corresponds to activity in the Superior Olivary Complex (SOC), which plays a critical role in sound localization and processing."
+            ],
+            "why_others_incorrect":"Options 0 (Lateral lemniscus) and 2 (Cochlear nerve) are incorrect because they correspond to earlier waves in the BERA waveform. Option 3 (Cochlear nucleus) is not directly related to the 'V' wave in BERA."
+        }
+    },
+    {
+        "id":"e52114b5-1c38-4923-85ee-92b5196bf21d",
+        "testbed_data":{
+            "correct_index":1
+        },
+        "gpt_output":{
+            "is_answer_correct":"yes",
+            "cop_index":"3",
+            "correct answer":"Curettage",
+            "why_correct":[
+                "The key concepts in the question and context are related to the application of lateral pedicle flaps in periodontal surgery.",
+                "\"Lateral peduncular flap is used to cover defects created by curettage in the alveolar ridge or the attached gingiva.\"",
+                "Based on this information from the context, which explicitly states the use of lateral pedicle flaps for covering defects caused by curettage, this option is the correct choice."
+            ],
+            "why_others_incorrect":"Options 0 (increasing the width of attached gingiva) and 1 (recession coverage) are related to different surgical procedures in periodontics. Option 3 (vestibular deepening) can be addressed using other surgical techniques, not lateral pedicle flaps."
+        }
+    },
+    {
+        "id":"26ce73d9-50a0-43e3-a32c-e55ce585fb80",
+        "testbed_data":{
+            "correct_index":0
+        },
+        "gpt_output":{
+            "is_answer_correct":"yes",
+            "cop_index":"2",
+            "correct answer":"Maxillary lateral incisor",
+            "why_correct":[
+                "The question and context focus on identifying the tooth where the mesial marginal developmental groove is seen.",
+                "The context states: 'The mesial marginal developmental groove is a characteristic feature of maxillary central incisors, but it can also be observed in some cases of maxillary lateral incisors.' However, it is not typically associated with maxillary first premolars or mandibular teeth.",
+                "Given the above information and considering the questions focus on identifying the tooth where this groove is seen, the correct answer is the Maxillary lateral incisor."
+            ],
+            "why_others_incorrect":"The mesial marginal developmental groove is not typically associated with maxillary first premolars or mandibular teeth. While it can occasionally be observed in some cases of maxillary lateral incisors, this option is less common than in central incisors."
+        }
+    },
+    {
+        "id":"96ad67d1-a195-4e12-9bb5-595f887c377b",
+        "testbed_data":{
+            "correct_index":0
+        },
+        "gpt_output":{
+            "is_answer_correct":"yes",
+            "cop_index":"1",
+            "answer":"Patients agreed to add albumin, and to pay for health care",
+            "why_correct":[
+                "The key concepts in this scenario are patient autonomy, informed consent, and medical treatment.",
+                "Ms. Yip has expressed a desire to have albumin added as part of her post-surgical care.",
+                "As a healthcare provider, it is essential to respect the patients wishes while also ensuring that any recommended treatments are medically appropriate."
+            ],
+            "why_others_incorrect":[
+                "Option 0: While respecting patient autonomy is crucial, simply declining their request without further discussion may not be the most effective approach.",
+                "Option 2: Adding albumin to a patient who does not require it may not be considered the best medical practice.",
+                "Option 3: Medical professionals should always communicate with patients about their treatment options and involve them in decision-making processes."
+            ]
+        }
+    },
+    {
+        "id":"956e7992-98d3-42e5-9d03-9f4adb91a920",
+        "testbed_data":{
+            "correct_index":1
+        },
+        "gpt_output":{
+            "is_answer_correct":"yes",
+            "cop_index":"0",
+            "correct answer":"1000 gm",
+            "why_correct":[
+                "The key concept in this question is Horrocks apparatus, which is used for water testing.",
+                "In Horrocks apparatus, the blue color from the 4th cup onwards indicates a chlorine residual of 2 mg\/L.",
+                "According to Horrocks chart, a chlorine residual of 2 mg\/L corresponds to 1000 gm (1 kg) of bleaching powder per million liters of water."
+            ],
+            "why_others_incorrect":"Options '1300 gm', '1600 gm', and '2000 gm' are incorrect as they do not correspond to the recommended amount of bleaching powder for a chlorine residual of 2 mg\/L based on Horrocks chart."
+        }
+    },
+    {
+        "id":"0706fda1-c455-44d3-b231-8e7b5fafc2cc",
+        "testbed_data":{
+            "correct_index":3
+        },
+        "gpt_output":{
+            "is_answer_correct":"yes",
+            "cop_index":"0",
+            "correct answer":"Precontemplation, preparation, planning, action, maintenance and relapses.",
+            "why_correct":[
+                "The key concepts in the question and context are the different stages of behavior change as described by the Transtheoretical Model (TTM).",
+                "The context states: 'Behaviors can be categorized into six stages, including precontemplation, contemplation, preparation, action, maintenance, and relapse.'",
+                "Based on this definition provided in the context, the correct sequence of behavior change stages is indeed Precontemplation, preparation, planning, action, maintenance, and relapses."
+            ],
+            "why_others_incorrect":"The other options incorrectly list stages or mix them up. For instance, option 1 mentions 'contemplation' before 'preparation', whereas the correct sequence has contemplation following precontemplation. Similarly, option 2 lists 'preaction', which is not a recognized stage in TTM."
+        }
+    },
+    {
+        "id":"fa5dfe85-0397-493f-8fa9-aef22b532715",
+        "testbed_data":{
+            "correct_index":3
+        },
+        "gpt_output":{
+            "is_answer_correct":"yes",
+            "cop_index":"0",
+            "answer":"Try to change the emotional reactions of the patient in the short term (sadness, discouragement, disinterest, etc.)",
+            "why_correct":[
+                "The key concepts in the question and context are the principles of Behavioral Activation as a treatment for depression.",
+                "The context states: 'Behavioral Activation involves helping patients identify and change their avoidance behaviors, thereby reducing negative emotions such as sadness, discouragement, and disinterest.' This indicates that the primary goal is to address these emotional reactions in the short term.",
+                "This understanding is consistent with the evidence-based approach of Behavioral Activation, which emphasizes the importance of short-term gains in symptom reduction to motivate patients to continue treatment."
+            ],
+            "why_others_incorrect":"Option 1 is incorrect because it states that Behavioral Activation 'completely abandons the goal of changing the patients emotions,' which contradicts the established principles. Option 2 is also incorrect as it suggests pretending emotions change to produce behavior change, which is not a valid approach. Option 3 is incorrect because acceptance is an important aspect of therapy but not the primary focus of Behavioral Activation in the short term."
+        }
+    },
+    {
+        "id":"76b8ca13-d202-4778-9169-4b2f2b2e472c",
+        "testbed_data":{
+            "correct_index":1
+        },
+        "gpt_output":{
+            "is_answer_correct":"no",
+            "cop_index":"3",
+            "correct answer":"HLA B27",
+            "why_correct":[
+                "The key concepts in the question and context are the diagnosis of Ankylosing Spondylitis (AS) and the specificity of diagnostic markers.",
+                "The context states: 'Serological tests for AS are often based on HLA-B27 status.' This highlights HLA B27 as a crucial marker for diagnosing AS."
+            ],
+            "why_others_incorrect":"Option '1' (B\/l sacroilitis) is a general symptom of AS but not specific enough to diagnose the condition. Option '2' (Lumbar movement) is actually the opposite of what would be expected in AS, as patients typically experience limited mobility due to spinal stiffness. Option '3' (ESR) is a non-specific marker that can be elevated in many conditions and is not specific for AS."
+        }
+    },
+    {
+        "id":"d2cdb3f3-f4d6-4ea0-a85a-26ab283ccd72",
+        "testbed_data":{
+            "correct_index":2
+        },
+        "gpt_output":{
+            "is_answer_correct":"yes",
+            "cop_index":"0",
+            "correct answer":"Hepatitis A infection",
+            "why_correct":[
+                "The key concepts in the question and context are the relationship between Immune Thrombocytopenic Purpura (ITP) and hepatitis infections.",
+                "\"Immune thrombocytopenia can be associated with various viral hepatitis infections, including Hepatitis A, B, C, and D. However, the strongest evidence links ITP to Hepatitis A infection.\"",
+                "Based on this context, which explicitly mentions a link between ITP and Hepatitis A infection, this is the correct answer for the association."
+            ],
+            "why_others_incorrect":"The other options are incorrect because they do not have the same level of evidence supporting their connection to ITP. While Hepatitis B, C, and D infections can also lead to ITP, the context specifically highlights Hepatitis A as a significant risk factor for this condition."
+        }
+    },
+    {
+        "id":"305f1c12-f0d2-4a7d-ba04-7ea95f8b92af",
+        "testbed_data":{
+            "correct_index":2
+        },
+        "gpt_output":{
+            "is_answer_correct":"yes",
+            "cop_index":"1",
+            "correct answer":"In between the embrasures",
+            "why_correct":[
+                "The key concepts in the question and context are related to the placement of minor connectors in dental restorations.",
+                "'A minor connector is a short, narrow connector placed in the interproximal space.' This definition from the context emphasizes its use in conjunction with other restorative elements like tooth preparations and restoratives.",
+                "The context specifically states: 'Minor connectors should be placed in the interproximal spaces between teeth, never on the convex buccal or lingual surfaces of adjacent teeth. The primary goal is to distribute forces evenly while maintaining structural integrity.'",
+                "Given this information, placing a minor connector 'in between the embrasures' as stated in option 1 adheres strictly to these principles."
+            ],
+            "why_others_incorrect":"Options 0 and 2 describe incorrect locations for minor connectors, which can compromise tooth structure or cause damage. Option 3 is not applicable here as one of the options indeed matches the correct placement guideline."
+        }
+    },
+    {
+        "id":"0541f1a8-c821-4933-8ca4-5846bda61bc9",
+        "testbed_data":{
+            "correct_index":3
+        },
+        "gpt_output":{
+            "is_answer_correct":"yes",
+            "cop_index":"1",
+            "correct answer":"Inferior concha",
+            "why_correct":[
+                "The key concepts in this question and context are related to the anatomy of the nasal cavity and the procedure for performing a nasal antrostomy.",
+                "The context notes: 'Nasal antrostomies are performed via the inferior conchae, providing direct access to the maxillary sinus.'",
+                "This statement directly supports the correct answer, as it explicitly states that nasal antrostomies are performed through the inferior concha."
+            ],
+            "why_others_incorrect":"Options 0 (Middle concha), 2 (Middle meatus), and 3 (Inferior meatus) are not the correct routes for performing a nasal antrostomy. The middle concha is not typically used, the middle meatus is more related to drainage pathways, and the inferior meatus is not an appropriate entry point."
+        }
+    },
+    {
+        "id":"dae79157-699d-4528-b481-04f57277f573",
+        "testbed_data":{
+            "correct_index":2
+        },
+        "gpt_output":{
+            "is_answer_correct":"yes",
+            "cop_index":"2",
+            "answer":"\u2461\u2463",
+            "why_correct":[
+                "The key concepts in the question and context are the mechanisms by which substances are transported based on concentration gradients.",
+                "\"Substances that are transported from areas of high concentration to low concentration are examples of passive transport.\"",
+                "Given this definition, \u2461 (e.g., glucose) and \u2463 (e.g., oxygen) fit the description as they move down their concentration gradients."
+            ],
+            "why_others_incorrect":"Options \u2460\u2462 represent active transport mechanisms where substances move from low to high concentrations against a concentration gradient, not from high to low. Therefore, they do not match the definition provided in the context."
+        }
+    },
+    {
+        "id":"5dc24886-03ab-41fd-b592-f53c4a4ebccb",
+        "testbed_data":{
+            "correct_index":1
+        },
+        "gpt_output":{
+            "is_answer_correct":"yes",
+            "cop_index":"2",
+            "correct answer":"HCO3",
+            "why_correct":[
+                "The key concepts in the question and context are the definition and characteristics of respiratory acidosis.",
+                "The context states: 'Respiratory acidosis occurs when there is a failure to expel CO2 from the body, leading to an increase in blood H+ ions.'",
+                "It also explains that this results in an increase in the concentration of hydrogen carbonate (HCO3-) ions as the body attempts to compensate for the decreased pH.",
+                "Based on these statements, it is clear that the primary indicator of respiratory acidosis is an increase in HCO3- levels, not a decrease (as would be expected with other types of acid-base imbalances)."
+            ],
+            "why_others_incorrect":"The options Pa02 and None of the above are incorrect because there is no direct relationship between respiratory acidosis and changes in Pa02 or an increase in PaCO2. Additionally, a decrease in PaCO2 would be more typical of compensatory mechanisms for respiratory alkalosis, not acidosis."
+        }
+    },
+    {
+        "id":"a24cd1c4-7fe3-41ea-b0be-bd42d2988a6f",
+        "testbed_data":{
+            "correct_index":1
+        },
+        "gpt_output":{
+            "is_answer_correct":"yes",
+            "cop_index":"2",
+            "correct answer":"Endocarditis",
+            "why_correct":[
+                "The question revolves around the context of Plaques jaunes, which are a specific clinical sign.",
+                "The context states: 'Plaques jaunes are small, yellowish plaques found on the valves of the heart in cases of endocarditis.'",
+                "This direct link between Plaques jaunes and Endocarditis indicates that Endocarditis is the correct answer."
+            ],
+            "why_others_incorrect":"Syphilis and Head injury do not directly relate to Plaques jaunes, while Atherosclerosis refers to a different set of cardiovascular conditions characterized by hardening of the arteries, not specifically yellowish plaques on heart valves."
+        }
+    },
+    {
+        "id":"9ed7a784-755f-4b3c-b857-df035b4ab2b4",
+        "testbed_data":{
+            "correct_index":2
+        },
+        "gpt_output":{
+            "is_answer_correct":"yes",
+            "cop_index":"3",
+            "correct answer":"8",
+            "why_correct":[
+                "The question focuses on the process of protein synthesis, specifically the formation of peptide bonds.",
+                "In protein synthesis, each peptide bond is formed through a condensation reaction between an amino acid and another aminoacyl-tRNA molecule. This reaction requires energy to break the peptide bonds in the tRNA molecules."
+            ],
+            "why_others_incorrect":"Option 1 is incorrect as two high-energy bonds are not required for peptide bond formation, only one ATP molecule is used for each bond forming reaction, which releases a small amount of energy. Option 2 is also incorrect because four and eight are excessive numbers that do not align with the actual process of peptide bond formation in protein synthesis."
+        }
+    },
+    {
+        "id":"ef608335-e14e-469a-bba5-f353b5b4bfe3",
+        "testbed_data":{
+            "correct_index":2
+        },
+        "gpt_output":{
+            "is_answer_correct":"yes",
+            "cop_index":"3",
+            "correct answer":"Dissolved H+ ions in blood",
+            "why_correct":[
+                "The question and context focus on the types of stimuli that peripheral chemoreceptors respond to.",
+                "Peripheral chemoreceptors, located primarily in the carotid and aortic bodies, are sensitive to changes in oxygen (hypoxia) and carbon dioxide levels (hypercapnia) in the blood.",
+                "However, they do not directly sense the concentration of hydrogen ions (H+) in the blood; instead, they detect pH changes as a reflection of CO2 levels, which are closely linked."
+            ],
+            "why_others_incorrect":"Options 0 (Hypoxia), 1 (Hypercapnoea) and 2 (Hypocapnoea) accurately describe stimuli that peripheral chemoreceptors are sensitive to. "
+        }
+    },
+    {
+        "id":"e2b96820-832a-4e74-ab75-9a01a325964c",
+        "testbed_data":{
+            "correct_index":2
+        },
+        "gpt_output":{
+            "is_answer_correct":"yes",
+            "cop_index":"0",
+            "correct answer":"Vaselines, oils, waxes and silicones.",
+            "why_correct":[
+                "The key concept in the question is about the characteristics of a hydrophilic ointment.",
+                "\"A hydrophilic ointment has a high affinity for water.",
+                " \n    ",
+                "This means it can dissolve or mix well with water. Ointments that are hydrophilic typically contain excipients like vaselines, oils, waxes and silicones."
+            ],
+            "why_others_incorrect":"Options 1 and 2 do not accurately describe the basic components of a hydrophilic ointment. Option 3 refers to 'white ointment', which is not relevant to this context."
+        }
+    },
+    {
+        "id":"61d1b520-0d42-488b-b5d2-801397427942",
+        "testbed_data":{
+            "correct_index":1
+        },
+        "gpt_output":{
+            "is_answer_correct":"yes",
+            "cop_index":"0",
+            "correct answer":"brain",
+            "why_correct":[
+                "The question focuses on the process of embryo development, specifically what organs begin to develop in the middle of the third week.",
+                "\"In the third week, the earliest organs to mature are the brain and the heart.\"",
+                "This statement from the context supports that the brain is the correct answer as it begins to develop and have a physiological function in the middle of the third week."
+            ],
+            "why_others_incorrect":"The other options (heart, liver, kidney) do not begin to mature earliest during this developmental stage. The heart starts to pump blood by the end of the third week, but is not fully developed until later stages of development."
+        }
+    },
+    {
+        "id":"44d57125-c535-46fc-8d6b-f8640a45269d",
+        "testbed_data":{
+            "correct_index":1
+        },
+        "gpt_output":{
+            "is_answer_correct":"no",
+            "cop_index":"0",
+            "correct answer":"C1 inhibitor.",
+            "why_correct":[
+                "The key concepts in this question and context relate to the regulation and function of the complement system.",
+                "\"The C1 inhibitor is a regulatory protein that inhibits the activation of the classical pathway of the complement system.\"",
+                "This indicates that C1 inhibitor is crucial for regulating the complement system, making it the correct choice."
+            ],
+            "why_others_incorrect":"C5a is an anaphylatoxin and not a regulatory protein, while C3b is a complement component involved in opsonization and C3 convertase activation. Factor B is also a complement component involved in the alternative pathway."
+        }
+    },
+    {
+        "id":"94bb3af6-7ce1-4223-8e8f-22095b43aeb4",
+        "testbed_data":{
+            "correct_index":3
+        },
+        "gpt_output":{
+            "is_answer_correct":"yes",
+            "cop_index":"0",
+            "correct answer":"Be on antibiotic treatment at that time.",
+            "why_correct":[
+                "The key concepts in this question revolve around vaccine administration and contraindications.",
+                "According to the context, 'It is generally recommended to administer vaccinations when the patient is not on antibiotics.' This statement emphasizes the importance of avoiding antibiotics before vaccination.",
+                "Considering the information above, being on antibiotic treatment at the time of vaccination would indeed be a contraindication. Thus, option 0 correctly reflects this understanding."
+            ],
+            "why_others_incorrect":"Options 1 and 2 are not correct as they describe situations where vaccines can typically be administered without issues. Option 3 is also incorrect since decompensated cardiopathies do not directly relate to contraindications for vaccination."
+        }
+    },
+    {
+        "id":"5c5b7ba4-0d34-4f69-9f2d-5e70fe584bee",
+        "testbed_data":{
+            "correct_index":0
+        },
+        "gpt_output":{
+            "is_answer_correct":"yes",
+            "cop_index":"1",
+            "correct answer":"Standing up from a sitting position",
+            "why_correct":[
+                "The key concepts in this question are the nature of the patients condition, the location and characteristics of the murmur, and the physiological effects of different positions on cardiac output.",
+                "\"A standing person tends to have a greater return of blood to the heart, whereas a recumbent individual has a decreased venous return due to gravity.\"",
+                "This information directly supports why changing position affects the intensity of the patient\u2019s systolic murmur, as a standing position results in increased blood flow to the heart, increasing the intensity of the murmur."
+            ],
+            "why_others_incorrect":"Squatting will reduce venous return and thereby decrease cardiac output which reduces murmur intensity. Diuretics increase venous return but do not change murmur intensity as they primarily affect fluid volume rather than blood flow to the heart, and volume depletion would similarly decrease venous return and therefore murmur intensity."
+        }
+    },
+    {
+        "id":"727319d7-40bf-4b3d-b2e5-c7434f1d31ea",
+        "testbed_data":{
+            "correct_index":0
+        },
+        "gpt_output":{
+            "is_answer_correct":"yes",
+            "cop_index":"1",
+            "correct answer":"Professionals of Social Work, Medicine and Nursing",
+            "why_correct":[
+                "The key concepts in the question and context are the agents involved in a community participation process.",
+                "The context states: 'Agents that have been most frequently used to implement these programs include professionals from social work, medicine, and nursing.' This explicitly lists professionals from these fields as the primary agents of community participation.",
+                "Based on the provided context, which directly identifies professionals from social work, medicine, and nursing as the key agents of community participation, this is the correct answer."
+            ],
+            "why_others_incorrect":"Options 0, 2, and 3 do not accurately represent the primary agents involved in a community participation process according to the context."
+        }
+    },
+    {
+        "id":"90e032ad-9f30-4561-93ff-0a7fc2ecb225",
+        "testbed_data":{
+            "correct_index":0
+        },
+        "gpt_output":{
+            "is_answer_correct":"no",
+            "cop_index":"3",
+            "correct answer":"Warm climate",
+            "why_correct":[
+                "The question and context focus on the condition being asked about: Vasoconstriction in skin.",
+                "The context states: 'Vasoconstriction, or vaso-occlusion, is a temporary narrowing of blood vessels which can occur due to cold temperatures.'",
+                "This indicates that vasoconstriction can be induced by environmental factors such as temperature, specifically warm climates, rather than neural pathways like the sympathetic nervous system."
+            ],
+            "why_others_incorrect":"Vasoconstriction in skin is not caused by Sympathetic (option 0) or Parasympathetic (option 1) nerve stimulation. Wheal and flare (option 2) refers to a type of allergic reaction, unrelated to the topic of vasoconstriction in the skin."
+        }
+    },
+    {
+        "id":"7e6f8e07-aa44-4d66-9b0f-63242898274b",
+        "testbed_data":{
+            "correct_index":2
+        },
+        "gpt_output":{
+            "is_answer_correct":"yes",
+            "cop_index":"0",
+            "correct answer":"CH group 0 positive and PFC AB positive.",
+            "why_correct":[
+                "The key concepts in the question are blood transfusion safety, the importance of matching blood groups during emergency transfusions, and the role of compatibility testing for fresh frozen plasma (FFP) and packed red blood cells (PRBCs).",
+                "The context emphasizes the need for urgent transfusions in emergency situations without access to a patients complete blood type information.",
+                "In such scenarios, the American Association of Blood Banks (AABB) recommends using Group 0 (universal donor) PRBCs to avoid ABO incompatibility reactions. Additionally, AABB guidelines recommend that FFP be given from either Group O negative or AB positive donors to minimize alloimmune hemolytic transfusion reactions.",
+                "Given these recommendations, the correct answer is to use CH group 0 positive and PFC AB positive to ensure compatibility and prevent a possible transfusion reaction."
+            ],
+            "why_others_incorrect":"Options 1, 2, and 3 are incorrect because they either do not follow AABB guidelines for compatibility testing or introduce additional risks of ABO incompatibility reactions. CH group 0 negative PRBCs would pose a risk to patients with Type A blood; CH group O negative PRBCs would be more compatible but would still carry some risks due to the presence of human leukocyte antigens (HLA) and other immunoglobulins that could trigger an immune response in recipients. CH group 0 positive PRBCs are safe, but PFC should not be given from a donor with a different blood type than the recipients."
+        }
+    },
+    {
+        "id":"81803f56-39e9-4b20-97af-9a02f85deda4",
+        "testbed_data":{
+            "correct_index":0
+        },
+        "gpt_output":{
+            "is_answer_correct":"no",
+            "cop_index":"3",
+            "correct answer":"None of the above",
+            "why_correct":[
+                "The core concept is the mechanism by which gene expression can be altered without changing the DNA sequence.",
+                "Epigenetics refers to changes in gene expression that do not involve changes to the underlying DNA sequence, such as methylation and acetylation. This process affects how genes are turned on or off without altering the genetic code itself.",
+                "However, translocation, inversion, and transduction refer to different processes that involve changes to the DNA sequence. Translocation involves moving a part of the chromosome from one location to another, inversion involves reversing the order of DNA segments, and transduction involves exchanging genes between bacteria through a viral vector."
+            ],
+            "why_others_incorrect":"Options '0', '1', and '2' are incorrect because they refer to epigenetic mechanisms, which involve changes in gene expression without altering the DNA sequence. Option '3' is also incorrect as it refers to transduction, which involves changes to the DNA sequence."
+        }
+    },
+    {
+        "id":"d77080c1-a777-486f-a470-239ed1e2940a",
+        "testbed_data":{
+            "correct_index":1
+        },
+        "gpt_output":{
+            "is_answer_correct":"yes",
+            "cop_index":"3",
+            "correct answer":"Reverse transcription of viral RNA",
+            "why_correct":[
+                "The key concepts in the question and context are related to antiretroviral therapy, HIV treatment, side effects, and the specific process targeted by the drug.",
+                "\"The experimental treatment inhibits the maturation of new HIV virions.\" This implies that the drug is acting at a stage where viral replication occurs, specifically focusing on a step in the viral life cycle.",
+                "Given that impaired glucose tolerance is a known side effect, it can be inferred that the drug affects metabolism, and since this occurs with antiretroviral drugs targeting reverse transcription, the most likely process targeted by the drug is indeed reverse transcription of viral RNA. This connection supports the idea that the drug acts at this step in the viral life cycle."
+            ],
+            "why_others_incorrect":"Options 0, 1, and 2 can be eliminated as they are not directly related to antiretroviral therapy mechanisms. Viral entry into host cells (option 0) is an initial stage where the virus interacts with the cell surface receptors, viral polypeptide cleavage (option 1) occurs during protein synthesis post-entry, and viral budding from host cells (option 2) happens after reverse transcription. Since the drug in question inhibits maturation and has metabolic side effects associated with it, targeting reverse transcription of viral RNA is most likely."
+        }
+    },
+    {
+        "id":"ba3fd3bb-7ae6-433b-937e-723f1bc38088",
+        "testbed_data":{
+            "correct_index":0
+        },
+        "gpt_output":{
+            "is_answer_correct":"yes",
+            "cop_index":"1",
+            "correct answer":"Determine hepatitis B e antigen serum level",
+            "why_correct":[
+                "The key concepts in this question involve understanding the patients serological markers for hepatitis B and determining the appropriate next step in management.",
+                "\"Although the patient is positive for anti-hepatitis B surface antibody, which indicates immunity to hepatitis B infection, the presence of hepatitis B e antigen (HBeAg) would indicate active viral replication and higher risk of transmission.\"",
+                "Given that the patient has a history of potential exposure to hepatitis B due to her emigration from China and lack of recalled vaccinations, determining HBeAg levels is crucial in assessing the risk of transmission and guiding appropriate management."
+            ],
+            "why_others_incorrect":"Options 0, 2, and 3 are not supported by the context as the most appropriate next steps. Planning a normal vaginal delivery at term (option 0) may pose risks to the fetus if HBeAg is positive. Administering hepatitis B vaccine to mother (option 2) would be unnecessary given her likely immunity from past vaccination or infection. Performing liver biopsy on the mother (option 3) is not indicated without further evidence of liver disease."
+        }
+    },
+    {
+        "id":"932f2bf9-05a6-4ad2-a35c-05b12c2dd16a",
+        "testbed_data":{
+            "correct_index":1
+        },
+        "gpt_output":{
+            "is_answer_correct":"yes",
+            "cop_index":"0",
+            "answer":"Before the ion exchange separation column",
+            "why_correct":[
+                "The key concept is understanding the general arrangement and function of components within an ion chromatography system.",
+                "\"The suppressor column is placed between the ion exchange column and the detector.\"",
+                "Based on this information, its clear that the suppression step happens before the ion exchange separation, making option 0 the correct placement."
+            ],
+            "why_others_incorrect":"Options 1, 2, and 3 are incorrect because they describe locations for the suppressor column after the ion exchange separation or elsewhere in the system, rather than before it."
+        }
+    },
+    {
+        "id":"b429bdb8-9dfb-4265-bdd2-c5465a604732",
+        "testbed_data":{
+            "correct_index":1
+        },
+        "gpt_output":{
+            "is_answer_correct":"no",
+            "cop_index":"1",
+            "correct answer":"Streptococcus pyogenes",
+            "why_correct":[
+                "The key concept in the question is the causative agent of rheumatic fever.",
+                "\"Rheumatic fever is usually caused by an autoimmune reaction to a bacterial infection, typically by Streptococcus pyogenes (Group A streptococcus).\"",
+                "Therefore, based on this context, it can be concluded that Strepococcus pyogenes is the correct answer."
+            ],
+            "why_others_incorrect":"Nocardia brasiliensis, Staphylococcus epidermidis and Enterococcus faecium are not commonly associated with rheumatic fever. Streptococcus pyogenes is well-documented as a primary cause of this condition."
+        }
+    },
+    {
+        "id":"ba6e6daa-4a30-405e-90e9-b699f1f9a1b3",
+        "testbed_data":{
+            "correct_index":3
+        },
+        "gpt_output":{
+            "is_answer_correct":"no",
+            "cop_index":"2",
+            "answer":"The cornerstone in the treatment of paracetamol poisoning is its specific antidote, N-acetylcysteine.",
+            "why_correct":[
+                "The key concepts in the question and context are the management strategies for acute paracetamol poisoning.",
+                "According to the European Association for Poisons Centre (EAPC) guidelines, 'the cornerstone of treatment is prompt administration of activated charcoal if the patient presents within 4 hours of ingestion.' This recommendation implies that N-acetylcysteine is not the first-line treatment.",
+                "The context explicitly states that gastrointestinal decontamination by activated charcoal is indicated as a therapeutic measure in acute paracetamol poisoning, which makes option '2' incorrect."
+            ],
+            "why_others_incorrect":"Option '0' incorrectly states that hepatotoxicity is the predominant symptomatology in paracetamol poisonings. Option '1' incorrectly suggests that N-acetylcysteine is not indicated as a treatment for paracetamol poisoning, which contradicts the established guidelines."
+        }
+    },
+    {
+        "id":"8ed06a03-f298-49c4-a598-f2a07064607d",
+        "testbed_data":{
+            "correct_index":0
+        },
+        "gpt_output":{
+            "is_answer_correct":"yes",
+            "cop_index":"3",
+            "correct answer":"More chances of syncope during dental extractions",
+            "why_correct":[
+                "The key concepts in the question and context relate to syndrome X, also known as coronary artery disease variant or microvascular angina.",
+                "The context states: 'A hallmark feature of Syndrome X is its tendency for symptomatic episodes triggered by stress or emotional stimuli, such as during dental extractions.'",
+                "Based on this information, it can be concluded that one of the defining characteristics of syndrome X is indeed an increased likelihood of experiencing syncope (fainting) during certain activities, such as dental extractions."
+            ],
+            "why_others_incorrect":"The other options are not correct because: \n  Prediabetes and prehypertension are risk factors for cardiovascular disease but not specific characteristics of syndrome X. X chromosome mutation is related to other conditions, not syndrome X."
+        }
+    },
+    {
+        "id":"6a887ee1-4f37-4639-b88f-2aeff8fe6f3a",
+        "testbed_data":{
+            "correct_index":3
+        },
+        "gpt_output":{
+            "is_answer_correct":"yes",
+            "cop_index":"0",
+            "correct answer":"0.5 hours",
+            "why_correct":[
+                "The key concept in the question and context is the definition of secondary arrest of dilatation.",
+                "The context states: 'Secondary arrest of dilatation occurs when there has been no progress on effacement or dilation for a certain amount of time, usually 0.5 hours.'",
+                "Based on this definition, which directly links the duration of 'no progress' to '0.5 hours', this is the correct answer."
+            ],
+            "why_others_incorrect":"The other options (1 hour, 1.5 hours, and 2 hours) are not supported by the context as defining durations for secondary arrest of dilatation."
+        }
+    },
+    {
+        "id":"916a773f-b95f-4efe-b74b-c50cacac6fe8",
+        "testbed_data":{
+            "correct_index":1
+        },
+        "gpt_output":{
+            "is_answer_correct":"yes",
+            "cop_index":"0",
+            "correct answer":"1 mm",
+            "why_correct":[
+                "The key concepts in this question are related to endodontic treatments, particularly root end fillings using MTA (Mineral Trioxide Aggregate).",
+                "\"The ideal depth of the material should be sufficient to cover the entire root surface but not so thick that it interferes with healing or causes tissue irritation.\"",
+                "Given the emphasis on both covering the root surface and avoiding interference with healing, a depth of 1 mm is most appropriate as it strikes a balance between these two considerations."
+            ],
+            "why_others_incorrect":"Options greater than 1 mm (3 mm, 5 mm, 7 mm) may lead to unnecessary bulk or interfere with the natural healing process, while options less than 1 mm (0 mm) might not adequately cover the root surface."
+        }
+    },
+    {
+        "id":"bd0042c5-09f8-4ee1-84bc-ebbd6626bbf8",
+        "testbed_data":{
+            "correct_index":0
+        },
+        "gpt_output":{
+            "is_answer_correct":"yes",
+            "cop_index":"3",
+            "correct answer":"Intravenous ultrasound",
+            "why_correct":[
+                "The key concepts in this scenario and context are the sudden onset of chest pain, unequal blood pressure readings, absent pulses in one leg, and a widened mediastinum on the chest X-ray. These signs strongly suggest a diagnosis of an aortic dissection.",
+                "In patients with suspected aortic dissection, imaging is essential to confirm or rule out this condition.",
+                "Given these clinical findings, the next best step is to conduct an intravenous ultrasound (also known as a TEE - Transesophageal Echocardiogram), which can help confirm the diagnosis and guide further management, such as surgical intervention if necessary."
+            ],
+            "why_others_incorrect":"Options CT scan, Surgery, and Intravenous ultrasound do not directly address the urgent need to confirm an aortic dissection diagnosis. While a CT scan may be useful in some cases of suspected thoracic emergencies, it is not the preferred next step here due to its lower sensitivity for this condition compared to TEE. Options 1 (Surgery) and 3 (Intravenous ultrasound) are often performed after TEE has been conducted to guide further management, making option 0 (CT scan) the less appropriate choice in this scenario."
+        }
+    },
+    {
+        "id":"b91ebfe5-092d-492a-90da-30165339d1c2",
+        "testbed_data":{
+            "correct_index":2
+        },
+        "gpt_output":{
+            "is_answer_correct":"yes",
+            "cop_index":"1",
+            "correct answer":"Chemical bond to tooth structure",
+            "why_correct":[
+                "The question and context focus on the common characteristics between zinc eugenol cement and polycarboxylate cement.",
+                "The context states: 'Both zinc eugenol cement and polycarboxylate cement exhibit a chemical bond to tooth structure.' This highlights their shared property as a key concept in the question and context."
+            ],
+            "why_others_incorrect":"Polyacrylic acid is liquid only in polycarboxylate cement, not in zinc eugenol cement. Option 3 refers to a modification made to increase strength of cement which is specific to zinc eugenol cement, not a common trait to both."
+        }
+    },
+    {
+        "id":"90d188c8-ccf4-43b8-92b0-110d3e368c7c",
+        "testbed_data":{
+            "correct_index":1
+        },
+        "gpt_output":{
+            "is_answer_correct":"yes",
+            "cop_index":"3",
+            "correct answer":"Quinine sulfate orally",
+            "why_correct":[
+                "The key concepts in the question and context are the clinical presentation, travel history, laboratory findings, and treatment options for Plasmodium falciparum malaria.",
+                "\"Given the high parasitemia level of 6% and severe symptoms such as fever above 39\u00baC and deterioration in consciousness, this patient is at risk of cerebral malaria. The Centers for Disease Control and Prevention (CDC) recommends quinine sulfate as an alternative treatment option when artesunate is not available.",
+                "The CDC guidelines also state that 'quinine should be administered at a dose rate of 0.5 mg\/kg IV every 8 hours or 40 mg orally every 12 hours' for the treatment of malaria. Based on this information, quinine sulfate orally would be an appropriate choice for this patient."
+            ],
+            "why_others_incorrect":"The other options are not correct because artesunate is typically recommended as the first-line treatment for severe malaria due to its efficacy and rapid action. Mefloquine by mouth is also effective but may not be suitable for severe cases or those with contraindications. Doxycycline orally is not commonly used for the treatment of P. falciparum malaria."
+        }
+    },
+    {
+        "id":"891d6697-0743-44c7-84b5-72922e8eb293",
+        "testbed_data":{
+            "correct_index":3
+        },
+        "gpt_output":{
+            "is_answer_correct":"yes",
+            "cop_index":"1",
+            "correct answer":"Carcinoids are more common in the duodenum and jejunum",
+            "why_correct":[
+                "The key concepts in the question and context relate to the classification, types, and locations of small intestinal tumors.",
+                "The context states: 'Carcinoid tumors are most commonly found in the small intestine.' Furthermore, it mentions that these tumors 'are more prevalent in the duodenum and jejunum.'",
+                "Based on the provided context, which explicitly links the prevalence of carcinoid tumors to the duodenum and jejunum, this is the correct statement about small intestinal tumors."
+            ],
+            "why_others_incorrect":"Option 0 incorrectly states that lymphomas are the most common small intestinal tumors, whereas option 2 inaccurately suggests that adenomatous polyps are more common in the terminal ileum. Option 3 misrepresents the relationship between small bowel tumors and colorectal cancer."
+        }
+    },
+    {
+        "id":"f761d49f-0c4d-4d3f-9781-1d70cd50815d",
+        "testbed_data":{
+            "correct_index":0
+        },
+        "gpt_output":{
+            "is_answer_correct":"yes",
+            "cop_index":"2",
+            "correct answer":"Early diagnosis and prompt treatment",
+            "why_correct":[
+                "The key concepts in the question and context are the definition and purpose of pulpotomy.",
+                "The context states: 'Pulpotomy involves removing infected or damaged pulp tissue from a tooth, primarily for reasons related to preventing further infection.' It also notes that this procedure 'allows for the preservation of vital tooth structure and minimizes the need for root canal therapy.',\n    ",
+                "Based on the provided context, which explicitly links pulpotomy to the goals of early diagnosis and prompt treatment, this is the correct choice for the described dental procedure."
+            ],
+            "why_others_incorrect":"The other options do not accurately describe the purpose or scope of pulpotomy. Disability limitation and rehabilitation are more related to the end stages of tooth loss, while specific protection refers to measures taken to prevent decay in teeth with caries progression but do not encompass the full intent behind pulpotomy."
+        }
+    },
+    {
+        "id":"bab30ed4-632c-40ca-ba1e-38d7be129e1d",
+        "testbed_data":{
+            "correct_index":1
+        },
+        "gpt_output":{
+            "is_answer_correct":"yes",
+            "cop_index":"3",
+            "correct answer":"6 molecules of acetyl-CoA and 1 molecule of succinyl-CoA",
+            "why_correct":[
+                "The key concepts in the question and context are beta-oxidation, fatty acid degradation, and the end products of this process.",
+                "\"The degradation of fatty acids produces acetyl-CoA, which can then enter the citric acid cycle to produce energy. The \u03b2-oxidation process results in the production of 6 molecules of acetyl-CoA per molecule of fatty acid degraded, plus one molecule of succinyl-CoA as a byproduct.\"",
+                "The context supports this explanation and confirms that 17:0 yields 6 molecules of acetyl-CoA and 1 molecule of succinyl-CoA upon degradation."
+            ],
+            "why_others_incorrect":"Options 0, 1, and 2 incorrectly describe the products of beta-oxidation. Option 0 suggests an incomplete breakdown, while options 1 and 2 misrepresent the end product succinyl-CoA."
+        }
+    },
+    {
+        "id":"697ca540-2ac4-4b74-a20c-1de5ae736356",
+        "testbed_data":{
+            "correct_index":0
+        },
+        "gpt_output":{
+            "is_answer_correct":"yes",
+            "cop_index":"1",
+            "answer":"Histamine release",
+            "why_correct":[
+                "The key concepts in the question and context are the patients symptoms, recent occupation, and initiation of therapy with a drug that binds ergosterol.",
+                "\"The patient is treated with Amphotericin B, which is an antifungal medication that works by binding to ergosterol.\"",
+                "Amphotericin B can cause histamine release as part of its mechanism of action, leading to symptoms such as flushing and hypotension."
+            ],
+            "why_others_incorrect":"Options 0 (Hypomagnesemia) and 2 (Leukopenia) are not directly related to Amphotericin Bs side effect profile. Option 3 (Cytochrome P450 induction) is incorrect as Amphotericin B actually inhibits Cytochrome P450."
+        }
+    },
+    {
+        "id":"e22b3196-a0a9-4746-8f17-f4f32774baba",
+        "testbed_data":{
+            "correct_index":1
+        },
+        "gpt_output":{
+            "is_answer_correct":"yes",
+            "cop_index":"3",
+            "correct answer":"Defect in BTK gene",
+            "why_correct":[
+                "The key concepts in the question and context are the symptoms of failure to gain weight, chronic diarrhea, recurrent infections, absent thymic shadow, and absence of germinal centers on lymph node biopsy.",
+                "The context states: 'X-linked lymphoproliferative disease (XLP) is caused by mutations in the gene that encodes the Brutons tyrosine kinase (BTK), leading to a deficiency in B-cell receptor signaling.'",
+                "Based on the clinical presentation and histopathological findings, the most likely cause of this patients symptoms is indeed XLP, which is associated with a defect in the BTK gene."
+            ],
+            "why_others_incorrect":"Options 0 (Defect in ATM gene), 1 (Adenosine deaminase deficiency), and 2 (NADPH oxidase deficiency) are not directly linked to the symptoms described. Defect in ATM gene is associated with Ataxia-Telangiectasia, adenosine deaminase deficiency is associated with Severe Combined Immunodeficiency (SCID), and NADPH oxidase deficiency is associated with Chronic Granulomatous Disease."
+        }
+    },
+    {
+        "id":"76739184-3a2e-42a8-a9a2-469b9472fd66",
+        "testbed_data":{
+            "correct_index":1
+        },
+        "gpt_output":{
+            "is_answer_correct":"yes",
+            "cop_index":"0",
+            "correct answer":"They are known as Grignard reactions",
+            "why_correct":[
+                "The key concepts in the question and context revolve around the process of adding enolate anions to \u03b1, \u03b2-unsaturated carbonyl compounds.",
+                "\"Grignard reactions\" is a term used to describe this specific type of addition reaction involving enolates and unsaturated carbonyls.",
+                "This terminology is accurately described in the context provided as a characteristic feature of Grignard additions to \u03b1,\u03b2-unsaturated carbonyl compounds."
+            ],
+            "why_others_incorrect":[
+                "\"The reaction products are 1,5-dicarbonyl compounds\" is incorrect as Grignard reactions generally produce \u03b2-hydroxy carbonyl compounds, not necessarily 1,5-dicarbonyls.",
+                "The term \"\"enolate that participates in this reaction is known as an acceptor\"\" does not accurately describe the role of enolates during a Grignard reaction. In reality, the enolate is the nucleophile.",
+                "\"In these reactions \u03b3-ketoesters are obtained\"' might be true for specific instances but isn\"t an overarching characteristic used to classify Grignard additions."
+            ]
+        }
+    },
+    {
+        "id":"9ea19fd3-ce8f-4558-b422-dfc417f4190e",
+        "testbed_data":{
+            "correct_index":0
+        },
+        "gpt_output":{
+            "is_answer_correct":"yes",
+            "cop_index":"2",
+            "correct answer":"Belongs to Herpes family",
+            "why_correct":[
+                "The key concept in this question relates to identifying the type of lesion presented and its most likely cause.",
+                "\"A lesion on the genital region, particularly in a young adult with a history of commercial sex work, is highly suggestive of an sexually transmitted infection (STI).\"",
+                "\"Herpes Simplex Virus (HSV) is one of the primary causes of genital herpes, a common STI that presents with painful ulcers or lesions.\""
+            ],
+            "why_others_incorrect":"Intracytoplasmic vacuolations are associated with certain viral infections like HIV, but they do not specifically match the clinical presentation here. Multinucleated giant cells are seen in other types of viral infections such as varicella-zoster virus and cytomegalovirus infections. The 'Its a RNA virus' statement is too vague to accurately identify the specific family to which this lesion belongs."
+        }
+    },
+    {
+        "id":"3d9afc01-2e27-492f-be4c-927904d76158",
+        "testbed_data":{
+            "correct_index":1
+        },
+        "gpt_output":{
+            "is_answer_correct":"yes",
+            "cop_index":"0",
+            "answer":"Covalently X-links DNA",
+            "why_correct":[
+                "The question and context focus on identifying the mechanism of action of a chemotherapy agent responsible for causing neuropathy in a patient with acute lymphocytic leukemia.",
+                "\"Given that one of his chemotherapy agents likely caused his neuropathy given its strong association with neurotoxicity,\" suggests a direct link between the drug and the adverse effect.",
+                "The key to this question is understanding how different chemotherapeutic agents work, particularly those known for their neurotoxic effects. Vincristine is notorious for causing peripheral neuropathy due to its mechanism of action."
+            ],
+            "why_others_incorrect":"Options 1 and 2 describe mechanisms of microtubule disruption by drugs like taxanes or vinca alkaloids, not vincristine. Option 3 inaccurately describes the mechanism of action of certain chemotherapeutic agents such as dexamethasone."
+        }
+    },
+    {
+        "id":"d1628e8e-adfb-4690-85ec-d35656d71f89",
+        "testbed_data":{
+            "correct_index":0
+        },
+        "gpt_output":{
+            "is_answer_correct":"yes",
+            "cop_index":"2",
+            "correct answer":"DCC",
+            "why_correct":[
+                "The key concepts in this question and context involve genetic mutations, family history, cancer type, and tumor characteristics.",
+                "The context notes that the patients younger sister was diagnosed with endometrial cancer, and his mother was diagnosed with gastric cancer at a young age, suggesting an inherited component to their cancers.",
+                "Given that the patient has a mucinous, poorly-differentiated adenocarcinoma of the ascending colon, the DCC gene mutation is most likely responsible for this condition, as it is associated with familial adenomatous polyposis (FAP) and other types of colon cancer."
+            ],
+            "why_others_incorrect":"MLH1 mutations are primarily associated with hereditary nonpolyposis colorectal cancer (HNPCC), TP53 mutations are often related to Li-Fraumeni syndrome, and KRAS mutations can be found in various types of cancers but are not as strongly linked to familial colon cancer as DCC."
+        }
+    },
+    {
+        "id":"b9cf8cf5-7f8c-45cc-8af7-70047800d98d",
+        "testbed_data":{
+            "correct_index":0
+        },
+        "gpt_output":{
+            "is_answer_correct":"yes",
+            "cop_index":"2",
+            "correct answer":"Ankylosis spondylitis",
+            "why_correct":[
+                "The key concepts in the question and context are the relationship between Rubella infection and its cardiovascular effects.",
+                "The context states: 'Congenital rubella syndrome can cause various congenital abnormalities, including ankylosis spondylitis.' This explicitly links ankylosis spondylitis to Congenital Rubella Syndrome (CRS) in the context of cardiovascular defects.",
+                "Based on the provided context, which directly mentions 'congenital rubella syndrome' and its association with ankylosis spondylitis, this is the most characteristic cardiovascular defect seen in Rubella infection."
+            ],
+            "why_others_incorrect":"Pulmonary artery stenosis and coarctation of the aorta are also possible congenital defects associated with CRS but not as specifically characterized. Rheumatic fever is unrelated to Rubella and is an immune response to group A Streptococcus, which causes acute rheumatic fever."
+        }
+    },
+    {
+        "id":"d6ad578d-c353-43b3-b298-3138781321be",
+        "testbed_data":{
+            "correct_index":1
+        },
+        "gpt_output":{
+            "is_answer_correct":"yes",
+            "cop_index":"2",
+            "correct answer":"2\/3",
+            "why_correct":[
+                "The key concepts in this question are the inheritance pattern of sickle cell disease, the genetic testing results, and the desired outcome.",
+                "\"Both individuals have a copy of the sickle cell gene from their parents but have never manifested symptoms. This suggests they are both heterozygous for the HbS allele, meaning they carry one normal (HbA) gene and one sickle cell (HbS) gene.\"",
+                "Given this genetic information, we can predict the possible genotypes of their offspring using a Punnett square or genetic counseling. The offspring will have a 2\/3 chance of being homozygous recessive (ss), meaning they do not carry the HbS allele and are therefore sickle cell anemia-free."
+            ],
+            "why_others_incorrect":"Option 0 is incorrect because if both parents were heterozygous, there would be a 50% chance of the child being homozygous recessive (ss), not 1\/2. Option 1 is incorrect because it suggests a higher probability than what can be predicted from their genotype. Option 3 is incorrect because it implies a 100% chance, which is impossible given the inheritance pattern."
+        }
+    },
+    {
+        "id":"6ae146dc-8e54-4b30-a817-b57d0e52d82a",
+        "testbed_data":{
+            "correct_index":2
+        },
+        "gpt_output":{
+            "is_answer_correct":"yes",
+            "cop_index":"0",
+            "correct answer":"Activation of the antithrombin enzyme",
+            "why_correct":[
+                "The key concepts in this question and context are the patients symptoms, laboratory results, and the mechanism of action of anticoagulant medications.",
+                "The new medication prescribed to this patient is warfarin, which is a vitamin K antagonist that inhibits the production of vitamin K-dependent clotting factors.",
+                "Warfarin exerts its effects by activating the antithrombin enzyme, which in turn inhibits the production of these clotting factors. This results in an increase in blood clotting time and a decrease in the risk of thrombosis."
+            ],
+            "why_others_incorrect":"The other options do not accurately describe how warfarin exerts its effects. The cyclooxygenase enzyme is inhibited by nonsteroidal anti-inflammatory drugs (NSAIDs), not anticoagulants like warfarin. Inhibition of vitamin K-dependent clotting factors is the mechanism of action for warfarin, but this option is too broad and does not specifically mention activation of antithrombin. Blockage of glycoprotein IIb\/IIIa receptors is a mechanism of action for antiplatelet drugs, not anticoagulants like warfarin."
+        }
+    },
+    {
+        "id":"7df243da-c770-424a-b235-04f6692b5144",
+        "testbed_data":{
+            "correct_index":1
+        },
+        "gpt_output":{
+            "is_answer_correct":"no",
+            "cop_index":"3",
+            "correct answer":"Common carotid aery",
+            "why_correct":[
+                "The key concepts in the question and context are related to the blood supply of the pharyngeal arches.",
+                "\"The common carotid arteries arise from the brachiocephalic trunk on the right side and the proximal part of the aortic arch on the left side, supplying the head, neck, and upper limb.\"",
+                "Based on the context, which specifically states that 'the 2nd pharyngeal arch' is supplied by the common carotid artery, this is not the correct answer. The question asks for the artery of the 2nd pharyngeal arch, but the provided text does not identify any specific artery directly associated with it."
+            ],
+            "why_others_incorrect":"The maxillary artery is related to the first pharyngeal arch and does not supply the second arch. The stapedial artery is present in early development but is thought to atrophy during embryonic life. The subclavian artery supplies structures of the upper limb and does not have a direct connection to the 2nd pharyngeal arch."
+        }
+    },
+    {
+        "id":"992fe411-d70c-41c4-9655-e0d4b0cb7684",
+        "testbed_data":{
+            "correct_index":2
+        },
+        "gpt_output":{
+            "is_answer_correct":"yes",
+            "cop_index":"1",
+            "correct answer":"10 years",
+            "why_correct":[
+                "The key concepts in this question relate to estimating dental age from radiographs.",
+                "\"Dental age refers to the developmental stage of teeth, which can be estimated through radiographic examination.\"",
+                "Based on this definition and considering the context of typical radiographic findings associated with a 10-year-old, this is the correct choice."
+            ],
+            "why_others_incorrect":"The other options are not supported by standard dental age estimation methods. Typically, the developmental stages seen at 5 years, 15 years, or 25 years on a radiograph do not align with common radiographic findings for these ages."
+        }
+    },
+    {
+        "id":"c14079ad-ea42-4dff-aa59-26623f29aa21",
+        "testbed_data":{
+            "correct_index":1
+        },
+        "gpt_output":{
+            "is_answer_correct":"yes",
+            "cop_index":"2",
+            "correct answer":"Telangiectasia macularis eruptiva perstans",
+            "why_correct":[
+                "The key concepts in this question relate to cutaneous mastocytosis and its various manifestations.",
+                "\"Cutaneous mastocytosis encompasses a spectrum of skin manifestations that reflect the degree of mast cell proliferation, ranging from solitary mastocytomas to more diffuse forms. Among these, telangiectasia macularis eruptiva perstans (TMEPP) is notably common and represents an aggressive variant of cutaneous mastocytosis.\"",
+                "Given this information, its clear that TMEPP is indeed the most common type of cutaneous mastocytosis, making option 2 the correct answer."
+            ],
+            "why_others_incorrect":"While solitary mastocytoma (option 0) and urticaria pigmentosa (option 1) are also associated with cutaneous mastocytosis, they do not represent the most common variant. Diffuse erythrodermic (option 3) is a more severe manifestation of cutaneous mastocytosis but is less frequent than TMEPP."
+        }
+    }
+]
