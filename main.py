@@ -123,31 +123,6 @@ def load_prompt_assets(task_name, prompt_id, max_shots, library_dir="prompt_libr
     logging.info(f"Loaded {len(assets['shots'])} shots for '{task_name}' (max_shots: {max_shots}).")
     return assets
 
-# def run_prediction_for_model(args, model_name, generator):
-#     for task_name in args.tasks:
-#         output_filename = f"{task_name}_predictions_prompt_{args.prompt_id}_model_{model_name}.csv"
-#         output_path = os.path.join(args.predictions_dir, output_filename)
-#         if os.path.exists(output_path) and not args.force_rerun:
-#             logging.info(f"Skipping task '{task_name}' for model '{model_name}', file exists.")
-#             continue
-#         input_csv = os.path.join(args.data_dir, f"{task_name}.csv")
-#         df = pd.read_csv(input_csv)
-#         prompt_assets = load_prompt_assets(TASK_TO_PROMPT_MAP[task_name], args.prompt_id, args.max_shots)
-#         predictions = []
-
-#         progress_bar = tqdm(df.iterrows(), total=len(df), desc=f"Predicting for {task_name} with {model_name}", file=sys.stderr)
-        
-#         for _, row in progress_bar:
-#         #for _, row in tqdm(df.iterrows(), total=len(df), desc=f"Predicting for {task_name} with {model_name}"):
-#             try:
-#                 options = ast.literal_eval(row['options'])
-#                 output = generator.predict(row['question'], options, prompt_assets, task_name, args.no_rag)
-#                 predictions.append({'id': row['id'], 'output': str(output)})
-#             except Exception as e:
-#                 logging.error(f"Error on id {row['id']}: {e}")
-#                 predictions.append({'id': row['id'], 'output': "{}"})
-#         pd.DataFrame(predictions).to_csv(output_path, index=False, header=True)
-#         logging.info(f"Predictions saved to {output_path}")
 
 def run_json_conversion_stage(args):
     for model_name in args.models:
