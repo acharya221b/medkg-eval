@@ -40,10 +40,10 @@ TASK_TO_PROMPT_MAP = {
 }
 
 TASK_TO_INPUT_KEY_MAP = {
-    'IR_pmid2title': 'paper_title',
-    'IR_title2pubmedlink': 'paper_url',
+    'IR_pmid2title': 'PMID',
+    'IR_title2pubmedlink': 'Title',
     'IR_abstract2pubmedlink': 'Abstract',
-    'IR_pubmedlink2title': 'paper_title'
+    'IR_pubmedlink2title': 'url'
 }
 
 TASK_TO_OUTPUT_KEY_MAP = {
@@ -54,51 +54,6 @@ TASK_TO_OUTPUT_KEY_MAP = {
 }
 
 
-# async def run_prediction_for_model_async(args, model_name, generator): # Make it async
-#     for task_name in args.tasks:
-#         # ... (the file path and skip logic is the same) ...
-        
-#         input_csv = os.path.join(args.data_dir, f"{task_name}.csv")
-#         df = pd.read_csv(input_csv)
-#         prompt_assets = load_prompt_assets(TASK_TO_PROMPT_MAP[task_name], args.prompt_id, args.max_shots)
-        
-#         # --- ASYNC BATCHING LOGIC ---
-#         tasks = []
-#         for _, row in df.iterrows():
-#             # Create a task for each row. The tasks don't run yet.
-#             options = ast.literal_eval(row['options'])
-#             task = generator.predict(row['question'], options, prompt_assets, task_name, args.no_rag)
-#             tasks.append(task)
-
-#         # Now, run all tasks concurrently and show a progress bar
-#         predictions_outputs = await tqdm_asyncio.gather(*tasks)
-        
-#         # Process the results
-#         predictions = []
-#         for i, output in enumerate(predictions_outputs):
-#             row_id = df.iloc[i]['id']
-#             if output is None:
-#                 logging.error(f"Error on id {row_id}: Prediction returned None")
-#                 predictions.append({'id': row_id, 'output': "{}"})
-#             else:
-#                 predictions.append({'id': row_id, 'output': str(output)})
-        
-#         # Save the collected predictions
-#         pd.DataFrame(predictions).to_csv(output_path, index=False, header=True)
-#         logging.info(f"Predictions saved to {output_path}")
-
-# --- NEW: Helper function to manage concurrency for a single row ---
-# async def process_row(row, generator, prompt_assets, task_name, no_rag, semaphore):
-#     # This function waits for the semaphore before running the prediction
-#     async with semaphore:
-#         try:
-#             options = ast.literal_eval(row['options'])
-#             output_dict = await generator.predict(row['question'], options, prompt_assets, task_name, no_rag)
-#             return (row['id'], output_dict)
-#         except Exception as e:
-#             logging.error(f"Error on id {row['id']}: {e}")
-#             return (row['id'], None)
-
 def process_row_sync_for_debug(row, generator, prompt_assets, task_name, no_rag):
     # This function waits for the semaphore before running the prediction
     row_id = row.get('id', 'UNKNOWN_ID')
@@ -106,74 +61,32 @@ def process_row_sync_for_debug(row, generator, prompt_assets, task_name, no_rag)
         if task_name.startswith('IR_'):
             input_key = TASK_TO_INPUT_KEY_MAP[task_name]
             output_key = TASK_TO_OUTPUT_KEY_MAP[task_name]
-            
-            # The 'question' for IR tasks comes from a specific column
-            question_text = row[input_key]
+            question_text = str(row.get(input_key, ""))
 
-            input_key = input_key.lower()
-            output_key = output_key.lower()
-            # Call the generator's predict method for an IR task
             output_dict = generator.predict(
-                question=question_text, 
+                question=question_text,
                 prompt_assets=prompt_assets,
                 task_name=task_name,
                 no_rag=no_rag,
-                input_key=input_key,
-                output_key=output_key
+                input_key=input_key.lower(),
+                output_key=output_key.lower()
             )
         else:
-            key_name = TASK_TO_INPUT_KEY_MAP.get(task_name, None)
-            options = ast.literal_eval(row['options'])
-            #result_coroutine = generator.predict(row['question'], prompt_assets, task_name, no_rag, options=options)
-            output_dict = generator.predict(row['question'], prompt_assets, task_name, no_rag, options=options)
-        #output_dict = asyncio.run(result_coroutine)
-        return (row['id'], output_dict)
+            question_text = str(row.get('question', ""))
+            options_dict = ast.literal_eval(row.get('options', '{}'))
+            output_dict = generator.predict(
+                question=question_text,
+                options=options_dict,
+                prompt_assets=prompt_assets,
+                task_name=task_name,
+                no_rag=no_rag,
+            )
+            
+        return (row_id, output_dict)
     except Exception as e:
-        logging.error(f"Error on id {row['id']}: {e}")
+        logging.error(f"Error on id {row_id}: {e}", exc_info=True)
         return (row_id, None)
         
-# async def run_prediction_for_model_async(args, model_name, generator):
-#     for task_name in args.tasks:
-#         output_filename = f"{task_name}_predictions_prompt_{args.prompt_id}_model_{model_name}.csv"
-#         output_path = os.path.join(args.predictions_dir, output_filename)
-#         if os.path.exists(output_path) and not args.force_rerun:
-#             logging.info(f"Skipping task '{task_name}' for model '{model_name}', file exists.")
-#             continue
-
-#         input_csv = os.path.join(args.data_dir, f"{task_name}.csv")
-#         if not os.path.exists(input_csv):
-#             logging.warning(f"Input file not found, skipping task '{task_name}'. Path: {input_csv}")
-#             continue
-        
-#         df = pd.read_csv(input_csv)
-#         prompt_assets = load_prompt_assets(TASK_TO_PROMPT_MAP[task_name], args.prompt_id, args.max_shots)
-        
-#         semaphore = asyncio.Semaphore(10)
-        
-#         # --- CORRECTED LOGIC ---
-#         # A list comprehension is the most Pythonic and correct way to create a list of tasks.
-#         # Calling process_row(...) here doesn't run it; it creates the coroutine "plan".
-#         tasks = []
-#         for _, row in df.iterrows():
-#             task = process_row(row, generator, prompt_assets, task_name, args.no_rag, semaphore)
-#             tasks.append(task)
-        
-#         logging.info(f"Executing {len(tasks)} predictions for task '{task_name}' with concurrency limit...")
-        
-#         # `tqdm_asyncio.gather` takes all the "plans" and runs them concurrently.
-#         predictions_outputs = await tqdm_asyncio.gather(*tasks, desc=f"Predicting for {task_name} with {model_name}")
-        
-#         # Process the collected results
-#         predictions = []
-#         for row_id, output in predictions_outputs:
-#             if output is None:
-#                 predictions.append({'id': row_id, 'output': "{}"})
-#             else:
-#                 predictions.append({'id': row_id, 'output': json.dumps(output)})
-        
-#         pd.DataFrame(predictions).to_csv(output_path, index=False, header=True)
-#         logging.info(f"Predictions saved to {output_path}")
-
 def run_prediction_for_model_sync_for_debug(args, model_name, generator):
     for task_name in args.tasks:
         # ... (file path and loading logic is the same)
@@ -181,7 +94,8 @@ def run_prediction_for_model_sync_for_debug(args, model_name, generator):
         output_path = os.path.join(args.predictions_dir, output_filename)
         #...
         df = pd.read_csv(os.path.join(args.data_dir, f"{task_name}.csv"))
-        prompt_assets = load_prompt_assets(TASK_TO_PROMPT_MAP[task_name], args.prompt_id, args.max_shots)
+        library_dir = "prompt_library/IR_RAG" if task_name.startswith('IR_') and not args.no_rag else "prompt_library"
+        prompt_assets = load_prompt_assets(TASK_TO_PROMPT_MAP[task_name], args.prompt_id, args.max_shots, library_dir=library_dir)
 
         logging.info(f"--- RUNNING IN SYNC DEBUG MODE ---")
         predictions = []
@@ -194,6 +108,81 @@ def run_prediction_for_model_sync_for_debug(args, model_name, generator):
         # Save results at the end
         pd.DataFrame(predictions).to_csv(output_path, index=False, header=True)
         logging.info(f"Predictions saved to {output_path}")
+
+async def process_row(row, generator, prompt_assets, task_name, no_rag, semaphore):
+    # This function waits for the semaphore before running the prediction
+    async with semaphore:
+        try:
+            row_id = row.get('id', 'UNKNOWN_ID')
+            if task_name.startswith('IR_'):
+                input_key = TASK_TO_INPUT_KEY_MAP[task_name]
+                output_key = TASK_TO_OUTPUT_KEY_MAP[task_name]
+                question_text = str(row.get(input_key, ""))
+
+                output_dict = await generator.predict(
+                    question=question_text,
+                    prompt_assets=prompt_assets,
+                    task_name=task_name,
+                    no_rag=no_rag,
+                    input_key=input_key.lower(),
+                    output_key=output_key.lower()
+                )
+            else:
+                question_text = str(row.get('question', ""))
+                options_dict = ast.literal_eval(row.get('options', '{}'))
+                output_dict = await generator.predict(
+                    question=question_text,
+                    options=options_dict,
+                    prompt_assets=prompt_assets,
+                    task_name=task_name,
+                    no_rag=no_rag
+                )
+                
+            return (row_id, output_dict)
+        except Exception as e:
+            logging.error(f"Error on id {row_id}: {e}", exc_info=True)
+            return (row_id, None)
+        
+async def run_prediction_for_model_async(args, model_name, generator):
+    for task_name in args.tasks:
+        sanitized_model_name = model_name.replace('/', '_')
+        output_filename = f"{task_name}_predictions_prompt_{args.prompt_id}_model_{sanitized_model_name}.csv"
+        output_path = os.path.join(args.predictions_dir, output_filename)
+        #...
+        df = pd.read_csv(os.path.join(args.data_dir, f"{task_name}.csv"))
+        library_dir = "prompt_library/IR_RAG" if task_name.startswith('IR_') and not args.no_rag else "prompt_library"
+        prompt_assets = load_prompt_assets(TASK_TO_PROMPT_MAP[task_name], args.prompt_id, args.max_shots, library_dir=library_dir)
+        semaphore = asyncio.Semaphore(10)
+        predictions = []
+        # Use a standard tqdm progress bar for easy debugging
+        # for _, row in tqdm(df.iterrows(), total=len(df), desc=f"Debugging {task_name}"):
+        #     # CALL THE SYNCHRONOUS WRAPPER
+        #     row_id, output = process_row(row, generator, prompt_assets, task_name, args.no_rag, semaphore)
+        #     predictions.append({'id': row_id, 'output': json.dumps(output) if output else "{}"})
+        # generation_params = {
+        #     "temperature": args.temperature,
+        #     "max_tokens": args.max_new_tokens,
+        #     "top_p": args.top_p,
+        # }
+        tasks = [process_row(row, generator, prompt_assets, task_name, args.no_rag, semaphore) 
+                 for _, row in df.iterrows()]
+        logging.info(f"Executing {len(tasks)} predictions for task '{task_name}'...")
+        predictions_outputs = await tqdm_asyncio.gather(*tasks, desc=f"Predicting for {task_name} with {model_name}")
+        
+        # Process the results
+        predictions = []
+        for i, output in predictions_outputs:
+            #row_id = df.iloc[i]['id']
+            if output is None:
+                logging.error(f"Error on id {i}: Prediction returned None")
+                predictions.append({'id': i, 'output': "{}"})
+            else:
+                # Ensure the output is a string representation of the dict/JSON
+                predictions.append({'id': i, 'output': json.dumps(output)})
+        
+        pd.DataFrame(predictions).to_csv(output_path, index=False, header=True)
+        logging.info(f"Predictions saved to {output_path}")
+
 
 def load_prompt_assets(task_name, prompt_id, max_shots, library_dir="prompt_library"):
     assets = {"prompt": "", "output_format": "", "shots": []}
@@ -221,7 +210,8 @@ def run_json_conversion_stage(args):
     """
     for model_name in args.models:
         for task_name in args.tasks:
-            pred_filename = f"{task_name}_predictions_prompt_{args.prompt_id}_model_{model_name}.csv"
+            sanitized_model_name = model_name.replace('/', '_')
+            pred_filename = f"{task_name}_predictions_prompt_{args.prompt_id}_model_{sanitized_model_name}.csv"
             pred_path = os.path.join(args.predictions_dir, pred_filename)
             if not os.path.exists(pred_path):
                 logging.warning(f"Prediction file not found, skipping: {pred_path}")
@@ -270,7 +260,7 @@ def run_json_conversion_stage(args):
                     merge_df['testbed_data'] = [{} for _ in range(len(merge_df))]
             
             # Save to JSON
-            json_filename = f"{task_name}_prompt_{args.prompt_id}_model_{model_name}.json"
+            json_filename = f"{task_name}_prompt_{args.prompt_id}_model_{sanitized_model_name}.json"
             json_path = os.path.join(args.results_dir, json_filename)
             merge_df[['id', 'testbed_data', 'gpt_output']].to_json(json_path, orient='records', indent=4)
             logging.info(f"Converted predictions to JSON: {json_path}")
@@ -325,8 +315,10 @@ def main(args):
             # Step 3: Conditionally load the heavy components ONLY if needed.
             if needs_semantic_search:
                 logging.info("--- Reasoning task detected. Loading semantic search components... ---")
-                st_model = SentenceTransformer(MODEL_NAME)
-                cross_encoder = CrossEncoder('pritamdeka/S-PubMedBert-MS-MARCO')
+                #st_model = SentenceTransformer(MODEL_NAME)
+                #cross_encoder = CrossEncoder('pritamdeka/S-PubMedBert-MS-MARCO')
+                st_model = SentenceTransformer(MODEL_NAME, device='cpu')
+                cross_encoder = CrossEncoder('pritamdeka/S-PubMedBert-MS-MARCO', device='cpu')
                 faiss_index, faiss_texts = load_faiss_index()
                 if st_model is None or faiss_index is None:
                      raise RuntimeError("Semantic search components failed to load.")
@@ -339,7 +331,7 @@ def main(args):
                     # Initialize the generator, passing RAG components (or None if in no-RAG mode)
                     rag_generator = RAGGenerator(model, st_model, cross_encoder, faiss_index, faiss_texts, nebula_pool)
                     #asyncio.run(run_prediction_for_model_async(args, model, rag_generator))
-                    run_prediction_for_model_sync_for_debug(args, model, rag_generator)
+                    asyncio.run(run_prediction_for_model_async(args, model, rag_generator))
                 except Exception as e:
                     logging.critical(f"FATAL: Generator for model {model} failed. Error: {e}")
                     continue
@@ -363,6 +355,10 @@ if __name__ == "__main__":
     parser.add_argument("--skip_predictions", action="store_true", help="Skip prediction generation.")
     parser.add_argument("--no-rag", action="store_true", help="Skip the entire RAG pipeline and query the LLM directly.")
     parser.add_argument("--force_rerun", action="store_true", help="Force regeneration of predictions.")
+    # parser.add_argument("--temperature", type=float, default=0.2, help="Temperature for sampling.")
+    # parser.add_argument("--max_new_tokens", type=int, default=64, help="Max new tokens to generate.")
+    # parser.add_argument("--top_p", type=float, default=0.95, help="Top-p for nucleus sampling.")
+    # parser.add_argument("--batch_size",type=int,default=10, help="concurrency limit set by asyncio.Semaphore")
     args = parser.parse_args()
     if args.no_rag:
         args.predictions_dir = "predictions_no_rag"

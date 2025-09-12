@@ -4,9 +4,11 @@ import os
 import re
 import json
 from dotenv import load_dotenv
-from openai import OpenAI
+#from openai import OpenAI
 from openai import AsyncOpenAI
 import spacy
+import glob
+import asyncio 
 
 # --- Correctly import all helper functions from the new utils.py file ---
 from .utils import (
@@ -49,114 +51,177 @@ class RAGGenerator:
 
         # Initialize the specific component (the LLM client)
         load_dotenv()
-        #self.llm = AsyncOpenAI(base_url=os.getenv("OPENAI_BASE_URL"), api_key=os.getenv("API_KEY"))
-        self.llm = OpenAI(base_url=os.getenv("OPENAI_BASE_URL"), api_key=os.getenv("API_KEY"))
+        self.llm = AsyncOpenAI(base_url=os.getenv("OPENAI_BASE_URL"), api_key=os.getenv("API_KEY"))
+        #self.llm = OpenAI(base_url=os.getenv("OPENAI_BASE_URL"), api_key=os.getenv("API_KEY"))
 
         # --- NEW: Load SciSpaCy model once for IR RAG mode, handle potential error ---
-        try:
-            self.nlp_model = spacy.load("en_ner_bionlp13cg_md")
-            logging.info("SciSpaCy model 'en_ner_bionlp13cg_md' loaded successfully.")
-        except IOError:
-            logging.warning("SciSpaCy model not found. IR RAG mode with concept extraction will not work.")
-            self.nlp_model = None
+        self.nlp_model = None
 
     # --- NEW: All private helper methods for the IR Task workflow ---
 
-    def extract_biomedical_concepts(self, text: str) -> list[str]:
+    def _load_spacy_model(self):
         """
-        CORRECTED: A proper class method to extract concepts using the loaded nlp_model.
+        Loads the SpaCy model on demand (lazy loading).
+        If the model is already loaded, it does nothing.
         """
-        if not self.nlp_model:
-            logging.warning("Cannot extract concepts because SciSpaCy model is not loaded.")
+        # The 'if' check is the key to efficiency: it only loads the model if `self.nlp_model` is None.
+        if self.nlp_model:
+            return
+
+        logging.info("Loading 'en_ner_bionlp13cg_md' for the first time...")
+        try:
+            # Assign the loaded model to the instance attribute
+            self.nlp_model = spacy.load("en_ner_bionlp13cg_md")
+            logging.info("SciSpaCy model loaded successfully.")
+        except IOError:
+            logging.error(
+                "Failed to load SciSpaCy model 'en_ner_bionlp13cg_md'. "
+                "It might not be installed correctly. Concept extraction will be disabled."
+            )
+            # We set it back to None on failure, though this state might be tricky.
+            # Depending on desired behavior, you could also raise an error.
+            self.nlp_model = None
+
+
+    async def extract_biomedical_concepts(self, text: str) -> list[str]:
+        """
+        Extracts concepts from text, ensuring the SpaCy model is loaded first.
+        """
+        # --- MODIFICATION: Calls the renamed function ---
+        self._load_spacy_model()
+
+        # If loading failed, self.nlp_model will be None, and we should exit gracefully.
+        if not self.nlp_model: 
+            logging.warning("Skipping concept extraction: SciSpaCy model is not available.")
             return []
         
-        doc = self.nlp_model(text)
-        # Use a set for automatic deduplication, then convert to list
-        return list({ent.text.strip().lower() for ent in doc.ents})
+        def _extract():
+            doc = self.nlp_model(text)
+            return list({ent.text.strip().lower() for ent in doc.ents})
+        return await asyncio.to_thread(_extract)
 
-    def build_prompt(self, task_name, concepts, question, input_key="abstract", output_key="url") -> str:
-        if task_name in ['IR_abstract2pubmedlink', 'IR_title2pubmedlink']:
-            return f"""
-            You are a biomedical assistant querying a NebulaGraph knowledge graph that stores scientific papers.
 
-            The graph contains:
-            - `Paper` nodes with properties: Paper.abstract, Paper.url, Paper.pmid, Paper.doi
-            - `Concept` nodes connected via: (paper:Paper)-[:MENTIONS]->(concept:Concept)
+    def _self_correct_query(self, query: str) -> str:
+        """
+        Takes a raw Cypher query from an LLM and applies a series of 
+        programmatic corrections to fix common syntax errors.
+        """
+        # We start with the original query and build corrections on top of it.
+        corrected_query = query
+        original_query_for_logging = query
+        
+        # --- Correction Stage 1: Fix syntax within the WHERE clause ---
+        if ' WHERE ' in corrected_query.upper():
+            # Isolate the parts of the query for safer replacements
+            parts = re.split(r'\bWHERE\b', corrected_query, maxsplit=1, flags=re.IGNORECASE)
+            where_clause = parts[1]
 
-            Your task is to generate a Cypher query that:
-            1. Finds all papers mentioning any of the given biomedical concepts.
-            2. Filters the papers using the {input_key}.
-            3. Returns: DISTINCT paper.Paper.{output_key}
+            # Correction 1.A: Fix single '=' to '=='
+            corrected_where_stage1 = re.sub(r'(?<![=<>!])=(?!=)', r'==', where_clause)
+            
+            # Correction 1.B: Ensure numeric values after '==' are quoted
+            pattern_to_quote = r'(==\s*)(\d+)\b'
+            add_quotes = lambda m: f'{m.group(1)}"{m.group(2)}"'
+            corrected_where_stage2 = re.sub(pattern_to_quote, add_quotes, corrected_where_stage1)
 
-            Use this Cypher format:
+            # Correction 1.C: Ensure numeric values inside lists are quoted
+            def quote_numbers_in_list(match_obj):
+                list_str = match_obj.group(0)
+                quoted_list_str = re.sub(r'\b(\d+)\b', r'"\1"', list_str)
+                return quoted_list_str
+            corrected_where_stage3 = re.sub(r'IN\s*\[[^\]]+\]', quote_numbers_in_list, corrected_where_stage2, flags=re.IGNORECASE)
+            
+            # Rebuild the query with the fully corrected WHERE clause
+            corrected_query = parts[0] + 'WHERE' + corrected_where_stage3
+            
+        # --- Correction Stage 2: Fix incorrect Nebula property access syntax ---
+        # This correction is applied to the ENTIRE query string
+        match_variable = re.search(r'MATCH\s*\(\s*(\w+)\s*:\s*Paper\s*\)', corrected_query, re.IGNORECASE)
+        
+        if match_variable:
+            variable_name = match_variable.group(1)
+            properties = ["pmid", "title", "url", "abstract", "is_paper_exists"] # Added 'is_paper_exists'
+            
+            for prop in properties:
+                incorrect_pattern = f"{variable_name}.{prop}"
+                correct_pattern = f"{variable_name}.Paper.{prop}"
+                corrected_query = corrected_query.replace(incorrect_pattern, correct_pattern)
+        
+        # --- Final Logging ---
+        if original_query_for_logging != corrected_query:
+            logging.info(
+                f"Self-correction applied.\n"
+                f"  Original: '{original_query_for_logging}'\n"
+                f"  Corrected: '{corrected_query}'"
+            )
+        
+        return corrected_query
 
-            MATCH (paper:Paper)-[e:MENTIONS]->(concept:Concept)
-            WHERE concept.Concept.name IN {concepts} AND
-                paper.Paper.{input_key} CONTAINS "{question}"
-            RETURN DISTINCT paper.Paper.{output_key}
+    async def _get_cypher_from_llm(self, prompt_assets: dict, question: str, input_key: str, output_key: str) -> str | None:
+        """
+        Builds a prompt from the loaded assets and asks the LLM to generate the
+        Cypher query from scratch.
+        """
+        # 1. Get the prompt and format instructions from the loaded assets.
+        instructions = prompt_assets.get("prompt", "")
+        format_rules = prompt_assets.get("output_format", "")
 
-            Only output the Cypher query. Do not explain it.
-            """
+        if not instructions or not format_rules:
+            logging.error("Prompt assets are missing 'prompt' or 'output_format' keys.")
+            return None
+        
+        # 2. Prepare any dynamic variables needed in the prompt.
+        sanitized_question = question.replace('"', '\\"')
+        
+        concepts = []
+        concepts_str=""
+        if "{concepts}" in format_rules: # Check if concepts are needed
+            concepts = self.extract_biomedical_concepts(question)
+            concepts_str = json.dumps(concepts)
+            concepts_str = "- The concepts to match are: "+ concepts_str
+            format_rules = format_rules.format(concepts=concepts_str, question=sanitized_question)
         else:
-            return f"""
-            You are a biomedical assistant querying a NebulaGraph knowledge graph that stores scientific papers.
+            format_rules = format_rules.format(question=sanitized_question)
+        # 3. Construct the FINAL prompt to send to the LLM.
+        #    This is where we combine everything.
+        #    We pre-fill the concepts/snippet so the LLM knows what values to use.
+        final_llm_prompt = f"""
+        {instructions}
 
-            The graph contains `Paper` nodes with properties: Paper.title, Paper.url, Paper.pmid, Paper.is_paper_exists, etc.
-            Your task is to generate a Cypher query that searches the {output_key} property for a given {input_key}.
-
-            Use this Cypher format:
-
-            MATCH (paper:Paper)
-            WHERE paper.Paper.{input_key} == "{question}"
-            RETURN paper.Paper.{output_key}
-
-            Only output the Cypher query. Do not explain it.
-            """
-
-
-
-    # def _generate_cypher_prompt(self, question: str) -> str:
-    #     """Generates the prompt for the LLM to create a Cypher query."""
-    #     concepts = self.extract_biomedical_concepts(question)
-    #     input_key=
-    #     prompt = self.build_prompt(concepts, question, input_key, output_key)
-    #     return prompt
-    #     # schema = (
-    #     #     "- `Paper` nodes have properties: `pmid`, `title`, `abstract`, `url`.\n"
-    #     #     "- When querying, refer to properties like `p.pmid`."
-    #     # )
-    #     # return (
-    #     #     f"You are a NebulaGraph expert. Given the user's question, write a simple Cypher query.\n"
-    #     #     f"The graph schema is: {schema}\n"
-    #     #     f"Only return the Cypher query inside a markdown code block. Do not explain it.\n"
-    #     #     f"Use `CONTAINS` for searching text and `==` for exact IDs. Return only the property the user asks for (e.g., `RETURN p.url`).\n\n"
-    #     #     f"User question: \"{question}\""
-    #     # )
-    
-    def _get_cypher_from_llm(self, task_name, question, input_key, output_key) -> str | None:
-        """Uses the LLM to translate a natural language question into a Cypher query."""
-        concepts = self.extract_biomedical_concepts(question) if task_name in ['IR_abstract2pubmedlink', 'IR_title2pubmedlink'] else []
-        prompt = self.build_prompt(task_name, concepts, question, input_key, output_key)
+        {format_rules}
+        """
+        
+        # 4. Call the LLM with the final combined prompt.
         try:
-            response = self.llm.chat.completions.create(
+            response = await self.llm.chat.completions.create(
                 model=self.model_name,
-                messages=[{"role": "user", "content": prompt}],
+                messages=[{"role": "user", "content": final_llm_prompt}],
                 temperature=0.0
             )
             llm_response = response.choices[0].message.content
             
-            match = re.search(r"```(cypher)?\n(.*?)```", llm_response, re.DOTALL)
-            query = match.group(2).strip() if match else llm_response.strip()
-
-            if "MATCH" not in query:
-                logging.error(f"LLM failed to generate valid Cypher. Response: '{llm_response}'")
+            # 5. Extract the query from the response.
+            match = re.search(r"```(?:cypher)?\n(.*?)\n```", llm_response, re.DOTALL)
+            if not match: # A stricter check: if no code block, it failed the instruction.
+                 match = re.search(r'^(MATCH .*)', llm_response, re.DOTALL | re.MULTILINE)
+            
+            if not match:
+                logging.warning(f"LLM did not return a valid query format. Response: '{llm_response}'")
                 return None
+            
+            query = match.group(1).strip()
+            
+            # 6. Apply self-correction as a safety net.
+            #query = self._self_correct_query(query)
+            
             return query
+            
         except Exception as e:
-            logging.error(f"Error getting Cypher from LLM: {e}")
+            logging.error(f"Error getting Cypher from LLM: {e}", exc_info=True)
             return None
 
-    def _execute_cypher_and_format(self, space_name: str, cypher_query: str, output_key: str) -> dict:
+
+    async def _execute_cypher_and_format(self, space_name: str, cypher_query: str, output_key: str) -> dict:
         """
         Executes a Cypher query using the correct manual try/finally pattern
         for session management.
@@ -165,35 +230,36 @@ class RAGGenerator:
             logging.error("Nebula connection pool is not available for Cypher execution.")
             return {output_key: "Unknown"}
 
-        session = None  # Initialize session to None
-        try:
-            # 1. Get a session from the pool
-            session = self.nebula_pool.get_session("root", "nebula") # Use your credentials
-
+        def _db_call():
+            session = None
+            try:
+                session = self.nebula_pool.get_session("root", "nebula")
             # 2. Use the session to execute queries
-            session.execute(f"USE {space_name};")
-            logging.info(f"Executing in '{space_name}': {cypher_query}")
-            result = session.execute(cypher_query)
+                session.execute(f"USE {space_name};")
+                logging.info(f"Executing in '{space_name}': {cypher_query}")
+                result = session.execute(cypher_query)
+                
+                if result.is_succeeded() and not result.is_empty():
+                    value_wrapper=[record.values()[0].as_string() for record in result if record.values()][0]
+                    #value_wrapper = result.rows()[0].values[0]
+                    return {output_key: str(value_wrapper)}
+                else:
+                    logging.warning(f"Cypher query failed or returned empty. Error: {result.error_msg() or 'Empty Result'}")
+                    return {output_key: "Unknown"}
             
-            if result.is_succeeded() and not result.is_empty():
-                value_wrapper=[record.values()[0].as_string() for record in result if record.values()][0]
-                #value_wrapper = result.rows()[0].values[0]
-                return {output_key: str(value_wrapper)}
-            else:
-                logging.warning(f"Cypher query failed or returned empty. Error: {result.error_msg() or 'Empty Result'}")
+            except Exception as e:
+                # Catch any other exceptions during the process
+                logging.error(f"An exception occurred during Cypher execution for '{cypher_query}': {e}", exc_info=True)
                 return {output_key: "Unknown"}
-        
-        except Exception as e:
-            # Catch any other exceptions during the process
-            logging.error(f"An exception occurred during Cypher execution for '{cypher_query}': {e}", exc_info=True)
-            return {output_key: "Unknown"}
-            
-        finally:
-            # 3. CRUCIAL: Always release the session back to the pool
-            if session:
-                session.release()
+                
+            finally:
+                # 3. CRUCIAL: Always release the session back to the pool
+                if session:
+                    session.release()
 
-    def _handle_ir_task(self, question, options, prompt_assets, task_name, no_rag, input_key=None, output_key=None):
+        return await asyncio.to_thread(_db_call)
+
+    async def _handle_ir_task(self, question, options, prompt_assets, task_name, no_rag, input_key=None, output_key=None):
         """NEW: A dedicated handler for all Information Retrieval tasks."""
         
         # --- PATH 1: IR task in RAG (Text-to-Cypher) mode ---
@@ -201,7 +267,7 @@ class RAGGenerator:
             logging.info(f"Running IR Task '{task_name}' in RAG (Text-to-Cypher) mode.")
             
             # 1. Get Cypher from LLM
-            cypher_query = self._get_cypher_from_llm(task_name, question, input_key, output_key)
+            cypher_query = await self._get_cypher_from_llm(prompt_assets, question, input_key, output_key)
             if not cypher_query:
                 output_key = TASK_TO_OUTPUT_KEY_MAP.get(task_name, "error")
                 return {output_key: "Unknown"}
@@ -212,33 +278,20 @@ class RAGGenerator:
             
             # This is a synchronous, blocking call, which is acceptable here as it's fast
             # and follows an async LLM call.
-            return self._execute_cypher_and_format(space_name, cypher_query, output_key)
+            return await self._execute_cypher_and_format(space_name, cypher_query, output_key)
 
         # --- PATH 2: IR task in non-RAG (memory-based) mode ---
         else:
             logging.info(f"Running IR Task '{task_name}' in non-RAG (memory-based) mode.")
             # Use the generic `generate_llm_response` function, but with empty definitions
             # This uses the prompt and shots from the prompt_library.
-            return generate_llm_response(
+            return await generate_llm_response(
                 self.llm, self.model_name, question, {}, [], 
-                prompt_assets, "SUPPORTED", no_rag=True, mode="IR"
+                prompt_assets, "SUPPORTED", no_rag=True, mode="IR", input_key=input_key, output_key=output_key
             )
 
-    # --- MODIFIED: The main predict function is now a router ---
-    def predict(self, question: str, prompt_assets: dict, task_name: str, no_rag: bool, 
-                        options: dict = None, input_key: str = None, output_key: str = None):
-        """
-        Orchestrates the prediction by routing to the correct handler based on task type.
-        """
-        # --- Route to the correct handler based on task name prefix ---
-        if task_name.startswith('IR_'):
-            return self._handle_ir_task(question, options, prompt_assets, task_name, no_rag, input_key, output_key)
-        else:
-            # --- This is your ORIGINAL, UNCHANGED logic for REASONING tasks ---
-            return self._handle_reasoning_task(question, options, prompt_assets, task_name, no_rag)
 
-    # --- UNCHANGED: Your original reasoning logic, moved into its own method ---
-    def _handle_reasoning_task(self, question, options, prompt_assets, task_name, no_rag=False):
+    async def _handle_reasoning_task(self, question, options, prompt_assets, task_name, no_rag=False):
         """
         Handles the original RAG and non-RAG pipeline for reasoning tasks.
         """
@@ -250,54 +303,31 @@ class RAGGenerator:
                 raise RuntimeError("RAG components not provided for a RAG-enabled run.")
             
             query = question + " " + " ".join(options.values())
-            suis, top_semantic_texts =  retrieve_semantic_nodes(query, self.st_model, self.faiss_index, self.faiss_texts, top_k=30000, top_m=30)
-            retrieved_definitions =  get_definitions_from_graph(self.nebula_pool, suis)
-            final_definitions =  rerank_definitions(self.cross_encoder, question, retrieved_definitions, top_k=15)
+            suis, top_semantic_texts = await retrieve_semantic_nodes(query, self.st_model, self.faiss_index, self.faiss_texts, top_k=30000, top_m=30)
+            retrieved_definitions = await get_definitions_from_graph(self.nebula_pool, suis)
+            final_definitions = await rerank_definitions(self.cross_encoder, question, retrieved_definitions, top_k=15)
             final_definitions = list(set(top_semantic_texts + final_definitions))
             context_str_for_check = " ".join(final_definitions)
-            consistency_result =  check_premise_consistency(self.llm, self.model_name, question, context_str_for_check)
+            consistency_result = await check_premise_consistency(self.llm, self.model_name, question, context_str_for_check)
             logging.info(f"Premise consistency check: {consistency_result}")
         else:
             logging.info("Skipping RAG pipeline for reasoning task as per --no-rag flag.")
 
-        return  generate_llm_response(
+        return await generate_llm_response(
             self.llm, self.model_name, question, options, final_definitions, 
             prompt_assets, consistency_result, no_rag
         )
 
-    # async def predict(self, question, options, prompt_assets, task_name, no_rag=False):
-    #     """
-    #     Orchestrates the prediction. If no_rag is True, it skips all retrieval.
-    #     """
-    #     final_definitions = []
-    #     consistency_result = "SUPPORTED" # Default for no-RAG or standard tasks
+    # --- MODIFIED: The main predict function is now a router ---
+    async def predict(self, question: str, prompt_assets: dict, task_name: str, no_rag: bool,
+                        options: dict = None, input_key: str = None, output_key: str = None):
+        """
+        Orchestrates the prediction by routing to the correct handler based on task type.
+        """
+        # --- Route to the correct handler based on task name prefix ---
+        if task_name.startswith('IR_'):
+            return await self._handle_ir_task(question, options, prompt_assets, task_name, no_rag, input_key, output_key)
+        else:
+            # --- This is your ORIGINAL, UNCHANGED logic for REASONING tasks ---
+            return await self._handle_reasoning_task(question, options, prompt_assets, task_name, no_rag)
 
-    #     # --- THE CORE NO-RAG LOGIC ---
-    #     if not no_rag:
-    #         # --- RAG-ENABLED PATH ---
-    #         if not all([self.st_model, self.faiss_index, self.nebula_pool]):
-    #             raise RuntimeError("RAG components not provided for a RAG-enabled run.")
-            
-    #         query = question + " " + " ".join(options.values())
-    #         #suis = retrieve_semantic_seeds(query, self.st_model, self.faiss_index, self.faiss_texts, top_k=30000)
-    #         suis, top_semantic_texts = await retrieve_semantic_nodes(query, self.st_model, self.faiss_index, self.faiss_texts, top_k=30000, top_m=30)
-    #         retrieved_definitions = await get_definitions_from_graph(self.nebula_pool, suis)
-    #         final_definitions = await rerank_definitions(self.cross_encoder, question, retrieved_definitions, top_k=15)
-    #         final_definitions = list(set(top_semantic_texts + final_definitions))
-    #         # if 'reasoning_fake' in task_name:
-    #         context_str_for_check = " ".join(final_definitions)
-    #         consistency_result = await check_premise_consistency(self.llm, self.model_name, question, context_str_for_check)
-    #         logging.info(f"Premise consistency check: {consistency_result}")
-
-            
-    #     else:
-    #         # --- NO-RAG PATH ---
-    #         logging.info("Skipping RAG pipeline as per --no-rag flag.")
-
-    #     # Both paths lead to the same final generation step.
-    #     # In no-RAG mode, definitions will be empty and consistency will be SUPPORTED.
-    #     return await generate_llm_response(
-    #         self.llm, self.model_name, question, options, final_definitions, 
-    #         prompt_assets, consistency_result, no_rag
-    #     )
-    
