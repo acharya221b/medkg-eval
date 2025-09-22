@@ -299,12 +299,18 @@ async def generate_llm_response(
         logging.error(f"Failed to get valid LLM response after multiple attempts.")
         return None
     elif mode=="IR":
-        main_prompt_instruction = prompt_assets.get("prompt", "")
+        #main_prompt_instruction = prompt_assets.get("prompt", "")
         few_shot_str = format_shots(prompt_assets.get("shots", []))
-        base_prompt = (
+        context_block = ""
+        if not no_rag:
+            context_str = " ".join(definitions) if definitions else "No relevant biomedical context found."
+            context_block = f"{output_key}: {context_str}\n\n"
+
+            base_prompt = (
         f"{main_prompt_instruction}\n"
         f"Examples:\n{few_shot_str}\n\n"
         f"--- CURRENT TASK ---\n"
+        f"Context {context_block}"
         f"Given {input_key}: {question}\n\n"
         f"Provide your {output_key}. {prompt_assets.get('output_format', '')}"
     )
