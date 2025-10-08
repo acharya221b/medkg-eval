@@ -17,6 +17,7 @@ from .utils import (
     rerank_definitions,
     check_premise_consistency,
     generate_llm_response
+    #get_semantic_names_for_definitions
 )
 
 # --- NEW: Configuration Maps specifically for Information Retrieval Tasks ---
@@ -368,7 +369,7 @@ class RAGGenerator:
 
         return await asyncio.to_thread(_db_call)
 
-    async def _handle_ir_task(self, question, options, prompt_assets, task_name, no_rag, input_key=None, output_key=None):
+    async def _handle_ir_task(self, question, options, prompt_assets, task_name, no_rag, input_key=None, output_key=None, context=None):
         """NEW: A dedicated handler for all Information Retrieval tasks."""
         
         # --- PATH 1: IR task in RAG (Text-to-Cypher) mode ---
@@ -377,7 +378,10 @@ class RAGGenerator:
             
             # 1. Get Cypher from LLM
             #cypher_query = await self._get_cypher_from_llm(prompt_assets, question, input_key, output_key)
-            json_output = await self._get_execute_cypher_query(task_name, prompt_assets, question, input_key, output_key)
+            #json_output = await self._get_execute_cypher_query(task_name, prompt_assets, question, input_key, output_key)
+            json_output=context
+            if json_output is None:
+                json_output = await self._get_execute_cypher_query(task_name, prompt_assets, question, input_key, output_key)
             if not json_output:
                 output_key = TASK_TO_OUTPUT_KEY_MAP.get(task_name, "error")
                 return {output_key: "Unknown"}
@@ -406,7 +410,7 @@ class RAGGenerator:
             )
 
 
-    async def _handle_reasoning_task(self, question, options, prompt_assets, task_name, no_rag=False):
+    async def _handle_reasoning_task(self, question, options, prompt_assets, task_name, no_rag=False, context=None):
         """
         Handles the original RAG and non-RAG pipeline for reasoning tasks.
         """
@@ -417,14 +421,39 @@ class RAGGenerator:
             if not all([self.st_model, self.faiss_index, self.nebula_pool]):
                 raise RuntimeError("RAG components not provided for a RAG-enabled run.")
             
-            query = question + " " + " ".join(options.values())
-            suis, top_semantic_texts = await retrieve_semantic_nodes(query, self.st_model, self.faiss_index, self.faiss_texts, top_k=30000, top_m=30)
-            retrieved_definitions = await get_definitions_from_graph(self.nebula_pool, suis)
-            final_definitions = await rerank_definitions(self.cross_encoder, question, retrieved_definitions, top_k=15)
-            final_definitions = list(set(top_semantic_texts + final_definitions))
-            context_str_for_check = " ".join(final_definitions)
-            consistency_result = await check_premise_consistency(self.llm, self.model_name, question, context_str_for_check)
-            logging.info(f"Premise consistency check: {consistency_result}")
+            if context is not None:
+                logging.info("Using pre-fetched context for RAG reasoning task.")
+                final_definitions = context
+            else:
+                query = question + " " + " ".join(options.values())
+                suis, top_semantic_texts = await retrieve_semantic_nodes(query, self.st_model, self.faiss_index, self.faiss_texts, top_k=30000, top_m=30)
+                retrieved_definitions = await get_definitions_from_graph(self.nebula_pool, suis)
+                final_definitions = await rerank_definitions(self.cross_encoder, question, retrieved_definitions, top_k=15)
+                # semantic_context_dict = await get_semantic_names_for_definitions(self.nebula_pool, final_definitions)
+                
+                # final_definitions = list(set(top_semantic_texts + final_definitions))
+                # context_str_for_check = ". ".join(final_definitions)
+                if top_semantic_texts:
+                    semantic_context = "Top Semantic Matches:\n- " + "\n- ".join(top_semantic_texts)
+                else:
+                    semantic_context = ""
+
+                # if semantic_context_dict:
+                #     # Format each item as "Concept Name: Definition text."
+                #     definition_items = [f"{name}: {text}" for name, text in semantic_context_dict.items()]
+                #     definition_context = "Top Semantics and their corresponding definitions:\n- " + "\n- ".join(definition_items)
+                # else:
+                #     definition_context = ""
+
+                # 2. Create the formatted string for the re-ranked graph definitions.
+                #    We will only add this section if there are definitions.
+                if final_definitions:
+                    definition_context = "Top Retrieved Definitions from Knowledge Graph:\n- " + "\n- ".join(final_definitions)
+                else:
+                    definition_context = ""
+                context_str_for_check = f"{semantic_context}\n\n{definition_context}".strip()
+                consistency_result = await check_premise_consistency(self.llm, self.model_name, question, context_str_for_check)
+                logging.info(f"Premise consistency check: {consistency_result}")
         else:
             logging.info("Skipping RAG pipeline for reasoning task as per --no-rag flag.")
 
@@ -434,15 +463,37 @@ class RAGGenerator:
         )
 
     # --- MODIFIED: The main predict function is now a router ---
-    async def predict(self, question: str, prompt_assets: dict, task_name: str, no_rag: bool,
+    async def predict(self, question: str, prompt_assets: dict, task_name: str, no_rag: bool, context: list = None,
                         options: dict = None, input_key: str = None, output_key: str = None):
         """
         Orchestrates the prediction by routing to the correct handler based on task type.
         """
         # --- Route to the correct handler based on task name prefix ---
         if task_name.startswith('IR_'):
-            return await self._handle_ir_task(question, options, prompt_assets, task_name, no_rag, input_key, output_key)
+            return await self._handle_ir_task(question, options, prompt_assets, task_name, no_rag, input_key, output_key, context)
         else:
             # --- This is your ORIGINAL, UNCHANGED logic for REASONING tasks ---
-            return await self._handle_reasoning_task(question, options, prompt_assets, task_name, no_rag)
+            return await self._handle_reasoning_task(question, options, prompt_assets, task_name, no_rag, context)
 
+    async def retrieve_context_only(self, question: str, options: dict, task_name: str, 
+                                      prompt_assets: dict, input_key: str = None, output_key: str = None) -> list:
+        """
+        --- NEW FUNCTION ---
+        This function contains ONLY the retrieval logic from your original handlers.
+        """
+        if task_name.startswith('IR_'):
+            # This is your original IR retrieval logic
+            return await self._get_execute_cypher_query(task_name, prompt_assets, question, input_key, output_key)
+        else:
+            # This is your original Reasoning retrieval logic
+            query = question + " " + " ".join(options.values())
+            suis, top_semantic_texts = await retrieve_semantic_nodes(query, self.st_model, self.faiss_index, self.faiss_texts, top_k=30000, top_m=30)
+            retrieved_definitions = await get_definitions_from_graph(self.nebula_pool, suis)
+            final_definitions = await rerank_definitions(self.cross_encoder, question, retrieved_definitions, top_k=15)
+            
+            # Create captioned context
+            semantic_context = "Top Semantic Matches:\n- " + "\n- ".join(top_semantic_texts) if top_semantic_texts else ""
+            definition_context = "Top Retrieved Definitions from Knowledge Graph:\n- " + "\n- ".join(final_definitions) if final_definitions else ""
+            context_str_for_check = f"{semantic_context}\n\n{definition_context}".strip()
+            
+            return [context_str_for_check] if context_str_for_check else []

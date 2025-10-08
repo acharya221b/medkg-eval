@@ -1,9 +1,12 @@
 {
-  "prompts": [
-    {
-      "id": "v0",
-      "prompt": "You are a biomedical assistant querying a NebulaGraph knowledge graph that stores scientific papers.\nThe graph contains:\n- `paper` nodes with properties: Paper.title, Paper.url, Paper.pmid, Paper.doi\nGiven `paper.Paper.url`, generate a NebulaGraph Cypher query that returns `paper.Paper.title` \n",
-      "output_format": "Copy and output this exact cypher query: MATCH (paper:Paper) WHERE paper.Paper.url == \"{question}\" RETURN paper.Paper.title\n\nDo not explain it."
-    }
-  ]
+   "prompts":[{
+      "id":"v0",
+      "prompt":"You are an intelligent reading and extraction system. You will be given a URL of a research paper and a context containing the title of the research paper. Your task is to carefully read the provided context and extract the exact title to the user's URL.",
+      "output_format":"The response should be returned in JSON format with the key 'Title' and the exact paper title you found in the context. If the title is not found in the context, respond with 'Unknown'. Do not make up a title if it is not present in the context. Only use the context provided."
+   },
+   {
+      "id":"v1",
+      "prompt":"You are a precision data extraction agent. Your sole task is to identify and extract a Title from the provided 'Context'. The Title must be extracted exactly as it appears in the context.",
+      "output_format":"The response must be a single, valid JSON object with one key: 'Title'. If the context contains a valid title, the output should be that title. If the context does not contain a title, the output must be the string 'Unknown'. Do not infer, guess, or create a Title if one is not explicitly present."
+   }]
 }

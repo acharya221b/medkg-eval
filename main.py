@@ -10,11 +10,11 @@ import glob
 import asyncio
 from tqdm import tqdm
 from tqdm.asyncio import tqdm_asyncio
-
+import time 
 # --- CRITICAL: Import all necessary components from the correct files ---
 import faiss
 import numpy as np
-from sentence_transformers import SentenceTransformer, CrossEncoder
+from sentence_transformers import models, SentenceTransformer, CrossEncoder
 from nebula3.gclient.net import ConnectionPool
 from nebula3.Config import Config
 
@@ -54,60 +54,6 @@ TASK_TO_OUTPUT_KEY_MAP = {
 }
 
 
-def process_row_sync_for_debug(row, generator, prompt_assets, task_name, no_rag):
-    # This function waits for the semaphore before running the prediction
-    row_id = row.get('id', 'UNKNOWN_ID')
-    try:
-        if task_name.startswith('IR_'):
-            input_key = TASK_TO_INPUT_KEY_MAP[task_name]
-            output_key = TASK_TO_OUTPUT_KEY_MAP[task_name]
-            question_text = str(row.get(input_key, ""))
-
-            output_dict = generator.predict(
-                question=question_text,
-                prompt_assets=prompt_assets,
-                task_name=task_name,
-                no_rag=no_rag,
-                input_key=input_key.lower(),
-                output_key=output_key.lower()
-            )
-        else:
-            question_text = str(row.get('question', ""))
-            options_dict = ast.literal_eval(row.get('options', '{}'))
-            output_dict = generator.predict(
-                question=question_text,
-                options=options_dict,
-                prompt_assets=prompt_assets,
-                task_name=task_name,
-                no_rag=no_rag,
-            )
-            
-        return (row_id, output_dict)
-    except Exception as e:
-        logging.error(f"Error on id {row_id}: {e}", exc_info=True)
-        return (row_id, None)
-        
-def run_prediction_for_model_sync_for_debug(args, model_name, generator):
-    for task_name in args.tasks:
-        # ... (file path and loading logic is the same)
-        output_filename = f"{task_name}_predictions_prompt_{args.prompt_id}_model_{model_name}.csv"
-        output_path = os.path.join(args.predictions_dir, output_filename)
-        #...
-        df = pd.read_csv(os.path.join(args.data_dir, f"{task_name}.csv"))
-        library_dir = "prompt_library/IR_RAG" if task_name.startswith('IR_') and not args.no_rag else "prompt_library"
-        prompt_assets = load_prompt_assets(TASK_TO_PROMPT_MAP[task_name], args.prompt_id, args.max_shots, library_dir=library_dir)
-
-        logging.info(f"--- RUNNING IN SYNC DEBUG MODE ---")
-        predictions = []
-        # Use a standard tqdm progress bar for easy debugging
-        for _, row in tqdm(df.iterrows(), total=len(df), desc=f"Debugging {task_name}"):
-            # CALL THE SYNCHRONOUS WRAPPER
-            row_id, output = process_row_sync_for_debug(row, generator, prompt_assets, task_name, args.no_rag)
-            predictions.append({'id': row_id, 'output': json.dumps(output) if output else "{}"})
-
-        # Save results at the end
-        pd.DataFrame(predictions).to_csv(output_path, index=False, header=True)
-        logging.info(f"Predictions saved to {output_path}")
 
 async def process_row(row, generator, prompt_assets, task_name, no_rag, semaphore):
     # This function waits for the semaphore before running the prediction
@@ -148,22 +94,13 @@ async def run_prediction_for_model_async(args, model_name, generator):
         sanitized_model_name = model_name.replace('/', '_')
         output_filename = f"{task_name}_predictions_prompt_{args.prompt_id}_model_{sanitized_model_name}.csv"
         output_path = os.path.join(args.predictions_dir, output_filename)
-        #...
+
         df = pd.read_csv(os.path.join(args.data_dir, f"{task_name}.csv"))
         library_dir = "prompt_library/IR_RAG" if task_name.startswith('IR_') and not args.no_rag else "prompt_library"
         prompt_assets = load_prompt_assets(TASK_TO_PROMPT_MAP[task_name], args.prompt_id, args.max_shots, library_dir=library_dir)
         semaphore = asyncio.Semaphore(10)
         predictions = []
-        # Use a standard tqdm progress bar for easy debugging
-        # for _, row in tqdm(df.iterrows(), total=len(df), desc=f"Debugging {task_name}"):
-        #     # CALL THE SYNCHRONOUS WRAPPER
-        #     row_id, output = process_row(row, generator, prompt_assets, task_name, args.no_rag, semaphore)
-        #     predictions.append({'id': row_id, 'output': json.dumps(output) if output else "{}"})
-        # generation_params = {
-        #     "temperature": args.temperature,
-        #     "max_tokens": args.max_new_tokens,
-        #     "top_p": args.top_p,
-        # }
+
         tasks = [process_row(row, generator, prompt_assets, task_name, args.no_rag, semaphore) 
                  for _, row in df.iterrows()]
         logging.info(f"Executing {len(tasks)} predictions for task '{task_name}'...")
@@ -182,6 +119,38 @@ async def run_prediction_for_model_async(args, model_name, generator):
         
         pd.DataFrame(predictions).to_csv(output_path, index=False, header=True)
         logging.info(f"Predictions saved to {output_path}")
+
+
+async def run_single_task_prediction_async(args, model_name, task_name, generator):
+    """This is a simplified version of your original function that runs one task."""
+    sanitized_model_name = model_name.replace('/', '_')
+    output_filename = f"{task_name}_predictions_prompt_{args.prompt_id}_model_{sanitized_model_name}.csv"
+    output_path = os.path.join(args.predictions_dir, output_filename)
+    
+    df = pd.read_csv(os.path.join(args.data_dir, f"{task_name}.csv"))
+    library_dir = "prompt_library" # Always default for no-rag
+    prompt_assets = load_prompt_assets(TASK_TO_PROMPT_MAP[task_name], args.prompt_id, args.max_shots, library_dir=library_dir)
+    semaphore = asyncio.Semaphore(args.concurrency)
+    
+    # We pass None for context because this is the no-rag path
+    tasks = [process_row(row, generator, prompt_assets, task_name, args.no_rag, semaphore) 
+             for _, row in df.iterrows()]
+    
+    predictions_outputs = await tqdm_asyncio.gather(*tasks, desc=f"Predicting for {task_name} with {model_name} (No RAG)")
+    
+    # Process the results
+    predictions = []
+    for i, output in predictions_outputs:
+        #row_id = df.iloc[i]['id']
+        if output is None:
+            logging.error(f"Error on id {i}: Prediction returned None")
+            predictions.append({'id': i, 'output': "{}"})
+        else:
+            # Ensure the output is a string representation of the dict/JSON
+            predictions.append({'id': i, 'output': json.dumps(output)})
+    
+    pd.DataFrame(predictions).to_csv(output_path, index=False, header=True)
+    logging.info(f"Predictions saved to {output_path}")
 
 
 def load_prompt_assets(task_name, prompt_id, max_shots, library_dir="prompt_library"):
@@ -265,83 +234,338 @@ def run_json_conversion_stage(args):
             merge_df[['id', 'testbed_data', 'gpt_output']].to_json(json_path, orient='records', indent=4)
             logging.info(f"Converted predictions to JSON: {json_path}")
 
+
 def run_evaluation_stage(args):
+    """
+    Runs the final evaluation stage.
+    MODIFIED: Now dynamically searches for JSON files only for the tasks
+    specified in the --tasks argument, across all models and prompt IDs.
+    """
     logging.info(f"--- Starting Final Consolidated Evaluation ---")
-    json_pattern = f"*_prompt_{args.prompt_id}_model_*.json"
+    
+    # --- START OF NEW DYNAMIC FILE SEARCH LOGIC ---
+    
+    all_json_files_to_evaluate = []
+    
+    # Iterate through each task provided in the command-line arguments
+    for task_name in args.tasks:
+        # Create a specific file pattern for this task with wildcards for prompt and model
+        # e.g., IR_pmid2title_prompt_*_model_*.json
+        json_pattern_for_task = f"{task_name}_prompt_*_model_*.json"
+        
+        # Find all files in the results directory that match this specific task's pattern
+        task_files = glob.glob(os.path.join(args.results_dir, json_pattern_for_task))
+        
+        # Add the found files to our master list
+        all_json_files_to_evaluate.extend(task_files)
+        
+    # --- END OF NEW LOGIC ---
+
+    # --- MINOR MODIFICATION: Pass the list of files DIRECTLY to the evaluator ---
+    # The evaluator no longer needs to perform the glob search itself.
+    
+    if not all_json_files_to_evaluate:
+        logging.error(f"No result JSON files found in '{args.results_dir}' for the specified tasks: {args.tasks}")
+        return
+
+    # Initialize the evaluator
     evaluator = FullDataEval(
-        args.results_dir, 
-        file_pattern=json_pattern, 
+        folder_name=args.results_dir, # Still needed for the rag_status check
+        all_files=all_json_files_to_evaluate, # Pass the explicit list of files
         correct_score=1, 
         incorrect_score=-0.25
     )
-    final_df = evaluator.run_all_evaluations()
+    
+    # The rest of the function proceeds as before
+    final_df, subset_details = evaluator.run_all_evaluations(subset_size=args.subset_size)
 
     if final_df.empty:
         logging.error("Evaluation produced no results.")
         return
         
-    # 2. Rename the 'score' column to be specific.
-    #    The 'correct' column already serves the purpose of the old 'simple_score'.
-    final_df.rename(columns={'score': 'penalty_score'}, inplace=True)
+    # Sort the final report for readability
+    final_df.sort_values(by=['task_name', 'model_name', 'prompt_id', 'kg_rag'], inplace=True)
     
-    # 3. Filter, sort, and clean up the DataFrame as before.
-    final_df = final_df[final_df['task_name'].isin(args.tasks)]
-    final_df.sort_values(by=['task_name', 'model_name'], inplace=True)
-    final_df.reset_index(drop=True, inplace=True)
-    report_path = os.path.join(args.results_dir, f"final_report_prompt_{args.prompt_id}_tasks_{'_'.join(args.tasks)}.csv")
-    final_df.to_csv(report_path, index=False)
-    print("\n--- Final Evaluation Report ---")
+    # The report filename should not contain a specific prompt_id anymore,
+    # since it can now contain results from multiple prompts.
+    tasks_str = '_'.join(args.tasks)
+    report_csv_path = os.path.join(args.results_dir, f"final_summary_report_tasks_{tasks_str}.csv")
+    final_df.to_csv(report_csv_path, index=False)
+    
+    report_json_path = os.path.join(args.results_dir, f"subset_accuracies_report_tasks_{tasks_str}.json")
+    try:
+        with open(report_json_path, 'w') as f:
+            json.dump(subset_details, f, indent=4)
+        logging.info(f"Detailed subset accuracies saved to: {report_json_path}")
+    except Exception as e:
+        logging.error(f"Failed to save subset accuracies JSON report: {e}")
+
+    print("\n\n" + "="*50)
+    print("--- Final Evaluation Summary Report ---")
+    print("="*50)
     print(final_df.to_string())
 
-def main(args):
-    """The main execution function, now aware of the --no-rag flag."""
+
+# def main(args):
+#     """The main execution function, now aware of the --no-rag flag."""
+#     st_model, cross_encoder, faiss_index, faiss_texts, nebula_pool = None, None, None, None, None
+#     try:
+#         # --- CONDITIONAL LOADING OF HEAVY RESOURCES ---
+#         # --- MODIFIED: SMART RESOURCE LOADING ---
+#         if args.no_rag:
+#             logging.info("--- No-RAG mode enabled. Skipping all resource loading. ---")
+#         else:
+#             # Step 1: Check if any Reasoning tasks are requested.
+#             # Reasoning tasks require the full semantic search stack.
+#             needs_semantic_search = any(not task.startswith('IR_') for task in args.tasks)
+
+#             # Step 2: All RAG tasks (both IR and Reasoning) require a Nebula connection.
+#             logging.info("--- RAG mode enabled. Connecting to NebulaGraph... ---")
+#             _, nebula_pool = connect_nebula()
+#             if nebula_pool is None:
+#                 raise RuntimeError("Nebula Pool is required for all RAG tasks but failed to load.")
+            
+#             # Step 3: Conditionally load the heavy components ONLY if needed.
+#             if needs_semantic_search:
+#                 logging.info("--- Reasoning task detected. Loading semantic search components... ---")
+#                 #st_model = SentenceTransformer('NeuML/pubmedbert-base-embeddings')
+#                 cross_encoder = CrossEncoder('ncbi/MedCPT-Cross-Encoder') #40 correct
+#                 #cross_encoder = CrossEncoder('BAAI/bge-reranker-large')
+#                 st_model = SentenceTransformer(MODEL_NAME)
+#                 #cross_encoder = CrossEncoder('pritamdeka/S-PubMedBert-MS-MARCO', device='cpu')
+#                 faiss_index, faiss_texts = load_faiss_index()
+#                 if st_model is None or faiss_index is None:
+#                      raise RuntimeError("Semantic search components failed to load.")
+#             else:
+#                 logging.info("--- Only IR tasks detected. Skipping loading of SentenceTransformer, CrossEncoder, and Faiss index. ---")
+
+#         if not args.skip_predictions:
+#             for model in args.models:
+#                 try:
+#                     # Initialize the generator, passing RAG components (or None if in no-RAG mode)
+#                     rag_generator = RAGGenerator(model, st_model, cross_encoder, faiss_index, faiss_texts, nebula_pool)
+#                     #asyncio.run(run_prediction_for_model_async(args, model, rag_generator))
+#                     asyncio.run(run_prediction_for_model_async(args, model, rag_generator))
+#                 except Exception as e:
+#                     logging.critical(f"FATAL: Generator for model {model} failed. Error: {e}")
+#                     continue
+        
+#         run_json_conversion_stage(args)
+#         run_evaluation_stage(args)
+#     finally:
+#         if nebula_pool:
+#             nebula_pool.close()
+#             logging.info("NebulaGraph connection closed.")
+
+
+async def main_async(args):
+    """The main asynchronous execution function, with the corrected logical fork."""
     st_model, cross_encoder, faiss_index, faiss_texts, nebula_pool = None, None, None, None, None
     try:
-        # --- CONDITIONAL LOADING OF HEAVY RESOURCES ---
-        # --- MODIFIED: SMART RESOURCE LOADING ---
+        # --- CORRECTED SMART RESOURCE LOADING ---
         if args.no_rag:
             logging.info("--- No-RAG mode enabled. Skipping all resource loading. ---")
         else:
-            # Step 1: Check if any Reasoning tasks are requested.
-            # Reasoning tasks require the full semantic search stack.
+            # This is the RAG resource loading block
             needs_semantic_search = any(not task.startswith('IR_') for task in args.tasks)
-
-            # Step 2: All RAG tasks (both IR and Reasoning) require a Nebula connection.
             logging.info("--- RAG mode enabled. Connecting to NebulaGraph... ---")
             _, nebula_pool = connect_nebula()
             if nebula_pool is None:
                 raise RuntimeError("Nebula Pool is required for all RAG tasks but failed to load.")
             
-            # Step 3: Conditionally load the heavy components ONLY if needed.
             if needs_semantic_search:
                 logging.info("--- Reasoning task detected. Loading semantic search components... ---")
-                #st_model = SentenceTransformer(MODEL_NAME)
-                #cross_encoder = CrossEncoder('pritamdeka/S-PubMedBert-MS-MARCO')
-                st_model = SentenceTransformer(MODEL_NAME, device='cpu')
-                cross_encoder = CrossEncoder('pritamdeka/S-PubMedBert-MS-MARCO', device='cpu')
+                st_model = SentenceTransformer(MODEL_NAME)
+                cross_encoder = CrossEncoder('ncbi/MedCPT-Cross-Encoder')
                 faiss_index, faiss_texts = load_faiss_index()
                 if st_model is None or faiss_index is None:
                      raise RuntimeError("Semantic search components failed to load.")
             else:
-                logging.info("--- Only IR tasks detected. Skipping loading of SentenceTransformer, CrossEncoder, and Faiss index. ---")
+                logging.info("--- Only IR tasks detected. Skipping semantic search components. ---")
 
-        if not args.skip_predictions:
-            for model in args.models:
-                try:
-                    # Initialize the generator, passing RAG components (or None if in no-RAG mode)
-                    rag_generator = RAGGenerator(model, st_model, cross_encoder, faiss_index, faiss_texts, nebula_pool)
-                    #asyncio.run(run_prediction_for_model_async(args, model, rag_generator))
-                    asyncio.run(run_prediction_for_model_async(args, model, rag_generator))
-                except Exception as e:
-                    logging.critical(f"FATAL: Generator for model {model} failed. Error: {e}")
+        # =============================================================================
+        # === LOGICAL FORK: Choose the entire workflow based on the --no-rag flag ===
+        # =============================================================================
+
+        if args.no_rag:
+            # --- PATH 1: NO-RAG WORKFLOW ---
+            logging.info("--- Starting pipeline in NO-RAG mode ---")
+            for model_name in args.models:
+                # --- NEW: CHECK FOR EXISTING PREDICTIONS ---
+                sanitized_model_name = model_name.replace('/', '_')
+                # This loop is now inside the model loop
+                for task_name in args.tasks:
+                    output_filename = f"{task_name}_predictions_prompt_{args.prompt_id}_model_{sanitized_model_name}.csv"
+                    output_path = os.path.join(args.predictions_dir, output_filename)
+                    
+                    if os.path.exists(output_path) and not args.force_rerun:
+                        logging.info(f"Predictions for '{model_name}' on task '{task_name}' already exist. Skipping.")
+                        continue # Skip to the next task
+                
+                    try:
+                        # We only need one generator per model
+                        rag_generator = RAGGenerator(model_name, st_model, cross_encoder, faiss_index, faiss_texts, nebula_pool)
+                        # We now call a modified function that processes one task at a time
+                        await run_single_task_prediction_async(args, model_name, task_name, rag_generator)
+                        #await run_prediction_for_model_async(args, model_name, rag_generator)
+                    except Exception as e:
+                        logging.critical(f"FATAL: Generator for model {model_name} on task {task_name} failed. Error: {e}")
+
+        else:
+            # --- PATH 2: RAG WORKFLOW (Efficient "Retrieve Once") ---
+            logging.info("--- Starting pipeline in RAG mode ---")
+            
+            retrieval_generator = RAGGenerator(args.models[0], st_model, cross_encoder, faiss_index, faiss_texts, nebula_pool)
+            
+            for task_name in args.tasks:
+                logging.info(f"--- Processing Task: {task_name} for all models ---")
+
+                models_to_run = []
+                for model_name in args.models:
+                    sanitized_model_name = model_name.replace('/', '_')
+                    output_filename = f"{task_name}_predictions_prompt_{args.prompt_id}_model_{sanitized_model_name}.csv"
+                    output_path = os.path.join(args.predictions_dir, output_filename)
+                    if not os.path.exists(output_path) or args.force_rerun:
+                        models_to_run.append(model_name)
+                    else:
+                        logging.info(f"Predictions for '{model_name}' on task '{task_name}' already exist. Will be skipped.")
+                
+                # 2. If there are no new models to run for this task, skip the ENTIRE task.
+                if not models_to_run:
+                    logging.info(f"All model predictions for task '{task_name}' already exist. Skipping entire task.")
                     continue
-        
+
+                full_df = pd.read_csv(os.path.join(args.data_dir, f"{task_name}.csv"))
+
+                library_dir_retrieval = "prompt_library/IR_RAG" if task_name.startswith('IR_') else "prompt_library"
+                prompt_assets = load_prompt_assets(TASK_TO_PROMPT_MAP[task_name], args.prompt_id, args.max_shots, library_dir=library_dir_retrieval)
+                
+                cache_dir = "retrieval_cache"
+                os.makedirs(cache_dir, exist_ok=True)
+                timestamp = time.strftime("%Y%m%d")
+                cache_file = os.path.join(cache_dir, f"{task_name}_context_cache_{timestamp}.json")
+
+                retrieved_contexts = []
+                if os.path.exists(cache_file) and not args.get_context:
+                    logging.info(f"Found existing context cache. Loading from: {cache_file}")
+                    with open(cache_file, 'r') as f:
+                        retrieved_contexts = json.load(f)
+                else:
+                    # --- STAGE 1: RETRIEVAL ---
+                    logging.info(f"--- Starting Retrieval Stage for {len(full_df)} records ---")
+                    retrieval_semaphore = asyncio.Semaphore(10)
+                    retrieval_tasks = []
+                    for _, row in full_df.iterrows():
+                        async def retrieve_with_semaphore(row_data):
+                            async with retrieval_semaphore:
+                                input_key = None
+                                output_key = None
+                                if task_name.startswith('IR_'):
+                                    input_key = TASK_TO_INPUT_KEY_MAP.get(task_name, '')
+                                    output_key = TASK_TO_OUTPUT_KEY_MAP.get(task_name, '')
+                                    question_text = str(row.get(input_key, ''))
+                                    options_dict = {}
+                                else:
+                                    question_text = str(row_data.get('question', ''))
+                                    options_dict = ast.literal_eval(row_data.get('options', '{}'))
+                                
+                                return await retrieval_generator.retrieve_context_only(question_text, options_dict, task_name, prompt_assets, input_key, output_key)
+                        
+                        # 3. Append the helper coroutine to the tasks list.
+                        retrieval_tasks.append(retrieve_with_semaphore(row))
+
+                    retrieved_contexts = await tqdm_asyncio.gather(*retrieval_tasks, desc=f"Retrieving context for {task_name}")
+                    logging.info(f"Saving retrieved context to cache: {cache_file}")
+                    with open(cache_file, 'w') as f:
+                        json.dump(retrieved_contexts, f)
+                    # for _, row in full_df.iterrows():
+                    #     input_key = None
+                    #     output_key = None
+                    #     if task_name.startswith('IR_'):
+                    #         input_key = TASK_TO_INPUT_KEY_MAP.get(task_name, '')
+                    #         output_key = TASK_TO_OUTPUT_KEY_MAP.get(task_name, '')
+                    #         question_text = str(row.get(input_key, ''))
+                    #         options_dict = {}
+                    #     else:
+                    #         question_text = str(row.get('question', ''))
+                    #         options_string = row.get('options', '{}')
+                    #         if pd.isna(options_string): # Handle potential NaN values
+                    #             options_string = '{}'
+                    #         options_dict = ast.literal_eval(options_string)
+
+                        
+                    #     input_key=input_key 
+                    #     output_key=output_key
+                    #     retrieval_tasks.append(
+                    #         retrieval_generator.retrieve_context_only(question_text, options_dict, task_name, prompt_assets, input_key, output_key)
+                    #     )
+                    # retrieved_contexts = await tqdm_asyncio.gather(*retrieval_tasks, desc=f"Retrieving context for {task_name}")
+                    
+                    # --- STAGE 2: GENERATION (Run for each model using the cached context) ---
+                for model_name in models_to_run:
+
+                    
+                    #generator = RAGGenerator(model_name, st_model, cross_encoder, faiss_index, faiss_texts, nebula_pool)
+                    sanitized_model_name = model_name.replace('/', '_')
+                    output_filename = f"{task_name}_predictions_prompt_{args.prompt_id}_model_{sanitized_model_name}.csv"
+                    output_path = os.path.join(args.predictions_dir, output_filename)
+
+
+                    # library_dir = "prompt_library/IR_RAG" if task_name.startswith('IR_') else "prompt_library"
+                    # prompt_assets = load_prompt_assets(TASK_TO_PROMPT_MAP[task_name], args.prompt_id, args.max_shots, library_dir=library_dir)
+                    logging.info(f"--- Starting Generation Stage for model: {model_name} ---")
+                    semaphore = asyncio.Semaphore(args.concurrency)
+                    
+                    prediction_tasks = []
+                    for i, (_, row) in enumerate(full_df.iterrows()):
+                        # Define a small async helper to manage the semaphore for prediction
+                        async def predict_with_semaphore(row_data, context):
+                            async with semaphore:
+                                row_id = row_data.get('id', 'UNKNOWN_ID')
+                                input_key = None
+                                output_key = None
+                                if task_name.startswith('IR_'):
+                                    input_key = TASK_TO_INPUT_KEY_MAP[task_name]
+                                    output_key = TASK_TO_OUTPUT_KEY_MAP[task_name]
+                                    question_text = str(row_data.get(input_key, ""))
+                                    options_dict = {}
+                                else:
+                                    question_text = str(row_data.get('question', ""))
+                                    options_string = row.get('options', '{}')
+                                    if pd.isna(options_string): # Handle potential NaN values
+                                        options_string = '{}'
+                                    options_dict = ast.literal_eval(options_string)
+
+                                
+                                output = await retrieval_generator.predict(
+                                    question=question_text, options=options_dict, prompt_assets=prompt_assets,
+                                    task_name=task_name, no_rag=args.no_rag, context=context,
+                                    input_key=input_key,
+                                    output_key=output_key
+                                )
+                                return (row_id, output)
+                        
+                        prediction_tasks.append(predict_with_semaphore(row, retrieved_contexts[i]))
+                    
+                    predictions_outputs = await tqdm_asyncio.gather(*prediction_tasks, desc=f"Predicting for {task_name} with {model_name}")
+                    
+                    predictions = [{'id': row_id, 'output': json.dumps(output) if output else "{}"} for row_id, output in predictions_outputs]
+                    pd.DataFrame(predictions).to_csv(output_path, index=False, header=True)
+                    logging.info(f"Predictions for {model_name} saved to {output_path}")
+
+        # --- COMMON FINAL STAGES ---
+        # These functions run at the end, regardless of the mode.
         run_json_conversion_stage(args)
         run_evaluation_stage(args)
+
     finally:
         if nebula_pool:
             nebula_pool.close()
-            logging.info("NebulaGraph connection closed.")
+        logging.info("NebulaGraph connection closed.")
+
+def main(args):
+    """The main entry point, now calling the async main function."""
+    asyncio.run(main_async(args))
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Medical KG Evaluation Pipeline.")
@@ -355,10 +579,12 @@ if __name__ == "__main__":
     parser.add_argument("--skip_predictions", action="store_true", help="Skip prediction generation.")
     parser.add_argument("--no-rag", action="store_true", help="Skip the entire RAG pipeline and query the LLM directly.")
     parser.add_argument("--force_rerun", action="store_true", help="Force regeneration of predictions.")
+    parser.add_argument("--get_context", action="store_true", help="Force regeneration of predictions.")
+    parser.add_argument("--subset_size", type=int, default=100, help="Number of records per evaluation subset.")
     # parser.add_argument("--temperature", type=float, default=0.2, help="Temperature for sampling.")
     # parser.add_argument("--max_new_tokens", type=int, default=64, help="Max new tokens to generate.")
     # parser.add_argument("--top_p", type=float, default=0.95, help="Top-p for nucleus sampling.")
-    # parser.add_argument("--batch_size",type=int,default=10, help="concurrency limit set by asyncio.Semaphore")
+    parser.add_argument("--concurrency",type=int,default=10, help="concurrency limit set by asyncio.Semaphore")
     args = parser.parse_args()
     if args.no_rag:
         args.predictions_dir = "predictions_no_rag"
