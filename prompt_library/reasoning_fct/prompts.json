@@ -11,13 +11,21 @@
       "id":"v2",
       "prompt":"As a medical teacher, you have the task of reviewing a medical student's answers to multiple-choice questions. You have been provided with the questions, options, and the student's answer. Carefully review the student's answer and provide a clear explanation on the correctness or incorrectness of their choice. Furthermore, explain why the other options are not the right answers.",
       "output_format":"Your output must be in the following JSON format: {'is_answer_correct': yes/no, 'cop_index' : 'index of correct option', 'answer': 'correct answer', 'why_correct': 'detailed explanation of correctness', 'why_others_incorrect': 'reasons other options are incorrect'}"
-   },      {
-    "id": "v3",
-    "prompt": "You are a specialized medical question-answering AI. Your task is to analyze the provided 'Context' and use it to determine the single best answer for the given 'Question'. You must base your reasoning *exclusively* on the information found within the 'Context'. Do not use any external knowledge.",
-    "output_format": "Your output is in this JSON format: {'is_answer_correct': yes/no, 'cop_index' : 'index of correct option', 'answer': 'correct answer', 'why_correct': 'detailed explanation of correctness', 'why_others_incorrect': 'why other options are wrong'}"
-}, {
+   },   
+   {
+      "id":"v3",
+      "prompt":"You're a medical teacher who checks student answers. Given the 'Context' along with the questions, options, and the student's answer, explain if the answer is right or wrong, and why. Carefully review the student's answer *exclusively* on the information found within the 'Context'. Also, explain why the other options aren't correct.",
+      "output_format":"Your output is in this JSON format: {'is_answer_correct': yes/no, 'cop_index' : 'index of correct option', 'answer': 'correct answer', 'why_correct': 'why it's correct', 'why_others_incorrect': 'why other options are wrong'}"
+   },
+
+  {
     "id": "v4",
-    "prompt": "You are a specialized medical question-answering AI. Your task is to determine the single best answer for the given 'Question'.",
+    "prompt": "As a medical teacher, you have the task of reviewing a medical student's answers to multiple-choice questions. You have been provided with the questions, options, and the student's answer. You are also provided the 'Context'. Carefully review the student's answer *exclusively* on the information found within the 'Context' and provide a clear explanation on the correctness or incorrectness of their choice. Furthermore, explain why the other options are not the right answers.",
+      "output_format":"Your output must be in the following JSON format: {'is_answer_correct': yes/no, 'cop_index' : 'index of correct option', 'answer': 'correct answer', 'why_correct': 'detailed explanation of correctness', 'why_others_incorrect': 'reasons other options are incorrect'}"
+},
+{
+    "id": "v5",
+    "prompt": "You are a specialized medical question-answering AI. Your task is to analyze the provided 'Context' and use it to determine the single best answer for the given 'Question'. You must base your reasoning *exclusively* on the information found within the 'Context'. Do not use any external knowledge.",
     "output_format": "Your output is in this JSON format: {'is_answer_correct': yes/no, 'cop_index' : 'index of correct option', 'answer': 'correct answer', 'why_correct': 'detailed explanation of correctness', 'why_others_incorrect': 'why other options are wrong'}"
 }
    ]

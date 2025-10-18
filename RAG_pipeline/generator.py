@@ -158,68 +158,6 @@ class RAGGenerator:
         
         return corrected_query
 
-    # async def _get_cypher_from_llm(self, prompt_assets: dict, question: str, input_key: str, output_key: str) -> str | None:
-    #     """
-    #     Builds a prompt from the loaded assets and asks the LLM to generate the
-    #     Cypher query from scratch.
-    #     """
-    #     # 1. Get the prompt and format instructions from the loaded assets.
-    #     instructions = prompt_assets.get("prompt", "")
-    #     format_rules = prompt_assets.get("output_format", "")
-
-    #     if not instructions or not format_rules:
-    #         logging.error("Prompt assets are missing 'prompt' or 'output_format' keys.")
-    #         return None
-        
-    #     # 2. Prepare any dynamic variables needed in the prompt.
-    #     sanitized_question = question.replace('"', '\\"')
-        
-    #     concepts = []
-    #     concepts_str=""
-    #     if "{concepts}" in format_rules: # Check if concepts are needed
-    #         concepts = self.extract_biomedical_concepts(question)
-    #         concepts_str = json.dumps(concepts)
-    #         concepts_str = "- The concepts to match are: "+ concepts_str
-    #         format_rules = format_rules.format(concepts=concepts_str, question=sanitized_question)
-    #     else:
-    #         format_rules = format_rules.format(question=sanitized_question)
-    #     # 3. Construct the FINAL prompt to send to the LLM.
-    #     #    This is where we combine everything.
-    #     #    We pre-fill the concepts/snippet so the LLM knows what values to use.
-    #     final_llm_prompt = f"""
-    #     {instructions}
-
-    #     {format_rules}
-    #     """
-        
-    #     # 4. Call the LLM with the final combined prompt.
-    #     try:
-    #         response = await self.llm.chat.completions.create(
-    #             model=self.model_name,
-    #             messages=[{"role": "user", "content": final_llm_prompt}],
-    #             temperature=0.0
-    #         )
-    #         llm_response = response.choices[0].message.content
-            
-    #         # 5. Extract the query from the response.
-    #         match = re.search(r"```(?:cypher)?\n(.*?)\n```", llm_response, re.DOTALL)
-    #         if not match: # A stricter check: if no code block, it failed the instruction.
-    #              match = re.search(r'^(MATCH .*)', llm_response, re.DOTALL | re.MULTILINE)
-            
-    #         if not match:
-    #             logging.warning(f"LLM did not return a valid query format. Response: '{llm_response}'")
-    #             return None
-            
-    #         query = match.group(1).strip()
-            
-    #         # 6. Apply self-correction as a safety net.
-    #         #query = self._self_correct_query(query)
-            
-    #         return query
-            
-    #     except Exception as e:
-    #         logging.error(f"Error getting Cypher from LLM: {e}", exc_info=True)
-    #         return None
 
     def _sanitize_for_cypher(self, text: str) -> str:
         """
@@ -243,7 +181,7 @@ class RAGGenerator:
         
         return text.strip()
         
-    async def _get_execute_cypher_query(self, task_name, prompt_assets: dict, question: str, input_key: str, output_key: str) -> str | None:
+    async def _get_execute_cypher_query(self, task_name, question: str, input_key: str, output_key: str) -> str | None:
         """
         Builds a prompt from the loaded assets and asks the LLM to generate the
         Cypher query from scratch.
@@ -268,64 +206,6 @@ class RAGGenerator:
             # This is a synchronous, blocking call, which is acceptable here as it's fast
             # and follows an async LLM call.
         return await self._execute_cypher_and_format(space_name, cypher_query, question, input_key, output_key)
-
-        # # 1. Get the prompt and format instructions from the loaded assets.
-        # instructions = prompt_assets.get("prompt", "")
-        # format_rules = prompt_assets.get("output_format", "")
-
-        # if not instructions or not format_rules:
-        #     logging.error("Prompt assets are missing 'prompt' or 'output_format' keys.")
-        #     return None
-        
-        # # 2. Prepare any dynamic variables needed in the prompt.
-        # sanitized_question = question.replace('"', '\\"')
-        
-        # concepts = []
-        # concepts_str=""
-        # if "{concepts}" in format_rules: # Check if concepts are needed
-        #     concepts = self.extract_biomedical_concepts(question)
-        #     concepts_str = json.dumps(concepts)
-        #     concepts_str = "- The concepts to match are: "+ concepts_str
-        #     format_rules = format_rules.format(concepts=concepts_str, question=sanitized_question)
-        # else:
-        #     format_rules = format_rules.format(question=sanitized_question)
-        # # 3. Construct the FINAL prompt to send to the LLM.
-        # #    This is where we combine everything.
-        # #    We pre-fill the concepts/snippet so the LLM knows what values to use.
-        # final_llm_prompt = f"""
-        # {instructions}
-
-        # {format_rules}
-        # """
-        
-        # # 4. Call the LLM with the final combined prompt.
-        # try:
-        #     response = await self.llm.chat.completions.create(
-        #         model=self.model_name,
-        #         messages=[{"role": "user", "content": final_llm_prompt}],
-        #         temperature=0.0
-        #     )
-        #     llm_response = response.choices[0].message.content
-            
-        #     # 5. Extract the query from the response.
-        #     match = re.search(r"```(?:cypher)?\n(.*?)\n```", llm_response, re.DOTALL)
-        #     if not match: # A stricter check: if no code block, it failed the instruction.
-        #          match = re.search(r'^(MATCH .*)', llm_response, re.DOTALL | re.MULTILINE)
-            
-        #     if not match:
-        #         logging.warning(f"LLM did not return a valid query format. Response: '{llm_response}'")
-        #         return None
-            
-        #     query = match.group(1).strip()
-            
-        #     # 6. Apply self-correction as a safety net.
-        #     #query = self._self_correct_query(query)
-            
-        #     return query
-            
-        # except Exception as e:
-        #     logging.error(f"Error getting Cypher from LLM: {e}", exc_info=True)
-        #     return None
 
 
     async def _execute_cypher_and_format(self, space_name: str, cypher_query: str, question:str, input_key:str, output_key: str) -> dict:
@@ -376,12 +256,11 @@ class RAGGenerator:
         if not no_rag:
             logging.info(f"Running IR Task '{task_name}' in RAG (Text-to-Cypher) mode.")
             
-            # 1. Get Cypher from LLM
-            #cypher_query = await self._get_cypher_from_llm(prompt_assets, question, input_key, output_key)
-            #json_output = await self._get_execute_cypher_query(task_name, prompt_assets, question, input_key, output_key)
+            # 1. Get Cypher and execute it
+            # If context is provided, we skip LLM generation and use it directly.
             json_output=context
             if json_output is None:
-                json_output = await self._get_execute_cypher_query(task_name, prompt_assets, question, input_key, output_key)
+                json_output = await self._get_execute_cypher_query(task_name, question, input_key, output_key)
             if not json_output:
                 output_key = TASK_TO_OUTPUT_KEY_MAP.get(task_name, "error")
                 return {output_key: "Unknown"}
@@ -418,13 +297,13 @@ class RAGGenerator:
         consistency_result = "SUPPORTED" 
 
         if not no_rag:
-            if not all([self.st_model, self.faiss_index, self.nebula_pool]):
-                raise RuntimeError("RAG components not provided for a RAG-enabled run.")
             
             if context is not None:
                 logging.info("Using pre-fetched context for RAG reasoning task.")
                 final_definitions = context
             else:
+                if not all([self.st_model, self.faiss_index, self.nebula_pool]):
+                    raise RuntimeError("RAG components not provided for a RAG-enabled run.")
                 query = question + " " + " ".join(options.values())
                 suis, top_semantic_texts = await retrieve_semantic_nodes(query, self.st_model, self.faiss_index, self.faiss_texts, top_k=30000, top_m=30)
                 retrieved_definitions = await get_definitions_from_graph(self.nebula_pool, suis)
@@ -475,15 +354,14 @@ class RAGGenerator:
             # --- This is your ORIGINAL, UNCHANGED logic for REASONING tasks ---
             return await self._handle_reasoning_task(question, options, prompt_assets, task_name, no_rag, context)
 
-    async def retrieve_context_only(self, question: str, options: dict, task_name: str, 
-                                      prompt_assets: dict, input_key: str = None, output_key: str = None) -> list:
+    async def retrieve_context_only(self, question: str, options: dict, task_name: str, input_key: str = None, output_key: str = None) -> list:
         """
         --- NEW FUNCTION ---
         This function contains ONLY the retrieval logic from your original handlers.
         """
         if task_name.startswith('IR_'):
             # This is your original IR retrieval logic
-            return await self._get_execute_cypher_query(task_name, prompt_assets, question, input_key, output_key)
+            return await self._get_execute_cypher_query(task_name, question, input_key, output_key)
         else:
             # This is your original Reasoning retrieval logic
             query = question + " " + " ".join(options.values())

@@ -40,22 +40,6 @@ def connect_nebula():
         logging.error(f"Failed to connect to NebulaGraph: {e}")
         return None, None
 
-# def connect_nebula():
-#     """
-#     Initializes and returns the NebulaGraph connection pool.
-#     """
-#     try:
-#         config = Config()
-#         config.max_connection_pool_size = 10 # Or whatever size you need
-#         pool = ConnectionPool()
-#         pool.init([("127.0.0.1", 9669)], config)
-        
-#         # Verify the pool is alive but DON'T check out a session here.
-#         logging.info("Successfully initialized NebulaGraph connection pool.")
-#         return pool
-#     except Exception as e:
-#         logging.error(f"Failed to initialize NebulaGraph connection pool: {e}")
-#         return None
 
 def load_faiss_index():
     try:
@@ -140,187 +124,6 @@ async def rerank_definitions(cross_encoder: CrossEncoder, question, definitions,
     logging.info(f"Re-ranked {len(definitions)} definitions and selected the top {len(top_definitions)}.")
     return top_definitions
 
-# async def get_definitions_from_graph(pool: ConnectionPool, suis: list):
-#     if not suis: return []
-
-#     # The nebula client's execute method is blocking I/O.
-#     # We run it in a thread to prevent it from stalling other async tasks.
-#     def _blocking_graph_queries():
-#         session = None
-#         try:
-#             # Use a context manager to get a session from the pool.
-#             # This automatically handles acquiring and releasing the connection.
-#             with pool.session_context('root', 'nebula') as session:
-#                 # IMPORTANT: You must select the graph space for each new session.
-#                 session.execute("USE petagraph;")
-
-#                 suis_str = ", ".join(f'"{sui}"' for sui in suis)
-#                 resp_cuis = session.execute(f'GO FROM {suis_str} OVER STY REVERSELY YIELD DISTINCT src(edge) AS cui')
-#                 if resp_cuis.is_empty(): return []
-                
-#                 cuis = [r.values[0].get_sVal().decode("utf-8") for r in resp_cuis.rows()]
-#                 cuis_str = ", ".join(f'"{cui}"' for cui in cuis)
-#                 resp_defs = session.execute(f'GO FROM {cuis_str} OVER DEF YIELD DISTINCT dst(edge) AS def_id')
-#                 if resp_defs.is_empty(): return []
-                
-#                 def_ids = [r.values[0].get_sVal().decode("utf-8") for r in resp_defs.rows()]
-#                 def_ids_str = ", ".join(f'"{d}"' for d in def_ids)
-#                 resp_final = session.execute(f'FETCH PROP ON Definition {def_ids_str} YIELD Definition.ATUI, Definition.DEF')
-
-#                 # 2. Check if the query was successful and not empty.
-#                 if resp_final.is_succeeded() and not resp_final.is_empty():
-                    
-#                     # 3. Initialize an empty dictionary to store the results.
-#                     definitions_dict = {}
-                    
-#                     # 4. Iterate through each row of the result set.
-#                     for record in resp_final.rows():
-#                         # The record.values will be a list corresponding to the YIELD order.
-#                         # record.values[0] will be Definition.ATUI
-#                         # record.values[1] will be Definition.DEF
-                        
-#                         # Get the key (ATUI) and value (DEF) from the record.
-#                         # .as_string() is a safe way to decode the value from the Nebula response.
-#                         atui_key = record.values[0].get_sVal().decode("utf-8")
-#                         definition_value = record.values[1].get_sVal().decode("utf-8")
-                        
-#                         # 5. Populate the dictionary.
-#                         definitions_dict[atui_key] = definition_value
-                    
-#                     # The function now returns a dictionary instead of a list.
-#                     return definitions_dict
-
-#                 else:
-#                     # If the query fails or returns nothing, return an empty dictionary.
-#                     logging.warning(f"FETCH PROP query for definitions failed or returned empty.")
-#                     return {}
-
-#         except Exception as e:
-#             logging.error(f"An error during graph traversal: {e}")
-#             return []
-
-#     return await asyncio.to_thread(_blocking_graph_queries)
-
-# async def rerank_definitions(cross_encoder: CrossEncoder, question: str, definitions_dict: dict, top_k: int = 15):
-#     """
-#     --- NEW AND CORRECTED ---
-#     This function now accepts a dictionary of definitions {def_id: definition_text},
-#     re-ranks them based on relevance to the question, and returns a dictionary
-#     containing only the top_k most relevant items.
-#     """
-#     # 1. Handle the case of an empty input dictionary.
-#     if not definitions_dict:
-#         return {}
-
-#     # Cross-encoder prediction is a heavy, CPU-bound task.
-#     def _blocking_rerank():
-#         # 2. Prepare the data for the cross-encoder.
-#         #    We create a list of [question, definition_text] pairs.
-#         #    Crucially, we keep track of the original def_ids.
-#         def_ids = list(definitions_dict.keys())
-#         definition_texts = list(definitions_dict.values())
-        
-#         sentence_pairs = [[question, def_text] for def_text in definition_texts]
-        
-#         # 3. Get the relevance scores from the model.
-#         scores = cross_encoder.predict(sentence_pairs)
-        
-#         # 4. Combine the scores with their original def_ids and texts.
-#         #    We now have a list of tuples: (score, def_id, definition_text)
-#         scored_definitions = sorted(
-#             zip(scores, def_ids, definition_texts), 
-#             key=lambda x: x[0], 
-#             reverse=True
-#         )
-        
-#         # 5. Select the top k results.
-#         top_results = scored_definitions[:top_k]
-        
-#         # 6. Reconstruct the dictionary with only the top k items.
-#         #    The result is a new dictionary in the original {def_id: definition_text} format.
-#         top_definitions_dict = {def_id: def_text for score, def_id, def_text in top_results}
-        
-#         return top_definitions_dict
-
-#     # Run the blocking function in a separate thread.
-#     top_definitions = await asyncio.to_thread(_blocking_rerank)
-    
-#     logging.info(f"Re-ranked {len(definitions_dict)} definitions and selected the top {len(top_definitions)}.")
-    
-#     # The function now returns a dictionary of the top k definitions.
-#     return top_definitions
-
-# async def get_semantic_names_for_definitions(pool: ConnectionPool, definitions_dict: dict) -> dict:
-#     """
-#     Takes a dictionary of {def_id: definition_text}, and for each entry,
-#     traverses the graph to find the core semantic concept name.
-    
-#     Returns a new dictionary of {semantic_name: definition_text}.
-#     """
-#     # 1. Handle empty inputs gracefully.
-#     if not definitions_dict or not pool:
-#         return {}
-
-#     # All the database logic will run in a separate thread.
-#     def _blocking_lookup():
-#         # Initialize the new dictionary we will return.
-#         semantic_mapping = {}
-        
-#         try:
-#             # Get a session from the pool.
-#             with pool.session_context('root', 'nebula') as session:
-#                 session.execute("USE petagraph;")
-                
-#                 # 2. Loop through each definition from the input dictionary.
-#                 for def_id, definition_text in definitions_dict.items():
-#                     try:
-#                         # --- STEP A: Go from Definition ID to Concept ID (CUI) ---
-#                         query1 = f'GO FROM "{def_id}" OVER DEF REVERSELY YIELD DISTINCT src(edge) AS cui'
-#                         result1 = session.execute(query1)
-#                         if not result1.is_succeeded() or result1.is_empty():
-#                             logging.warning(f"Could not find CUI for DEF_ID: {def_id}. Skipping.")
-#                             continue # Skip to the next item in the loop
-                        
-#                         cuis = [r.values[0].get_sVal().decode("utf-8") for r in result1.rows()]
-#                         cuis_str = ", ".join(f"{cui}" for cui in cuis)
-                        
-#                         # --- STEP B: Go from CUI to Semantic ID (SUI) ---
-#                         query2 = f'GO FROM "{cuis_str}" OVER STY YIELD DISTINCT dst(edge) AS sui'
-#                         result2 = session.execute(query2)
-#                         if not result2.is_succeeded() or result2.is_empty():
-#                             logging.warning(f"Could not find SUI for CUI: {cuis_str}. Skipping.")
-#                             continue
-                            
-#                         suis = [r.values[0].get_sVal().decode("utf-8") for r in result2.rows()]
-#                         suis_str = ", ".join(f"{sui}" for sui in suis)
-
-#                         # --- STEP C: Fetch the Semantic Name from the SUI ---
-#                         query3 = f'FETCH PROP ON Semantic "{suis_str}" YIELD Semantic.name'
-#                         result3 = session.execute(query3)
-#                         if not result3.is_succeeded() or result3.is_empty():
-#                             logging.warning(f"Could not find Semantic Name for SUI: {suis_str}. Skipping.")
-#                             continue
-                            
-#                         suis = [r.values[0].get_sVal().decode("utf-8") for r in result3.rows()]
-#                         suis_names = ", ".join(f"{sui}" for sui in suis)
-                        
-#                         # 4. We have a success! Populate the new dictionary.
-#                         # The key is the semantic name, the value is the original definition text.
-#                         semantic_mapping[suis_names] = definition_text
-                        
-#                     except Exception as e:
-#                         logging.error(f"An error occurred during the 3-step lookup for DEF_ID {def_id}: {e}")
-#                         continue # Move to the next item
-
-#         except Exception as e:
-#             logging.error(f"A fatal error occurred in the semantic name lookup process: {e}")
-            
-#         # 3. Return the newly created dictionary.
-#         return semantic_mapping
-
-#     # Run the entire blocking process in a separate thread.
-#     return await asyncio.to_thread(_blocking_lookup)
-
 def format_shots(shots):
     if not shots: return ""
     examples = []
@@ -347,14 +150,6 @@ async def check_premise_consistency(llm_client, model_name, question, context_st
     try:
         response = await llm_client.chat.completions.create(model=model_name, messages=[{"role": "user", "content": prompt}], temperature=0.0)
         answer = response.choices[0].message.content.strip().upper()
-
-        # response = await llm_client.completions.create(
-        # model=model_name,
-        # prompt=prompt,
-        # temperature=0.0,
-        # max_tokens=10  # This task only needs one word, so keep it fast!
-        # )
-        # answer = response.choices[0].text.strip().upper()
         
         if "SUPPORTED" in answer: return "SUPPORTED"
         if "CONTRADICTED" in answer: return "CONTRADICTED"
@@ -449,29 +244,6 @@ async def generate_llm_response(
                 )
                 raw_text = response.choices[0].message.content
                 parsed_json = json.loads(repair_json(raw_text))
-
-                # response = await llm_client.completions.create(
-                #     model=model_name, 
-                #     prompt=prompt,
-                #     **final_api_params
-                # )                
-                # raw_text = response.choices[0].text
-                
-                # # --- THIS IS THE FIX ---
-                # # 1. Search for a JSON code block in the model's response.
-                # match = re.search(r'(\{.*\})', raw_text, re.DOTALL)
-                
-                # json_string_to_parse = ""
-                # if match:
-                #     # If we found a clear JSON block, use its content.
-                #     json_string_to_parse = match.group(1)
-                # else:
-                #     # If no block was found, fall back to parsing the whole text.
-                #     # This maintains compatibility with models that *do* return raw JSON.
-                #     json_string_to_parse = raw_text
-
-                # # 2. Now, parse only the extracted (or full) string.
-                # parsed_json = json.loads(repair_json(json_string_to_parse))
 
                 if 'cop_index' not in parsed_json:
                     raise ValueError("Output JSON is missing the required 'cop_index' key.")

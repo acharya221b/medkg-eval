@@ -7,7 +7,7 @@
             },
             "Output":{
                "is_paper_exists":"Yes",
-               "paper_title":"Factors influencing the uptake of Voluntary HIV Counseling and Testing among secondary school students in Arusha City, Tanzania: a cross sectional study"
+               "Title":"Factors influencing the uptake of Voluntary HIV Counseling and Testing among secondary school students in Arusha City, Tanzania: a cross sectional study"
             },
             "prompt_type":"default"
          },
@@ -17,7 +17,7 @@
             },
             "Output":{
                "is_paper_exists":"Unknown",
-               "paper_title":"Unknown"
+               "Title":"Unknown"
             },
             "prompt_type":"task_specific"
          },
@@ -27,7 +27,7 @@
             },
             "Output":{
                "is_paper_exists":"Unknown",
-               "paper_title":"Unknown"
+               "Title":"Unknown"
             },
             "prompt_type":"task_specific"
          },
@@ -37,7 +37,7 @@
             },
             "Output":{
                "is_paper_exists":"Yes",
-               "paper_title":"Contributions of inflammation and tumor microenvironment to neurofibroma tumorigenesis"
+               "Title":"Contributions of inflammation and tumor microenvironment to neurofibroma tumorigenesis"
             },
             "prompt_type":"default"
          },
@@ -47,7 +47,7 @@
             },
             "Output":{
                "is_paper_exists":"Yes",
-               "paper_title":"Soft-Tissue Tumors of the Hand-Imaging Features"
+               "Title":"Soft-Tissue Tumors of the Hand-Imaging Features"
             },
             "prompt_type":"default"
          }
