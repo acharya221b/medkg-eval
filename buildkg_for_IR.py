@@ -1,4 +1,4 @@
-#buildkg.py
+# buildkg_for_IR.py
 import pandas as pd
 import spacy
 import re

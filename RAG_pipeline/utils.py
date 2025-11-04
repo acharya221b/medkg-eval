@@ -32,10 +32,11 @@ def connect_nebula():
         config.max_connection_pool_size = 10
         connection_pool = ConnectionPool()
         connection_pool.init([("127.0.0.1", 9669)], config)
-        client = connection_pool.get_session("root", "nebula")
-        client.execute("USE petagraph;")
+        #client = connection_pool.get_session("root", "nebula")
+        #client.execute("USE petagraph;")
         logging.info("Successfully connected to NebulaGraph.")
-        return client, connection_pool
+        # return client, connection_pool
+        return connection_pool
     except Exception as e:
         logging.error(f"Failed to connect to NebulaGraph: {e}")
         return None, None
@@ -260,9 +261,9 @@ async def generate_llm_response(
         context_block = ""
         if not no_rag:
             context_str = " ".join(definitions) if definitions else "No relevant biomedical context found."
-            context_block = f"{output_key}: {context_str}\n\n"
+            context_block = f"{output_key.upper()}: {context_str}\n\n"
 
-            base_prompt = (
+        base_prompt = (
         f"{main_prompt_instruction}\n"
         f"Examples:\n{few_shot_str}\n\n"
         f"--- CURRENT TASK ---\n"

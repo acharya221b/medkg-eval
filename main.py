@@ -337,7 +337,7 @@ async def main_async(args):
 
             # --- PATH 2: RAG WORKFLOW (Efficient "Retrieve Once") ---
             logging.info("--- Starting pipeline in RAG mode ---")
-            _, nebula_pool = connect_nebula()
+            nebula_pool = connect_nebula()
             if nebula_pool is None:
                 raise RuntimeError("Nebula Pool is required for all RAG tasks but failed to load.")
             
@@ -368,7 +368,7 @@ async def main_async(args):
                 os.makedirs(cache_dir, exist_ok=True)
                 timestamp = time.strftime("%Y%m%d")
                 cache_file = os.path.join(cache_dir, f"{task_name}_context_cache_{timestamp}.json")
-                cache_file = os.path.join(cache_dir, "reasoning_nota_context_cache_20251016.json")
+                #cache_file = os.path.join(cache_dir, "reasoning_nota_context_cache_20251016.json")
                 retrieved_contexts = []
                 if os.path.exists(cache_file) and not args.get_context:
                     logging.info(f"Found existing context cache. Loading from: {cache_file}")
@@ -399,7 +399,9 @@ async def main_async(args):
                                     if task_name.startswith('IR_'):
                                         input_key = TASK_TO_INPUT_KEY_MAP.get(task_name, '')
                                         output_key = TASK_TO_OUTPUT_KEY_MAP.get(task_name, '')
-                                        question_text = str(row.get(input_key, ''))
+                                        question_text = str(row_data.get(input_key, ''))
+                                        input_key = input_key.lower()
+                                        output_key = output_key.lower()
                                         options_dict = {}
                                     else:
                                         question_text = str(row_data.get('question', ''))
@@ -449,6 +451,8 @@ async def main_async(args):
                                         input_key = TASK_TO_INPUT_KEY_MAP[task_name]
                                         output_key = TASK_TO_OUTPUT_KEY_MAP[task_name]
                                         question_text = str(row_data.get(input_key, ""))
+                                        input_key = input_key.lower()
+                                        output_key = output_key.lower()
                                         options_dict = {}
                                     else:
                                         question_text = str(row_data.get('question', ""))
@@ -518,7 +522,7 @@ if __name__ == "__main__":
     # parser.add_argument("--temperature", type=float, default=0.2, help="Temperature for sampling.")
     # parser.add_argument("--max_new_tokens", type=int, default=64, help="Max new tokens to generate.")
     # parser.add_argument("--top_p", type=float, default=0.95, help="Top-p for nucleus sampling.")
-    parser.add_argument("--concurrency",type=int,default=37, help="concurrency limit set by asyncio.Semaphore")
+    parser.add_argument("--concurrency",type=int,default=10, help="concurrency limit set by asyncio.Semaphore")
     args = parser.parse_args()
     if args.no_rag:
         args.predictions_dir = "predictions_no_rag"

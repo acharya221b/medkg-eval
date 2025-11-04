@@ -1,0 +1,19 @@
+{
+  "prompts": [
+    {
+      "id": "v0",
+      "prompt": "You are a biomedical assistant querying a NebulaGraph knowledge graph that stores scientific papers.\nThe graph contains:\n- `Paper` nodes with properties: Paper.abstract, Paper.url, Paper.pmid, Paper.doi\n- `Concept` nodes connected via: (paper:Paper)-[:MENTIONS]->(concept:Concept)\n\nYour task is to generate a Cypher query that:\n1. Finds all papers mentioning any of the given biomedical concepts.\n2. Filters the papers using an abstract snippet.\n3. Returns: DISTINCT paper.Paper.url\n",
+      "output_format": "Use this Cypher format:\nMATCH (paper:Paper)-[e:MENTIONS]->(concept:Concept)\nWHERE concept.Concept.name IN {concepts} AND\n      paper.Paper.abstract CONTAINS \"{question}\"\nRETURN DISTINCT paper.Paper.url\n\nOnly output the Cypher query. Do not explain it."
+    },
+    {
+      "id": "v1",
+      "prompt": "You are a biomedical assistant querying a NebulaGraph knowledge graph that stores scientific papers.\nThe graph contains:\n- `paper` nodes with properties: Paper.abstract, Paper.url, Paper.pmid, Paper.doi\nGiven `paper.Paper.title`, generate a NebulaGraph Cypher query that returns `paper.Paper.url` \n",
+      "output_format": "Copy and output this exact cypher query: MATCH (paper:Paper) WHERE paper.Paper.abstract CONTAINS \"{question}\" RETURN DISTINCT paper.Paper.url\n\nDo not explain it."
+    },
+   {
+      "id": "v2",
+      "prompt": "You are a biomedical assistant querying a NebulaGraph knowledge graph that stores scientific papers.\nThe graph contains:\n- `Paper` nodes with properties: Paper.abstract, Paper.url, Paper.pmid, Paper.doi\n- `Concept` nodes connected via: (paper:Paper)-[:MENTIONS]->(concept:Concept)\n\nYour task is to generate a Cypher query that:\n1. Finds all papers mentioning any of the given biomedical concepts.\n2. Filters the papers using an abstract snippet.\n3. Returns: DISTINCT paper.Paper.url\n",
+      "output_format": "Copy and output this exact cypher query:\nMATCH (paper:Paper)-[e:MENTIONS]->(concept:Concept)\nWHERE concept.Concept.name IN {concepts} AND\n      paper.Paper.abstract CONTAINS \"{question}\"\nRETURN DISTINCT paper.Paper.url\n\n Do not explain it."
+    }
+  ]
+}
