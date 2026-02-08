@@ -26,7 +26,7 @@ from evaluation.utils import clean_output # Assuming this is in the root evaluat
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 ALL_TASKS = ['reasoning_fct', 'reasoning_fake', 'reasoning_nota', 
-             'IR_pmid2title', 'IR_title2url', 'IR_abstract2pubmedlink', 'IR_pubmedlink2title']
+             'IR_pmid2title', 'IR_title2pubmedlink', 'IR_abstract2pubmedlink', 'IR_pubmedlink2title']
 
 TASK_TO_PROMPT_MAP = {
     'reasoning_fct': 'reasoning_fct', 

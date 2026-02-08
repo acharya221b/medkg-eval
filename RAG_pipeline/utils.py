@@ -292,3 +292,75 @@ async def generate_llm_response(
     else:
         logging.error(f"Invalid mode '{mode}' specified for generate_llm_response.")
         return None
+    
+
+# async def get_semantic_names_for_definitions(pool: ConnectionPool, definitions_dict: dict) -> dict:
+#     """
+#     Takes a dictionary of {def_id: definition_text}, and for each entry,
+#     traverses the graph to find the core semantic concept name.
+    
+#     Returns a new dictionary of {semantic_name: definition_text}.
+#     """
+#     # 1. Handle empty inputs gracefully.
+#     if not definitions_dict or not pool:
+#         return {}
+
+#     # All the database logic will run in a separate thread.
+#     def _blocking_lookup():
+#         # Initialize the new dictionary we will return.
+#         semantic_mapping = {}
+        
+#         try:
+#             # Get a session from the pool.
+#             with pool.session_context('root', 'nebula') as session:
+#                 session.execute("USE petagraph;")
+                
+#                 # 2. Loop through each definition from the input dictionary.
+#                 for def_id, definition_text in definitions_dict.items():
+#                     try:
+#                         # --- STEP A: Go from Definition ID to Concept ID (CUI) ---
+#                         query1 = f'GO FROM "{def_id}" OVER DEF REVERSELY YIELD DISTINCT src(edge) AS cui'
+#                         result1 = session.execute(query1)
+#                         if not result1.is_succeeded() or result1.is_empty():
+#                             logging.warning(f"Could not find CUI for DEF_ID: {def_id}. Skipping.")
+#                             continue # Skip to the next item in the loop
+                        
+#                         cuis = [r.values[0].get_sVal().decode("utf-8") for r in result1.rows()]
+#                         cuis_str = ", ".join(f"{cui}" for cui in cuis)
+                        
+#                         # --- STEP B: Go from CUI to Semantic ID (SUI) ---
+#                         query2 = f'GO FROM "{cuis_str}" OVER STY YIELD DISTINCT dst(edge) AS sui'
+#                         result2 = session.execute(query2)
+#                         if not result2.is_succeeded() or result2.is_empty():
+#                             logging.warning(f"Could not find SUI for CUI: {cuis_str}. Skipping.")
+#                             continue
+                            
+#                         suis = [r.values[0].get_sVal().decode("utf-8") for r in result2.rows()]
+#                         suis_str = ", ".join(f"{sui}" for sui in suis)
+
+#                         # --- STEP C: Fetch the Semantic Name from the SUI ---
+#                         query3 = f'FETCH PROP ON Semantic "{suis_str}" YIELD Semantic.name'
+#                         result3 = session.execute(query3)
+#                         if not result3.is_succeeded() or result3.is_empty():
+#                             logging.warning(f"Could not find Semantic Name for SUI: {suis_str}. Skipping.")
+#                             continue
+                            
+#                         suis = [r.values[0].get_sVal().decode("utf-8") for r in result3.rows()]
+#                         suis_names = ", ".join(f"{sui}" for sui in suis)
+                        
+#                         # 4. We have a success! Populate the new dictionary.
+#                         # The key is the semantic name, the value is the original definition text.
+#                         semantic_mapping[suis_names] = definition_text
+                        
+#                     except Exception as e:
+#                         logging.error(f"An error occurred during the 3-step lookup for DEF_ID {def_id}: {e}")
+#                         continue # Move to the next item
+
+#         except Exception as e:
+#             logging.error(f"A fatal error occurred in the semantic name lookup process: {e}")
+            
+#         # 3. Return the newly created dictionary.
+#         return semantic_mapping
+
+#     # Run the entire blocking process in a separate thread.
+#     return await asyncio.to_thread(_blocking_lookup)
