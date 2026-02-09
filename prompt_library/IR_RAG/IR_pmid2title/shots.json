@@ -6,7 +6,6 @@
                "Pmid":"25933806"
             },
             "Output":{
-               "is_paper_exists":"Yes",
                "Title":"Factors influencing the uptake of Voluntary HIV Counseling and Testing among secondary school students in Arusha City, Tanzania: a cross sectional study"
             },
             "prompt_type":"default"
@@ -16,7 +15,6 @@
                "Pmid":"25933806e007"
             },
             "Output":{
-               "is_paper_exists":"Unknown",
                "Title":"Unknown"
             },
             "prompt_type":"task_specific"
@@ -26,7 +24,6 @@
                "Pmid":"25933ty138"
             },
             "Output":{
-               "is_paper_exists":"Unknown",
                "Title":"Unknown"
             },
             "prompt_type":"task_specific"
@@ -36,7 +33,6 @@
                "Pmid":"29596064"
             },
             "Output":{
-               "is_paper_exists":"Yes",
                "Title":"Contributions of inflammation and tumor microenvironment to neurofibroma tumorigenesis"
             },
             "prompt_type":"default"
@@ -46,7 +42,6 @@
                "Pmid":"32063006"
             },
             "Output":{
-               "is_paper_exists":"Yes",
                "Title":"Soft-Tissue Tumors of the Hand-Imaging Features"
             },
             "prompt_type":"default"

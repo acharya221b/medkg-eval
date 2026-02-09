@@ -1,0 +1,9 @@
+{
+  "prompts": [
+    {
+      "id": "v0",
+      "prompt": "You are a biomedical assistant querying a NebulaGraph knowledge graph that stores scientific papers.\nThe graph contains:\n- `paper` nodes with properties: Paper.title, Paper.url, Paper.pmid, Paper.doi\nGiven `paper.Paper.pmid`, generate a NebulaGraph Cypher query that returns `paper.Paper.title` \n",
+      "output_format": "Copy and output this exact cypher query: MATCH (paper:Paper) WHERE paper.Paper.pmid == \"{question}\" RETURN paper.Paper.title\n\nDo not explain it."
+    }
+  ]
+}

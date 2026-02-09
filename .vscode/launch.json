@@ -10,7 +10,8 @@
             "args": [
                 "--prompt_id", "v0",
                 "--tasks", "reasoning_fct",
-                "--models", "llama3.2:latest"
+                "--models", "llama2:70b",
+                "--force_rerun"
             ]
         },
         {
@@ -60,6 +61,18 @@
                 "--prompt_id", "v0",
                 "--models", "llama3.2:latest", "deepseek-r1:14b",
                 "--no-rag"
+            ]
+        },
+        {
+            "name": "IR task",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/main.py",
+            "console": "integratedTerminal",
+            "args": [
+                "--tasks", "IR_abstract2pubmedlink",
+                "--prompt_id", "v0",
+                "--models", "llama3.2:latest"
             ]
         }
     ]

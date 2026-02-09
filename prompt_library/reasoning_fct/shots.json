@@ -16,7 +16,11 @@
                "is_answer_correct":"yes",
                "cop_index":"3",
                "correct answer":"Frontalis suspension surgery",
-               "why_correct":"Frontalis suspension surgery is used for severe ptosis with poor levator muscle function. It allows the forehead to help elevate the eyelid.",
+               "why_correct":[
+      "The key concepts in the question and context are the relationship between ptosis, poor levator function, and the appropriate surgical intervention.",
+      "The context states: 'Frontalis suspension surgery is used for severe ptosis with poor levator muscle function.' It also notes that this surgery 'allows the forehead to help elevate the eyelid.'",
+      "Based on the provided context, which explicitly links 'severe ptosis with poor levator muscle function' to 'Frontalis suspension surgery,' this is the correct surgical choice for the described condition."
+   ],
                "why_others_incorrect":"The other procedures, such as Levator muscle resection, Mullerectomy, and Fasanella Servat surgery, are used for cases of ptosis with better levator function."
             },
             "prompt_type":"default"
@@ -36,7 +40,11 @@
                "is_answer_correct":"yes",
                "cop_index":"0",
                "correct answer":"Lateral aspect of TMJ",
-               "why_correct":"The temporo-mandibular ligament is attached to the lateral aspect of the Temporo-Mandibular Joint (TMJ).",
+               "why_correct":  [
+    "The question and context focus on the anatomical attachment point of the temporo-mandibular ligament.",
+    "The context states: 'The temporo-mandibular ligament is attached to the lateral aspect of the Temporo-Mandibular Joint (TMJ).'",
+    "The context directly identifies the 'lateral aspect of the Temporo-Mandibular Joint (TMJ)' as the attachment point for the temporo-mandibular ligament, confirming this as the correct answer."
+  ],
                "why_others_incorrect":"The ligament is not attached to the posterior aspect of TMJ, the mandibular condyle, or the coronoid process."
             },
             "prompt_type":"default"
@@ -56,7 +64,11 @@
                "is_answer_correct":"no",
                "cop_index":"3",
                "correct answer":"None of the above",
-               "why_correct":"Lipoproteins are classified into five main types: Chylomicrons, Very Low-Density Lipoproteins (VLDL), Intermediate-Density Lipoproteins (IDL), Low-Density Lipoproteins (LDL), and High-Density Lipoproteins (HDL).",
+               "why_correct":[
+    "The core concept is the classification and number of different types of lipoproteins.",
+    "The context states: 'Lipoproteins are classified into five main types: Chylomicrons, Very Low-Density Lipoproteins (VLDL), Intermediate-Density Lipoproteins (IDL), Low-Density Lipoproteins (LDL), and High-Density Lipoproteins (HDL).'",
+    "The context clearly lists five main types of lipoproteins, which means the options '3', '2', and '4' are all incorrect, making 'None of the above' the correct answer."
+  ],
                "why_others_incorrect":"Options '3', '2', and '4' are incorrect as they do not correctly represent the number of main lipoprotein types."
             },
             "prompt_type":"task_specific"
@@ -76,7 +88,11 @@
                "is_answer_correct":"no",
                "cop_index":"2",
                "correct_answer":"Atrophy",
-               "why_correct":"Chronic urethral obstruction due to benign prostatic hyperplasia often leads to a backflow of urine, causing hydronephrosis. Over time, this may lead to atrophy of the kidney parenchyma.",
+               "why_correct":[
+    "The central concept is the consequence of chronic urethral obstruction caused by benign prostatic hyperplasia on the kidney parenchyma.",
+    "The context explains: 'Chronic urethral obstruction due to benign prostatic hyperplasia often leads to a backflow of urine, causing hydronephrosis. Over time, this may lead to atrophy of the kidney parenchyma.'",
+    "The provided information directly links chronic urethral obstruction to 'atrophy of the kidney parenchyma' by explaining the process of backflow and hydronephrosis, thus supporting 'Atrophy' as the correct answer."
+  ],
                "why_others_incorrect":"Hyperplasia, hyperophy, and dysplasia are not typically seen in the kidney as a result of chronic urethral obstruction due to benign prostatic hyperplasia."
             },
             "prompt_type":"task_specific"
@@ -97,7 +113,11 @@
                "is_answer_correct":"yes",
                "cop_index":"2",
                "correct answer":"Vitamin B12",
-               "why_correct":"Vitamin B12 is primarily found in animal sources, including meats, dairy, and eggs.",
+               "why_correct":[
+    "The question and context revolve around identifying which vitamin is exclusively or primarily sourced from animal products.",
+    "The context states: 'Vitamin B12 is primarily found in animal sources, including meats, dairy, and eggs.'",
+    "The provided context explicitly confirms that 'Vitamin B12' is the vitamin 'primarily found in animal sources,' which aligns with the question and makes it the correct answer."
+  ],
                "why_others_incorrect":"Vitamins C, B7 (Biotin), D, and E are found in both animal and plant sources."
             },
             "prompt_type":"default"

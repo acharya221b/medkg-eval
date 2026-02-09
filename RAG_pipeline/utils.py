@@ -8,10 +8,12 @@ from dotenv import load_dotenv
 from json_repair import repair_json
 import faiss
 import numpy as np
-from openai import OpenAI
+#from openai import OpenAI
+from openai import AsyncOpenAI
 from sentence_transformers import SentenceTransformer, CrossEncoder
 from nebula3.gclient.net import ConnectionPool
 from nebula3.Config import Config
+import asyncio 
 
 # --- ROBUST FILE PATHS ---
 _CURR_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -30,13 +32,15 @@ def connect_nebula():
         config.max_connection_pool_size = 10
         connection_pool = ConnectionPool()
         connection_pool.init([("127.0.0.1", 9669)], config)
-        client = connection_pool.get_session("root", "nebula")
-        client.execute("USE petagraph;")
+        #client = connection_pool.get_session("root", "nebula")
+        #client.execute("USE petagraph;")
         logging.info("Successfully connected to NebulaGraph.")
-        return client, connection_pool
+        # return client, connection_pool
+        return connection_pool
     except Exception as e:
         logging.error(f"Failed to connect to NebulaGraph: {e}")
         return None, None
+
 
 def load_faiss_index():
     try:
@@ -48,10 +52,30 @@ def load_faiss_index():
         logging.error(f"Could not load FAISS index or texts file: {e}")
         return None, None
 
-def retrieve_semantic_seeds(query, model, index, texts, top_k=30000):
-    query_vec = model.encode([query], convert_to_numpy=True)
-    _, indices = index.search(query_vec, top_k)
-    return [texts[i]["sui"] for i in indices[0]]
+async def retrieve_semantic_nodes(query, model, index, texts, top_k=50, top_m=10):
+    """
+    MODIFIED: This function now retrieves both the top_k SUIs for graph traversal
+    and the top_m full semantic texts for direct use.
+    """
+    # Sentence encoding is CPU-bound and blocks the event loop.
+    # We run it in a separate thread to keep the pipeline responsive.
+    def _blocking_encode_and_search():
+        query_vec = model.encode([query], convert_to_numpy=True)
+        _, indices = index.search(query_vec, top_k)
+        return indices[0]
+
+    top_indices = await asyncio.to_thread(_blocking_encode_and_search)
+    
+    # Get the SUIs for the top_k results (for potential graph traversal)
+    top_k_suis = [texts[i]["sui"] for i in top_indices]
+    
+    # --- YOUR NEW FEATURE ---
+    # Get the full text content for the top_m results directly.
+    # We use [:top_m] to select the m most similar results from the top_k.
+    top_m_texts = [texts[i]["name"] for i in top_indices[:top_m]]
+    
+    logging.info(f"Retrieved {len(top_k_suis)} SUIs and the top {len(top_m_texts)} semantic texts.")
+    return top_k_suis, top_m_texts
 
 def retrieve_semantic_nodes(query, model, index, texts, top_k=50, top_m=10):
     """
@@ -76,24 +100,40 @@ def retrieve_semantic_nodes(query, model, index, texts, top_k=50, top_m=10):
 
 def get_definitions_from_graph(client, suis):
     if not suis: return []
-    try:
-        suis_str = ", ".join(f'"{sui}"' for sui in suis)
-        resp_cuis = client.execute(f'GO FROM {suis_str} OVER STY REVERSELY YIELD DISTINCT src(edge) AS cui')
-        if resp_cuis.is_empty(): return []
-        cuis = [r.values[0].get_sVal().decode("utf-8") for r in resp_cuis.rows()]
-        cuis_str = ", ".join(f'"{cui}"' for cui in cuis)
-        resp_defs = client.execute(f'GO FROM {cuis_str} OVER DEF YIELD DISTINCT dst(edge) AS def_id')
-        if resp_defs.is_empty(): return []
-        def_ids = [r.values[0].get_sVal().decode("utf-8") for r in resp_defs.rows()]
-        def_ids_str = ", ".join(f'"{d}"' for d in def_ids)
-        resp_final = client.execute(f'FETCH PROP ON Definition {def_ids_str} YIELD Definition.DEF')
-        if resp_final.is_empty(): return []
-        return [r.values[0].get_sVal().decode("utf-8") for r in resp_final.rows()]
-    except Exception as e:
-        logging.error(f"An error during graph traversal: {e}")
-        return []
 
-def rerank_definitions(question, definitions, top_k=15):
+    # The nebula client's execute method is blocking I/O.
+    # We run it in a thread to prevent it from stalling other async tasks.
+    def _blocking_graph_queries():
+        session = None
+        try:
+            # Use a context manager to get a session from the pool.
+            # This automatically handles acquiring and releasing the connection.
+            with pool.session_context('root', 'nebula') as session:
+                # IMPORTANT: You must select the graph space for each new session.
+                session.execute("USE petagraph;")
+
+                suis_str = ", ".join(f'"{sui}"' for sui in suis)
+                resp_cuis = session.execute(f'GO FROM {suis_str} OVER STY REVERSELY YIELD DISTINCT src(edge) AS cui')
+                if resp_cuis.is_empty(): return []
+                
+                cuis = [r.values[0].get_sVal().decode("utf-8") for r in resp_cuis.rows()]
+                cuis_str = ", ".join(f'"{cui}"' for cui in cuis)
+                resp_defs = session.execute(f'GO FROM {cuis_str} OVER DEF YIELD DISTINCT dst(edge) AS def_id')
+                if resp_defs.is_empty(): return []
+                
+                def_ids = [r.values[0].get_sVal().decode("utf-8") for r in resp_defs.rows()]
+                def_ids_str = ", ".join(f'"{d}"' for d in def_ids)
+                resp_final = session.execute(f'FETCH PROP ON Definition {def_ids_str} YIELD Definition.DEF')
+                
+                if resp_final.is_empty(): return []
+                return [r.values[0].get_sVal().decode("utf-8") for r in resp_final.rows()]
+        except Exception as e:
+            logging.error(f"An error during graph traversal: {e}")
+            return []
+
+    return await asyncio.to_thread(_blocking_graph_queries)
+
+async def rerank_definitions(cross_encoder: CrossEncoder, question, definitions, top_k=15):
     if not definitions: return []
     cross_encoder = CrossEncoder('pritamdeka/S-PubMedBert-MS-MARCO')
     scores = cross_encoder.predict([[question, d] for d in definitions])
@@ -118,7 +158,7 @@ def format_shots(shots):
         examples.append(example)
     return "\\n\\n".join(examples)
 
-def check_premise_consistency(llm_client, model_name, question, context_str):
+async def check_premise_consistency(llm_client, model_name, question, context_str):
     if not context_str: return "NEUTRAL"
     prompt = (
         f"You are a logical validation agent. Determine if the 'Context' supports, contradicts, or is neutral to the 'Question Premise'. "
@@ -126,8 +166,9 @@ def check_premise_consistency(llm_client, model_name, question, context_str):
         f"Context: {context_str}\nQuestion Premise: {question}\nAnswer:"
     )
     try:
-        response = llm_client.chat.completions.create(model=model_name, messages=[{"role": "user", "content": prompt}], temperature=0.0)
+        response = await llm_client.chat.completions.create(model=model_name, messages=[{"role": "user", "content": prompt}], temperature=0.0)
         answer = response.choices[0].message.content.strip().upper()
+        
         if "SUPPORTED" in answer: return "SUPPORTED"
         if "CONTRADICTED" in answer: return "CONTRADICTED"
         return "NEUTRAL"
@@ -135,10 +176,23 @@ def check_premise_consistency(llm_client, model_name, question, context_str):
         logging.error(f"Error during premise consistency check: {e}")
         return "NEUTRAL"
 
-def generate_llm_response(llm_client, model_name, question, options, definitions, prompt_assets, consistency_result="", no_rag=False):
+
+async def generate_llm_response(
+    llm_client : AsyncOpenAI, 
+    model_name, 
+    question, 
+    options, 
+    definitions, 
+    prompt_assets, 
+    consistency_result="", 
+    no_rag=False,
+    mode='full',
+    input_key="",
+    output_key=""
+):
     """
-    MODIFIED: This function now dynamically builds the prompt based on whether
-    RAG is enabled, omitting the Context and Guidance sections in no-RAG mode.
+    A unified function that can generate a full JSON response ('full' mode)
+    or a fast 'yes'/'no' for probability testing ('forced_choice' mode).
     """
     main_prompt_instruction = prompt_assets.get("prompt", "")
     few_shot_str = format_shots(prompt_assets.get("shots", []))
@@ -154,28 +208,93 @@ def generate_llm_response(llm_client, model_name, question, options, definitions
         "4. `why_others_incorrect`: A brief explanation for why each of the other options is wrong."
     )
     
-    # --- DYNAMIC PROMPT COMPONENT LOGIC ---
     context_block = ""
-    consistency_guidance = ""
     if not no_rag:
-        # Only add context and guidance if RAG is enabled.
         context_str = " ".join(definitions) if definitions else "No relevant biomedical context found."
-        context_block = f"Context: {context_str}\n\n"
-        if consistency_result in ["CONTRADICTED", "NEUTRAL"]:
+        context_block = f"CONTEXT: {context_str}\n\n"
+
+    # --- MODE 1: FORCED CHOICE (Lightweight for looping) ---
+    if mode == 'forced_choice':
+        # This prompt is intentionally simple. It doesn't need few-shots or complex formatting.
+        prompt = (
+            f"{main_prompt_instruction}\n\n"
+            f"--- CURRENT TASK ---\n"
+            f"{context_block}"
+            f"Question: {question}\nOptions:\n{options_str}\n\n"
+            "Based on your expert analysis, is the provided 'correct answer' in the options factually correct? "
+            "Respond with ONLY the single word 'yes' or 'no'."
+        )
+        try:
+            response = await llm_client.chat.completions.create(
+                model=model_name,
+                messages=[{"role": "user", "content": prompt}],
+                temperature=0.0,
+                max_tokens=3 # We only need a single word
+            )
+            return response.choices[0].message.content.lower().strip().replace(".", "")
+        except Exception as e:
+            logging.error(f"API call for forced_choice failed: {e}")
+            return "error"
+
+    # --- MODE 2: FULL GENERATION (Your robust version) ---
+    elif mode == 'full':
+
+        few_shot_str = format_shots(prompt_assets.get("shots", []))
+        consistency_guidance = ""
+        if not no_rag and consistency_result in ["CONTRADICTED", "NEUTRAL"]:
+            # consistency_guidance = (
+            #     f"\n--- CRITICAL GUIDANCE ---\nA fact-check determined the context is '{consistency_result}' to the question's premise. This strongly indicates the question is flawed or unanswerable. "
+            #     f"Your primary task is to explain WHY the question is flawed. Set 'cop_index' to the 'None of the above' option if it exists, otherwise set it to -1.\n--- END GUIDANCE ---\n"
+            # )
             consistency_guidance = (
-                f"\n--- CRITICAL GUIDANCE ---\nA fact-check determined the context is '{consistency_result}' to the question's premise. This strongly indicates the question is flawed or unanswerable. "
-                f"Your primary task is to explain WHY the question is flawed. Set 'cop_index' to the 'None of the above' option if it exists, otherwise set it to -1.\n--- END GUIDANCE ---\n"
+                f"\n--- CONTEXT CHECK ---\nA fact-check determined the provided context is '{consistency_result}' to the question's premise. \n--- END CHECK ---\n"
             )
 
-    # Assemble the final prompt from the dynamic components
-    base_prompt = (
+        base_prompt = (
+            f"{main_prompt_instruction}\n"
+            f"Examples:\n{few_shot_str}\n\n"
+            f"--- CURRENT TASK ---\n"
+            f"{context_block}"
+            f"{consistency_guidance}"
+            f"Question: {question}\nOptions:\n{options_str}\n\n"
+            f"Provide your answer. {prompt_assets.get('output_format', '')}"
+        )
+        for attempt in range(2):
+            prompt = base_prompt + ("\n\nYour previous response was invalid. Please provide ONLY the JSON object." if attempt > 0 else "")
+            try:
+                response = await llm_client.chat.completions.create(
+                    model=model_name, 
+                    messages=[{"role": "user", "content": prompt}], 
+                    temperature=0.0, 
+                    response_format={"type": "json_object"}
+                )
+                raw_text = response.choices[0].message.content
+                parsed_json = json.loads(repair_json(raw_text))
+
+                if 'cop_index' not in parsed_json:
+                    raise ValueError("Output JSON is missing the required 'cop_index' key.")
+                return parsed_json
+            except Exception as e:
+                logging.warning(f"Attempt {attempt + 1} failed: {e}. Raw response: '{locals().get('raw_text', 'N/A')}'")
+                time.sleep(1)
+        
+        logging.error(f"Failed to get valid LLM response after multiple attempts.")
+        return None
+    elif mode=="IR":
+        #main_prompt_instruction = prompt_assets.get("prompt", "")
+        few_shot_str = format_shots(prompt_assets.get("shots", []))
+        context_block = ""
+        if not no_rag:
+            context_str = " ".join(definitions) if definitions else "No relevant biomedical context found."
+            context_block = f"{output_key.upper()}: {context_str}\n\n"
+
+        base_prompt = (
         f"{main_prompt_instruction}\n"
-        f"{consistency_guidance}" # Will be empty in no-RAG mode
         f"Examples:\n{few_shot_str}\n\n"
         f"--- CURRENT TASK ---\n"
-        f"{context_block}" # Will be empty in no-RAG mode
-        f"Question: {question}\nOptions:\n{options_str}\n\n"
-        f"Provide your answer. {output_format_instruction}"
+        f"Context {context_block}"
+        f"Given {input_key}: {question}\n\n"
+        f"Provide your {output_key}. {prompt_assets.get('output_format', '')}"
     )
     for attempt in range(2):
         prompt = base_prompt + ("\n\nYour previous response was invalid. Please provide ONLY the JSON object." if attempt > 0 else "")
@@ -189,12 +308,62 @@ def generate_llm_response(llm_client, model_name, question, options, definitions
             # 2. Parse the now-guaranteed-to-be-valid JSON string.
             parsed_json = json.loads(repaired_json_str)
 
-            if 'cop_index' not in parsed_json:
-                raise ValueError("Output JSON is missing the required 'cop_index' key.")
+#     # All the database logic will run in a separate thread.
+#     def _blocking_lookup():
+#         # Initialize the new dictionary we will return.
+#         semantic_mapping = {}
+        
+#         try:
+#             # Get a session from the pool.
+#             with pool.session_context('root', 'nebula') as session:
+#                 session.execute("USE petagraph;")
+                
+#                 # 2. Loop through each definition from the input dictionary.
+#                 for def_id, definition_text in definitions_dict.items():
+#                     try:
+#                         # --- STEP A: Go from Definition ID to Concept ID (CUI) ---
+#                         query1 = f'GO FROM "{def_id}" OVER DEF REVERSELY YIELD DISTINCT src(edge) AS cui'
+#                         result1 = session.execute(query1)
+#                         if not result1.is_succeeded() or result1.is_empty():
+#                             logging.warning(f"Could not find CUI for DEF_ID: {def_id}. Skipping.")
+#                             continue # Skip to the next item in the loop
+                        
+#                         cuis = [r.values[0].get_sVal().decode("utf-8") for r in result1.rows()]
+#                         cuis_str = ", ".join(f"{cui}" for cui in cuis)
+                        
+#                         # --- STEP B: Go from CUI to Semantic ID (SUI) ---
+#                         query2 = f'GO FROM "{cuis_str}" OVER STY YIELD DISTINCT dst(edge) AS sui'
+#                         result2 = session.execute(query2)
+#                         if not result2.is_succeeded() or result2.is_empty():
+#                             logging.warning(f"Could not find SUI for CUI: {cuis_str}. Skipping.")
+#                             continue
+                            
+#                         suis = [r.values[0].get_sVal().decode("utf-8") for r in result2.rows()]
+#                         suis_str = ", ".join(f"{sui}" for sui in suis)
+
+#                         # --- STEP C: Fetch the Semantic Name from the SUI ---
+#                         query3 = f'FETCH PROP ON Semantic "{suis_str}" YIELD Semantic.name'
+#                         result3 = session.execute(query3)
+#                         if not result3.is_succeeded() or result3.is_empty():
+#                             logging.warning(f"Could not find Semantic Name for SUI: {suis_str}. Skipping.")
+#                             continue
+                            
+#                         suis = [r.values[0].get_sVal().decode("utf-8") for r in result3.rows()]
+#                         suis_names = ", ".join(f"{sui}" for sui in suis)
+                        
+#                         # 4. We have a success! Populate the new dictionary.
+#                         # The key is the semantic name, the value is the original definition text.
+#                         semantic_mapping[suis_names] = definition_text
+                        
+#                     except Exception as e:
+#                         logging.error(f"An error occurred during the 3-step lookup for DEF_ID {def_id}: {e}")
+#                         continue # Move to the next item
+
+#         except Exception as e:
+#             logging.error(f"A fatal error occurred in the semantic name lookup process: {e}")
             
-            return parsed_json
-        except Exception as e:
-            logging.warning(f"Attempt {attempt + 1} failed: {e}. Raw response: '{locals().get('raw_text', 'N/A')}'")
-            time.sleep(1)
-    logging.error(f"Failed to get valid LLM response after multiple attempts.")
-    return None
+#         # 3. Return the newly created dictionary.
+#         return semantic_mapping
+
+#     # Run the entire blocking process in a separate thread.
+#     return await asyncio.to_thread(_blocking_lookup)

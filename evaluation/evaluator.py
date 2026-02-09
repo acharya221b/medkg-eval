@@ -1,3 +1,5 @@
+# evaluation/evaluator.py
+
 import pandas as pd
 import glob
 import json
@@ -5,133 +7,187 @@ from tqdm import tqdm
 import os
 import logging
 import re
+import numpy as np
 
 class FullDataEval:
-    def __init__(self, folder_name, file_pattern="*.json", correct_score=1, incorrect_score=-0.25):
-        self.evaluations = []
+    """
+    A comprehensive evaluation class that processes JSON results for both
+    reasoning and information retrieval tasks, now with support for subset-based
+    statistical analysis.
+    """
+    def __init__(self, folder_name, all_files, correct_score=1, incorrect_score=-0.25):
         self.folder_name = folder_name
         self.correct_score = correct_score
         self.incorrect_score = incorrect_score
-        
-        # --- THE DEFINITIVE FIX IS HERE ---
-        # This now correctly creates a list of FULL file paths to be processed.
-        self.all_files = glob.glob(os.path.join(self.folder_name, file_pattern))
-        logging.info(f"Evaluator initialized. Found {len(self.all_files)} files for pattern '{file_pattern}'.")
-        
-    def read_json(self, file):
-        with open(file, 'r') as json_file:
-            return json.load(json_file)
+        self.all_files = all_files
+        logging.info(f"Evaluator initialized with {len(self.all_files)} specific files to process.")
+
+
+    def read_json(self, file_path):
+        """Safely reads and loads a JSON file."""
+        try:
+            with open(file_path, 'r') as f:
+                return json.load(f)
+        except (json.JSONDecodeError, FileNotFoundError) as e:
+            logging.error(f"Could not read or parse JSON file: {file_path}. Error: {e}")
+            return [] # Return an empty list to prevent crashes
 
     def calculate_score(self, correct, wrong):
-        return (correct * self.correct_score + wrong * self.incorrect_score)
-
-    def create_dataframe(self, task_name, model_name, correct, wrong, score):
-        total = correct + wrong
-        accuracy = (correct / total * 100) if total > 0 else 0
-        df_dict = {
-            'model_name': [model_name],
-            'task_name': [task_name], 
-            'total': [total], 
-            'correct': [correct], 
-            'wrong': [wrong], 
-            'accuracy_%': [accuracy],
-            'score': [score]
-        }
-        return pd.DataFrame(df_dict)
+        """Calculates the raw penalty score."""
+        return (correct * self.correct_score) + (wrong * self.incorrect_score)
+    
+    def evaluate_answer(self, predicted, correct):
+        """Performs a robust, case-insensitive string comparison."""
+        return str(predicted).strip().lower() == str(correct).strip().lower()
 
     def handle_exception(self, task_name, sample_id, model_name, exception):
-        logging.error(f"Error processing sample '{sample_id}' in task '{task_name}' with model '{model_name}': {exception}")
-        return 1
+        """Logs exceptions encountered during sample evaluation."""
+        logging.error(f"Error processing sample '{sample_id}' in '{task_name}' with model '{model_name}': {exception}")
+        return 1 # Returns 1 to count as a "wrong" answer
 
-    def evaluate_reasoning_task(self, task_name, model_name, file_path):
-        """A single evaluation method for all our reasoning tasks."""
-        correct, wrong, exception_count = 0, 0, 0
-        all_files_data = self.read_json(file_path)
-
-        for sample in tqdm(all_files_data, desc=f"Evaluating {task_name}"):
-            try:
-                # The 'testbed_data' column was not being correctly created. This is now fixed in main.py.
-                gpt_output = sample.get('gpt_output', {})
-                testbed_data = sample.get('testbed_data', {})
-
-                if 'cop_index' not in gpt_output:
-                    raise KeyError("'cop_index' not found in gpt_output.")
-                                
-                predicted_index = gpt_output.get('cop_index')
-                correct_index = testbed_data.get('correct_index')
-
-                if predicted_index is None:
-                    raise KeyError("'cop_index' not found in gpt_output.")
-                
-                # Compare predicted index with correct index
-                if str(predicted_index) == str(correct_index):
-                    correct += 1
-                else:
-                    wrong += 1
-
-            except Exception as e:
-                exception_count += self.handle_exception(task_name, sample.get('id', 'unknown_id'), model_name, e)
-                wrong += 1
-
-        logging.info(f"Results for {task_name} and {model_name}: Correct={correct}, Wrong={wrong}, Exceptions={exception_count}")
-        score = self.calculate_score(correct, wrong)
-        return self.create_dataframe(task_name, model_name, correct, wrong, score)
+    def _get_eval_function_for_task(self, task_name):
+        """A router to select the correct evaluation logic for a single sample."""
+        if task_name.startswith('IR_'):
+            return self._get_ir_eval_function(task_name)
+        elif 'reasoning_fake' in task_name:
+            return self._evaluate_reasoning_fake_sample
+        elif 'reasoning' in task_name:
+            return self._evaluate_reasoning_sample
+        return None
     
-    def evaluate_reasoning_fake_task(self, task_name, model_name, file_path):
-        """
-        A special evaluation method for the 'reasoning_fake' task where success
-        is defined by the LLM recognizing the question is nonsensical.
-        """
-        correct, wrong, exception_count = 0, 0, 0
-        all_files_data = self.read_json(file_path)
+    def _evaluate_reasoning_sample(self, sample):
+        """Evaluates a single sample for a standard reasoning task."""
+        try:
+            predicted = sample.get('gpt_output', {}).get('cop_index')
+            correct = sample.get('testbed_data', {}).get('correct_index')
+            if predicted is None or correct is None: return False
+            return str(predicted) == str(correct)
+        except Exception:
+            return False
 
-        # The keywords that indicate a successful recognition of a fake question.
-        SUCCESS_KEYWORDS = [
-            'i do not know', 'conceding defeat', 'admit', 'none of the above',
-            'acknowled', 'irrelevant', 'fiction', 'all of the above', 
-            'nonsensical', 'no correct', 'absurd', 'defy', "i don't know", 
-            'defies', 'bizarre', 'illogical', 'cannot answer'
-        ]
+    def _evaluate_reasoning_fake_sample(self, sample):
+        """Evaluates a single sample for the 'fake' reasoning task."""
+        SUCCESS_KEYWORDS = ['i do not know', 'conceding defeat', 'admit', 'none of the above', 'acknowled', 'irrelevant', 'fiction', 'all of the above', 'nonsensical', 'no correct', 'absurd', 'defy', "i don't know", 'defies', 'bizarre', 'illogical', 'cannot answer']
+        try:
+            explanation = str(sample.get('gpt_output', {}).get('why_correct', '')) + str(sample.get('gpt_output', {}).get('answer', ''))
+            return any(term in explanation.lower() for term in SUCCESS_KEYWORDS)
+        except Exception:
+            return False
+    
+    def _get_ir_eval_function(self, task_name):
+        """Returns a specialized evaluation function for a given IR task."""
+        ir_task_config = {
+            "IR_pmid2title":          {"predicted_key": "Title", "correct_key": "Title"},
+            "IR_pubmedlink2title":      {"predicted_key": "Title", "correct_key": "Title"},
+            "IR_title2pubmedlink":      {"predicted_key": "url", "correct_key": "url"},
+            "IR_abstract2pubmedlink": {"predicted_key": "url", "correct_key": "url"}
+        }
+        config = ir_task_config.get(task_name)
+        if not config: return None
 
-        for sample in tqdm(all_files_data, desc=f"Evaluating {task_name} with {model_name}"):
+        def _eval_func(sample):
             try:
-                gpt_output = sample.get('gpt_output', {})
-                
-                # For this task, we look at the text explanation, not an index.
-                # We'll check multiple likely keys for the explanation text.
-                explanation = str(gpt_output.get('why_correct', '')) + str(gpt_output.get('answer', ''))
-                predicted_answer = explanation.lower()
+                predicted = sample['gpt_output'][config["predicted_key"]]
+                correct = sample['testbed_data'][config["correct_key"]]
+                return self.evaluate_answer(predicted, correct)
+            except (KeyError, TypeError): # Catch errors from missing keys or non-dict objects
+                return False
+        return _eval_func
 
-                # Check if any of the success keywords are in the LLM's response.
-                if any(term in predicted_answer for term in SUCCESS_KEYWORDS):
-                    correct += 1
-                else:
-                    wrong += 1
+    def _evaluate_single_file(self, file_path, task_name, model_name, subset_size):
+        """
+        Core evaluation logic for a single file, now operating on subsets.
+        Returns a dictionary with overall results and a list of subset accuracies.
+        """
+        all_data = self.read_json(file_path)
+        eval_function = self._get_eval_function_for_task(task_name)
+        if not eval_function or not all_data:
+            return None
+
+        total_correct = 0
+        total_wrong = 0
+        exception_count = 0
+        subset_accuracies = []
+        
+        for i in range(0, len(all_data), subset_size):
+            subset = all_data[i : i + subset_size]
+            subset_correct = 0
             
-            except Exception as e:
-                exception_count += self.handle_exception(task_name, sample.get('id', 'unknown_id'), model_name, e)
-                wrong += 1
+            for sample in subset:
+                try:
+                    if eval_function(sample):
+                        subset_correct += 1
+                except Exception as e:
+                    # This exception is for unexpected errors in the eval logic itself
+                    exception_count += self.handle_exception(task_name, sample.get('id'), model_name, e)
+            
+            subset_wrong = len(subset) - subset_correct
+            if len(subset) > 0:
+                accuracy = (subset_correct / len(subset)) * 100
+                subset_accuracies.append(accuracy)
+            
+            total_correct += subset_correct
+            total_wrong += subset_wrong
 
-        logging.info(f"Results for {task_name} and {model_name}: Correct={correct}, Wrong={wrong}, Exceptions={exception_count}")
-        score = self.calculate_score(correct, wrong)
-        return self.create_dataframe(task_name, model_name, correct, wrong, score)
+        logging.info(f"Results for {task_name}/{model_name}: Correct={total_correct}, Wrong={total_wrong}, Exceptions={exception_count}")
+        return {
+            "total_correct": total_correct,
+            "total_wrong": total_wrong,
+            "subset_accuracies": subset_accuracies
+        }
 
-    def run_all_evaluations(self):
+    def run_all_evaluations(self, subset_size=100):
+        """
+        Main driver method. Processes all files, generates reports, and returns
+        both a summary DataFrame and a dictionary with detailed subset accuracies.
+        """
+        main_report_data = []
+        subset_details_data = {}
+
         for file_path in self.all_files:
             filename = os.path.basename(file_path)
+            pattern = r'((?:reasoning|IR)_.+?)_prompt_(.+?)_model_(.+?)\.json'
+            match = re.search(pattern, filename)
             
-            # --- MODIFICATION: Parse task and model name from filename ---
-            match = re.search(r'(reasoning_\w+)_prompt_.*?_model_(.*?)\.json', filename)
             if not match:
-                logging.warning(f"Could not parse task/model name from '{filename}'. Skipping.")
+                logging.warning(f"Could not parse filename '{filename}' with pattern. Skipping.")
                 continue
             
-            task_name, model_name = match.groups()
+            task_name, prompt_id, model_name = match.groups()
+            kg_rag_status = 'no' if 'no_rag' in self.folder_name.lower() else 'yes'
+            run_key = f"{task_name}_{model_name}_{prompt_id}_{kg_rag_status}"
+
+            eval_results = self._evaluate_single_file(file_path, task_name, model_name, subset_size)
             
-            if 'reasoning_fake' in task_name:
-                eval_result = self.evaluate_reasoning_fake_task(task_name, model_name, file_path)
-            else:
-                eval_result = self.evaluate_reasoning_task(task_name, model_name, file_path)
-            self.evaluations.append(eval_result)
+            if eval_results:
+                total_correct = eval_results["total_correct"]
+                total_wrong = eval_results["total_wrong"]
+                total = total_correct + total_wrong
+                overall_accuracy = (total_correct / total * 100) if total > 0 else 0
+                
+                accuracies = eval_results["subset_accuracies"]
+                
+                # --- NEW STATISTICAL CALCULATIONS ---
+                avg_subset_accuracy = np.mean(accuracies) if accuracies else 0.0
+                std_dev_subset_accuracy = np.std(accuracies) if accuracies else 0.0
+                
+                # --- SAVE SUBSET DATA ---
+                subset_details_data[run_key] = accuracies
+                
+                report_row = {
+                    'model_name': model_name,
+                    'task_name': task_name,
+                    'prompt_id': prompt_id,
+                    'kg_rag': kg_rag_status,
+                    'total_samples': total,
+                    'correct': total_correct,
+                    'wrong': total_wrong,
+                    'overall_accuracy_%': f"{overall_accuracy:.2f}",
+                    'avg_subset_accuracy_%': f"{avg_subset_accuracy:.2f}",
+                    'std_dev_subset_accuracy': f"{std_dev_subset_accuracy:.2f}",
+                    'penalty_score': self.calculate_score(total_correct, total_wrong)
+                }
+                main_report_data.append(report_row)
         
-        return pd.concat(self.evaluations, ignore_index=True) if self.evaluations else pd.DataFrame()
+        main_report_df = pd.DataFrame(main_report_data)
+        return main_report_df, subset_details_data

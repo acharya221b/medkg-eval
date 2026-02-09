@@ -1,0 +1,13 @@
+medkg_stable/
+.env tgi
+data/
+predictions/
+retrieval_cache/
+predictions_no_rag/
+__pycache__/
+RAG_pipeline/__pycache__
+for_appendix
+graphrag_new
+results
+results_no_rag
+thesis_visualizations
