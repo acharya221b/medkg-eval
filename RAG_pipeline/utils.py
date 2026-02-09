@@ -77,7 +77,28 @@ async def retrieve_semantic_nodes(query, model, index, texts, top_k=50, top_m=10
     logging.info(f"Retrieved {len(top_k_suis)} SUIs and the top {len(top_m_texts)} semantic texts.")
     return top_k_suis, top_m_texts
 
-async def get_definitions_from_graph(pool: ConnectionPool, suis: list):
+def retrieve_semantic_nodes(query, model, index, texts, top_k=50, top_m=10):
+    """
+    MODIFIED: This function now retrieves both the top_k SUIs for graph traversal
+    and the top_m full semantic texts for direct use.
+    """
+    query_vec = model.encode([query], convert_to_numpy=True)
+    _, indices = index.search(query_vec, top_k)
+    
+    top_indices = indices[0]
+    
+    # Get the SUIs for the top_k results (for potential graph traversal)
+    top_k_suis = [texts[i]["sui"] for i in top_indices]
+    
+    # --- YOUR NEW FEATURE ---
+    # Get the full text content for the top_m results directly.
+    # We use [:top_m] to select the m most similar results from the top_k.
+    top_m_texts = [texts[i]["name"] for i in top_indices[:top_m]]
+    
+    logging.info(f"Retrieved {len(top_k_suis)} SUIs and the top {len(top_m_texts)} semantic texts.")
+    return top_k_suis, top_m_texts
+
+def get_definitions_from_graph(client, suis):
     if not suis: return []
 
     # The nebula client's execute method is blocking I/O.
@@ -114,14 +135,10 @@ async def get_definitions_from_graph(pool: ConnectionPool, suis: list):
 
 async def rerank_definitions(cross_encoder: CrossEncoder, question, definitions, top_k=15):
     if not definitions: return []
-    # Cross-encoder prediction is also a heavy, CPU-bound task.
-    def _blocking_rerank():
-        #cross_encoder = CrossEncoder('pritamdeka/S-PubMedBert-MS-MARCO')
-        scores = cross_encoder.predict([[question, d] for d in definitions])
-        scored_definitions = sorted(zip(scores, definitions), key=lambda x: x[0], reverse=True)
-        return [d for _, d in scored_definitions[:top_k]]
-
-    top_definitions = await asyncio.to_thread(_blocking_rerank)
+    cross_encoder = CrossEncoder('pritamdeka/S-PubMedBert-MS-MARCO')
+    scores = cross_encoder.predict([[question, d] for d in definitions])
+    scored_definitions = sorted(zip(scores, definitions), key=lambda x: x[0], reverse=True)
+    top_definitions = [d for _, d in scored_definitions[:top_k]]
     logging.info(f"Re-ranked {len(definitions)} definitions and selected the top {len(top_definitions)}.")
     return top_definitions
 
@@ -178,10 +195,18 @@ async def generate_llm_response(
     or a fast 'yes'/'no' for probability testing ('forced_choice' mode).
     """
     main_prompt_instruction = prompt_assets.get("prompt", "")
-    if options is None: 
-        options_str = ""
-    else:
-        options_str = "\\n".join([f"{k}: {v}" for k, v in options.items()])
+    few_shot_str = format_shots(prompt_assets.get("shots", []))
+    options_str = "\\n".join([f"{k}: {v}" for k, v in options.items()])
+    output_format_instruction = (
+        "You MUST provide your response as a single, valid JSON object with the following keys:\n"
+        "1. `cop_index`: The integer index of the correct option.\n"
+        "2. `answer`: The full string value of the correct option.\n"
+        "3. `why_correct`: A detailed explanation of only the correct answer. This explanation MUST follow a specific three-part structure:\n"
+        "   - First, briefly state the key concepts in the question.\n"
+        "   - Second, quote all the exact sentences from the Context that directly support your answer.\n"
+        "   - Finally, provide a concluding sentence that links the evidence to the chosen answer.\n"
+        "4. `why_others_incorrect`: A brief explanation for why each of the other options is wrong."
+    )
     
     context_block = ""
     if not no_rag:
@@ -271,39 +296,17 @@ async def generate_llm_response(
         f"Given {input_key}: {question}\n\n"
         f"Provide your {output_key}. {prompt_assets.get('output_format', '')}"
     )
-        for attempt in range(2):
-            prompt = base_prompt + ("\n\nYour previous response was invalid. Please provide ONLY the JSON object." if attempt > 0 else "")
-            try:
-                response = await llm_client.chat.completions.create(
-                    model=model_name, 
-                    messages=[{"role": "user", "content": prompt}], 
-                    temperature=0.0, 
-                    response_format={"type": "json_object"}
-                )
-                raw_text = response.choices[0].message.content
-                parsed_json = json.loads(repair_json(raw_text))
-                # if 'cop_index' not in parsed_json:
-                #     raise ValueError("Output JSON is missing the required 'cop_index' key.")
-                return parsed_json
-            except Exception as e:
-                logging.warning(f"Attempt {attempt + 1} failed: {e}. Raw response: '{locals().get('raw_text', 'N/A')}'")
-                time.sleep(1)
-
-    else:
-        logging.error(f"Invalid mode '{mode}' specified for generate_llm_response.")
-        return None
-    
-
-# async def get_semantic_names_for_definitions(pool: ConnectionPool, definitions_dict: dict) -> dict:
-#     """
-#     Takes a dictionary of {def_id: definition_text}, and for each entry,
-#     traverses the graph to find the core semantic concept name.
-    
-#     Returns a new dictionary of {semantic_name: definition_text}.
-#     """
-#     # 1. Handle empty inputs gracefully.
-#     if not definitions_dict or not pool:
-#         return {}
+    for attempt in range(2):
+        prompt = base_prompt + ("\n\nYour previous response was invalid. Please provide ONLY the JSON object." if attempt > 0 else "")
+        try:
+            response = llm_client.chat.completions.create(model=model_name, messages=[{"role": "user", "content": prompt}], temperature=0.0, response_format={"type": "json_object"})
+            raw_text = response.choices[0].message.content
+            # response = llm_client.complete(prompt)
+            # raw_text = response.text
+            repaired_json_str = repair_json(raw_text)
+            
+            # 2. Parse the now-guaranteed-to-be-valid JSON string.
+            parsed_json = json.loads(repaired_json_str)
 
 #     # All the database logic will run in a separate thread.
 #     def _blocking_lookup():

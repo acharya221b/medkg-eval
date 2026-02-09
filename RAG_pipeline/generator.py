@@ -12,6 +12,7 @@ import asyncio
 
 # --- Correctly import all helper functions from the new utils.py file ---
 from .utils import (
+    retrieve_semantic_seeds,
     retrieve_semantic_nodes,
     get_definitions_from_graph,
     rerank_definitions,
@@ -256,38 +257,16 @@ class RAGGenerator:
         if not no_rag:
             logging.info(f"Running IR Task '{task_name}' in RAG (Text-to-Cypher) mode.")
             
-            # 1. Get Cypher and execute it
-            # If context is provided, we skip LLM generation and use it directly.
-            json_output=context
-            if json_output is None:
-                json_output = await self._get_execute_cypher_query(task_name, question, input_key, output_key)
-            if not json_output:
-                output_key = TASK_TO_OUTPUT_KEY_MAP.get(task_name, "error")
-                return {output_key: "Unknown"}
-            
-            # 2. Execute query against NebulaGraph
-            space_name = TASK_TO_SPACE_MAP[task_name]
-            output_key = TASK_TO_OUTPUT_KEY_MAP[task_name]
-            
-            # This is a synchronous, blocking call, which is acceptable here as it's fast
-            # and follows an async LLM call.
-            #return await self._execute_cypher_and_format(space_name, cypher_query, output_key)
-
-            return await generate_llm_response(
-                self.llm, self.model_name, question, {}, json_output, 
-                prompt_assets, "SUPPORTED", no_rag=no_rag, mode="IR", input_key=input_key, output_key=output_key
-            )
-
-        # --- PATH 2: IR task in non-RAG (memory-based) mode ---
-        else:
-            logging.info(f"Running IR Task '{task_name}' in non-RAG (memory-based) mode.")
-            # Use the generic `generate_llm_response` function, but with empty definitions
-            # This uses the prompt and shots from the prompt_library.
-            return await generate_llm_response(
-                self.llm, self.model_name, question, {}, [], 
-                prompt_assets, "SUPPORTED", no_rag=no_rag, mode="IR", input_key=input_key, output_key=output_key
-            )
-
+            query = question + " " + " ".join(options.values())
+            #suis = retrieve_semantic_seeds(query, self.st_model, self.faiss_index, self.faiss_texts, top_k=30000)
+            suis, top_semantic_texts = retrieve_semantic_nodes(query, self.st_model, self.faiss_index, self.faiss_texts, top_k=30000, top_m=30)
+            retrieved_definitions = get_definitions_from_graph(self.nebula_client, suis)
+            final_definitions = rerank_definitions(question, retrieved_definitions, top_k=15)
+            final_definitions = list(set(top_semantic_texts + final_definitions))
+            # if 'reasoning_fake' in task_name:
+            context_str_for_check = " ".join(final_definitions)
+            consistency_result = check_premise_consistency(self.llm, self.model_name, question, context_str_for_check)
+            logging.info(f"Premise consistency check: {consistency_result}")
 
     async def _handle_reasoning_task(self, question, options, prompt_assets, task_name, no_rag=False, context=None):
         """

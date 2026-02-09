@@ -240,67 +240,30 @@ def run_evaluation_stage(args):
     specified in the --tasks argument, across all models and prompt IDs.
     """
     logging.info(f"--- Starting Final Consolidated Evaluation ---")
-    
-    # --- START OF NEW DYNAMIC FILE SEARCH LOGIC ---
-    
-    all_json_files_to_evaluate = []
-    
-    # Iterate through each task provided in the command-line arguments
-    for task_name in args.tasks:
-        # Create a specific file pattern for this task with wildcards for prompt and model
-        # e.g., IR_pmid2title_prompt_*_model_*.json
-        json_pattern_for_task = f"{task_name}_prompt_*_model_*.json"
-        
-        # Find all files in the results directory that match this specific task's pattern
-        task_files = glob.glob(os.path.join(args.results_dir, json_pattern_for_task))
-        
-        # Add the found files to our master list
-        all_json_files_to_evaluate.extend(task_files)
-        
-    # --- END OF NEW LOGIC ---
-
-    # --- MINOR MODIFICATION: Pass the list of files DIRECTLY to the evaluator ---
-    # The evaluator no longer needs to perform the glob search itself.
-    
-    if not all_json_files_to_evaluate:
-        logging.error(f"No result JSON files found in '{args.results_dir}' for the specified tasks: {args.tasks}")
-        return
-
-    # Initialize the evaluator
+    json_pattern = f"*_prompt_{args.prompt_id}_model_*.json"
     evaluator = FullDataEval(
-        folder_name=args.results_dir, # Still needed for the rag_status check
-        all_files=all_json_files_to_evaluate, # Pass the explicit list of files
+        args.results_dir, 
+        file_pattern=json_pattern, 
         correct_score=1, 
         incorrect_score=-0.25
     )
-    
-    # The rest of the function proceeds as before
-    final_df, subset_details = evaluator.run_all_evaluations(subset_size=args.subset_size)
+    final_df = evaluator.run_all_evaluations()
 
     if final_df.empty:
         logging.error("Evaluation produced no results.")
         return
         
-    # Sort the final report for readability
-    final_df.sort_values(by=['task_name', 'model_name', 'prompt_id', 'kg_rag'], inplace=True)
+    # 2. Rename the 'score' column to be specific.
+    #    The 'correct' column already serves the purpose of the old 'simple_score'.
+    final_df.rename(columns={'score': 'penalty_score'}, inplace=True)
     
-    # The report filename should not contain a specific prompt_id anymore,
-    # since it can now contain results from multiple prompts.
-    tasks_str = '_'.join(args.tasks)
-    report_csv_path = os.path.join(args.results_dir, f"final_summary_report_tasks_{tasks_str}.csv")
-    final_df.to_csv(report_csv_path, index=False)
-    
-    report_json_path = os.path.join(args.results_dir, f"subset_accuracies_report_tasks_{tasks_str}.json")
-    try:
-        with open(report_json_path, 'w') as f:
-            json.dump(subset_details, f, indent=4)
-        logging.info(f"Detailed subset accuracies saved to: {report_json_path}")
-    except Exception as e:
-        logging.error(f"Failed to save subset accuracies JSON report: {e}")
-
-    print("\n\n" + "="*50)
-    print("--- Final Evaluation Summary Report ---")
-    print("="*50)
+    # 3. Filter, sort, and clean up the DataFrame as before.
+    final_df = final_df[final_df['task_name'].isin(args.tasks)]
+    final_df.sort_values(by=['task_name', 'model_name'], inplace=True)
+    final_df.reset_index(drop=True, inplace=True)
+    report_path = os.path.join(args.results_dir, f"final_report_prompt_{args.prompt_id}_tasks_{'_'.join(args.tasks)}.csv")
+    final_df.to_csv(report_path, index=False)
+    print("\n--- Final Evaluation Report ---")
     print(final_df.to_string())
 
 
